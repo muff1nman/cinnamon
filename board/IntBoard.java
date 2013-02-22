@@ -3,6 +3,8 @@ import java.util.LinkedList;
 import java.util.Set;
 
 public class IntBoard {
+	final int COLUMNS = 4;
+	final int ROWS = 4;
 	public IntBoard() {
 		// TODO No Constructor
 	}
@@ -24,7 +26,7 @@ public class IntBoard {
 		// TODO Auto-generated method stub
 
 	}
-	public int calcIndex() {
+	public int calcIndex(int row, int col) {
 		return 0;
 		
 	}
