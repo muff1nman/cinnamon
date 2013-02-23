@@ -39,6 +39,9 @@ public class IntBoardTests {
 	@Test
 	public void testAdjacency8() {
 		LinkedList<Integer> testList = board.getAdjList(8);
+		for (Integer i : testList) {
+			System.out.println(i);
+		}
 		Assert.assertTrue(testList.contains(4));
 		Assert.assertTrue(testList.contains(12));
 		Assert.assertTrue(testList.contains(9));
