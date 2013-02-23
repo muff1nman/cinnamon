@@ -1,15 +1,32 @@
 package board;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Set;
 
 public class IntBoard {
 	final int COLUMNS = 4;
 	final int ROWS = 4;
+	private Map<Integer, LinkedList<Integer>> adjacencyLists;
 	public IntBoard() {
-		// TODO No Constructor
+		adjacencyLists = new HashMap<Integer, LinkedList<Integer>>();
 	}
 	public void calcAdjacencies() {
-		// TODO Auto-generated method stub
+		LinkedList<Integer> adjacency;
+		for (int i = 1; i <= ROWS; ++i) {
+			for (int j = 1; j <= COLUMNS; ++i) {
+				adjacency = new LinkedList<Integer>();
+				if(calcIndex(i, j + 1) != -1)
+					adjacency.add(calcIndex(i,j+1));
+				if(calcIndex(i, j - 1) != -1)
+					adjacency.add(calcIndex(i,j-1));
+				if(calcIndex(i + 1, j) != -1)
+					adjacency.add(calcIndex(i + 1, j));
+				if(calcIndex(i - 1, j) != -1)
+					adjacency.add(calcIndex(i - 1, j));
+				adjacencyLists.put(calcIndex(i, j), adjacency);
+			}
+		}
 
 	}
 	public void startTargets(int location, int steps) {
@@ -27,8 +44,7 @@ public class IntBoard {
 
 	}
 	public int calcIndex(int row, int col) {
-		return 0;
-		
+		return col + ((row - 1) * COLUMNS);
 	}
 	
 }
