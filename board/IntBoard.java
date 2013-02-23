@@ -44,7 +44,9 @@ public class IntBoard {
 
 	}
 	public int calcIndex(int row, int col) {
-		return col + (row * COLUMNS);
+		if (row >= ROWS) return -1;
+		else if (col >= COLUMNS) return -1;
+		else return col + (row * COLUMNS);
 	}
 	
 }
