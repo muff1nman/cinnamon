@@ -14,7 +14,7 @@ public class IntBoard {
 	public void calcAdjacencies() {
 		LinkedList<Integer> adjacency;
 		for (int i = 0; i < ROWS; ++i) {
-			for (int j = 0; j < COLUMNS; ++i) {
+			for (int j = 0; j < COLUMNS; ++j) {
 				adjacency = new LinkedList<Integer>();
 				if(calcIndex(i, j + 1) != -1)
 					adjacency.add(calcIndex(i,j+1));

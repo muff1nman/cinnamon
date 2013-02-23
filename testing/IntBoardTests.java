@@ -30,6 +30,7 @@ public class IntBoardTests {
 	@Test
 	public void testAdjacency15() {
 		LinkedList<Integer> testList = board.getAdjList(15);
+		System.out.println(testList.contains(11));
 		Assert.assertTrue(testList.contains(11));
 		Assert.assertTrue(testList.contains(14));
 		Assert.assertEquals(2, testList.size());
