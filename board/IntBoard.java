@@ -13,8 +13,8 @@ public class IntBoard {
 	}
 	public void calcAdjacencies() {
 		LinkedList<Integer> adjacency;
-		for (int i = 1; i <= ROWS; ++i) {
-			for (int j = 1; j <= COLUMNS; ++i) {
+		for (int i = 0; i < ROWS; ++i) {
+			for (int j = 0; j < COLUMNS; ++i) {
 				adjacency = new LinkedList<Integer>();
 				if(calcIndex(i, j + 1) != -1)
 					adjacency.add(calcIndex(i,j+1));
@@ -39,12 +39,12 @@ public class IntBoard {
 		
 	}
 	public LinkedList<Integer> getAdjList(int location) {
-		return null;
+		return adjacencyLists.get(location);
 		// TODO Auto-generated method stub
 
 	}
 	public int calcIndex(int row, int col) {
-		return col + ((row - 1) * COLUMNS);
+		return col + (row * COLUMNS);
 	}
 	
 }
