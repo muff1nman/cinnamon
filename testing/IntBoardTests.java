@@ -129,13 +129,13 @@ public class IntBoardTests {
 
 	@Test
 	public void testcalcIndex() {
-		Assert.assertEquals(0,board.calcIndex(1, 1));
-		Assert.assertEquals(3,board.calcIndex(1, 4));
-		Assert.assertEquals(5,board.calcIndex(2, 1));
-		Assert.assertEquals(8,board.calcIndex(3, 1));
-		Assert.assertEquals(10,board.calcIndex(3, 3));
-		Assert.assertEquals(13,board.calcIndex(4, 2));
-		Assert.assertEquals(15,board.calcIndex(4, 4));
+		Assert.assertEquals(0,board.calcIndex(0, 0));
+		Assert.assertEquals(3,board.calcIndex(0, 3));
+		Assert.assertEquals(5,board.calcIndex(1, 0));
+		Assert.assertEquals(8,board.calcIndex(2, 0));
+		Assert.assertEquals(10,board.calcIndex(2, 2));
+		Assert.assertEquals(13,board.calcIndex(3, 1));
+		Assert.assertEquals(15,board.calcIndex(3, 3));
 	}
 
 }
