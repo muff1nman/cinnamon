@@ -7,9 +7,14 @@ import java.util.Set;
 public class IntBoard {
 	final int COLUMNS = 4;
 	final int ROWS = 4;
+	boolean visited[] = new boolean[ROWS * COLUMNS];
 	private Map<Integer, LinkedList<Integer>> adjacencyLists;
 	public IntBoard() {
 		adjacencyLists = new HashMap<Integer, LinkedList<Integer>>();
+		visited = new boolean[ROWS * COLUMNS];
+		for (int i = 0; i < ROWS * COLUMNS; ++i) {
+			visited[i] = false;
+		}
 	}
 	public void calcAdjacencies() {
 		LinkedList<Integer> adjacency;
