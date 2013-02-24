@@ -38,9 +38,6 @@ public class IntBoardTests {
 	@Test
 	public void testAdjacency8() {
 		LinkedList<Integer> testList = board.getAdjList(8);
-		for (Integer i : testList) {
-			System.out.println(i);
-		}
 		Assert.assertTrue(testList.contains(4));
 		Assert.assertTrue(testList.contains(12));
 		Assert.assertTrue(testList.contains(9));
@@ -76,6 +73,7 @@ public class IntBoardTests {
 	public void testTargets0_3() {
 		board.startTargets(0, 3);
 		Set<Integer> targets = board.getTargets();
+		System.out.println(targets.toString());
 		Assert.assertEquals(6, targets.size());
 		Assert.assertTrue(targets.contains(12));
 		Assert.assertTrue(targets.contains(9));

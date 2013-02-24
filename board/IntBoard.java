@@ -1,20 +1,23 @@
 package board;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
 public class IntBoard {
-	final int COLUMNS = 4;
-	final int ROWS = 4;
-	boolean visited[] = new boolean[ROWS * COLUMNS];
+	private final static int COLUMNS = 4;
+	private final static int ROWS = 4;
+	private boolean visited[] = new boolean[ROWS * COLUMNS];
 	private Map<Integer, LinkedList<Integer>> adjacencyLists;
+	private Set<Integer> targets;
 	public IntBoard() {
 		adjacencyLists = new HashMap<Integer, LinkedList<Integer>>();
 		visited = new boolean[ROWS * COLUMNS];
 		for (int i = 0; i < ROWS * COLUMNS; ++i) {
 			visited[i] = false;
 		}
+		targets = new HashSet<Integer>();
 	}
 	public void calcAdjacencies() {
 		LinkedList<Integer> adjacency;
@@ -35,18 +38,33 @@ public class IntBoard {
 
 	}
 	public void startTargets(int location, int steps) {
-		// TODO Auto-generated method stub
-
+		visited[location] = true;
+		calcTargets(location, steps);
+	}
+	private void calcTargets(int location, int steps) {
+		LinkedList<Integer> adjacentCells = new LinkedList<Integer>();
+		for(int adjCell : adjacencyLists.get(location)) {
+			if(visited[adjCell] == false) {
+				adjacentCells.add(adjCell);
+			}
+		}
+		for(int adjCell : adjacentCells) {
+			visited[adjCell] = true;
+			if(steps == 1) {
+				targets.add(adjCell);
+			} else {
+				System.out.println("adjCell " + adjCell + " steps " + (steps - 1));
+				calcTargets(adjCell, steps - 1);
+			}
+			visited[adjCell] = false;
+		}
 	}
 	public Set<Integer> getTargets() {
-		return null;
-		// TODO Auto-generated method stub
+		return targets;
 		
 	}
 	public LinkedList<Integer> getAdjList(int location) {
 		return adjacencyLists.get(location);
-		// TODO Auto-generated method stub
-
 	}
 	public int calcIndex(int row, int col) {
 		if (row >= ROWS) return -1;
