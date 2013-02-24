@@ -46,10 +46,10 @@ public class IntBoard {
 	public int calcIndex(int row, int col) {
 		if (row >= ROWS) return -1;
 		else if (col >= COLUMNS) return -1;
+		else if (col < 0) return -1;
+		else if (row < 0) return -1;
 		else {
-			int calculated = col + (row * COLUMNS);
-			if (calculated < 0) return -1;
-			else return calculated;
+			return row * COLUMNS + col;
 		}
 			
 	}

@@ -30,7 +30,6 @@ public class IntBoardTests {
 	@Test
 	public void testAdjacency15() {
 		LinkedList<Integer> testList = board.getAdjList(15);
-		System.out.println(testList.contains(11));
 		Assert.assertTrue(testList.contains(11));
 		Assert.assertTrue(testList.contains(14));
 		Assert.assertEquals(2, testList.size());
@@ -131,7 +130,7 @@ public class IntBoardTests {
 	public void testcalcIndex() {
 		Assert.assertEquals(0,board.calcIndex(0, 0));
 		Assert.assertEquals(3,board.calcIndex(0, 3));
-		Assert.assertEquals(5,board.calcIndex(1, 0));
+		Assert.assertEquals(4,board.calcIndex(1, 0));
 		Assert.assertEquals(8,board.calcIndex(2, 0));
 		Assert.assertEquals(10,board.calcIndex(2, 2));
 		Assert.assertEquals(13,board.calcIndex(3, 1));
