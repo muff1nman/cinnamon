@@ -53,7 +53,6 @@ public class IntBoard {
 			if(steps == 1) {
 				targets.add(adjCell);
 			} else {
-				System.out.println("adjCell " + adjCell + " steps " + (steps - 1));
 				calcTargets(adjCell, steps - 1);
 			}
 			visited[adjCell] = false;

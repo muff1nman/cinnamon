@@ -73,7 +73,6 @@ public class IntBoardTests {
 	public void testTargets0_3() {
 		board.startTargets(0, 3);
 		Set<Integer> targets = board.getTargets();
-		System.out.println(targets.toString());
 		Assert.assertEquals(6, targets.size());
 		Assert.assertTrue(targets.contains(12));
 		Assert.assertTrue(targets.contains(9));
