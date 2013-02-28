@@ -11,7 +11,7 @@ public class Board {
 	public void loadConfigFiles() {
 		
 	}
-	public int calcIndex() {
+	public int calcIndex(int row, int col) {
 		return 0;
 	}
 	public RoomCell GetRoomCellAt(int row, int column) {
