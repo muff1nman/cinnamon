@@ -59,10 +59,16 @@ public class BoardTests {
 	}
 	@Test
 	public void testCorrectInitial() {
-		// maybe I'm thinking of this wrong...
-		// do we need to set a getter for
-		// roomClassifier to do this test?
-		fail("not implemented");
+		Assert.assertEquals('C', newBoard.GetRoomCellAt(0, 0));
+		Assert.assertEquals('R', newBoard.GetRoomCellAt(0, 8));
+		Assert.assertEquals('R', newBoard.GetRoomCellAt(1, 7));
+		Assert.assertEquals('D', newBoard.GetRoomCellAt(12, 10));
+		Assert.assertEquals('K', newBoard.GetRoomCellAt(17, 3));
+		Assert.assertEquals('O', newBoard.GetRoomCellAt(20, 25));
+		Assert.assertEquals('L', newBoard.GetRoomCellAt(15, 18));
+		Assert.assertEquals('S', newBoard.GetRoomCellAt(4, 15));
+		Assert.assertEquals('B', newBoard.GetRoomCellAt(0, 25));
+		Assert.assertEquals('K', newBoard.GetRoomCellAt(20, 0));
 	}
 	@Test
 	public void testCalcIndex() {
