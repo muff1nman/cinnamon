@@ -9,16 +9,12 @@ import org.junit.Test;
 
 import board.BadConfigFormatException;
 import board.Board;
+import board.RoomCell;
 
 public class BoardTests {
 	Board newBoard;
-	//@BeforeClass
-	//public void beforeClass() {
-		// since we're not changing any info in our tests,
-		// should we use this instead of the setup function?
-	//}
-	@Before
-	public void setUp() throws Exception {
+	@BeforeClass
+	public void beforeClass() throws Exception {
 		newBoard = new Board();
 		newBoard.loadConfigFiles();
 	}
@@ -41,8 +37,14 @@ public class BoardTests {
 	public void testBoardConfiguration() {
 		Assert.assertEquals(21, newBoard.getNumRows());
 		Assert.assertEquals(26, newBoard.getNumColumns());
-		Assert.assertEquals(newBoard.GetRoomCellAt(0, 15).getDoorDirection())
-		
+		Assert.assertEquals(RoomCell.DoorDirection.LEFT, newBoard.GetRoomCellAt(0, 15).getDoorDirection());
+		Assert.assertEquals(RoomCell.DoorDirection.RIGHT, newBoard.GetRoomCellAt(1, 5).getDoorDirection());
+		Assert.assertEquals(RoomCell.DoorDirection.DOWN, newBoard.GetRoomCellAt(5, 23).getDoorDirection());
+		Assert.assertEquals(RoomCell.DoorDirection.UP, newBoard.GetRoomCellAt(12, 10).getDoorDirection());
+		Assert.assertEquals(RoomCell.DoorDirection.LEFT, newBoard.GetRoomCellAt(13, 7).getDoorDirection());
+		Assert.assertEquals(RoomCell.DoorDirection.UP, newBoard.GetRoomCellAt(9, 16).getDoorDirection());
+		Assert.assertEquals(RoomCell.DoorDirection.DOWN, newBoard.GetRoomCellAt(10, 24).getDoorDirection());
+		Assert.assertEquals(RoomCell.DoorDirection.RIGHT, newBoard.GetRoomCellAt(17, 3).getDoorDirection());
 		
 		// test # of doors
 		int doorways = 0;
