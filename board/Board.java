@@ -8,7 +8,7 @@ public class Board {
 	private int numRows;
 	private int numColumns;
 	
-	public void loadConfigFiles() {
+	public void loadConfigFiles(String csv, String legend) throws BadConfigFormatException {
 		
 	}
 	public int calcIndex(int row, int col) {

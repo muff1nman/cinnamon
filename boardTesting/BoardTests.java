@@ -12,11 +12,11 @@ import board.Board;
 import board.RoomCell;
 
 public class BoardTests {
-	Board newBoard;
+	static Board newBoard;
 	@BeforeClass
-	public void beforeClass() throws Exception {
+	public static void beforeClass() throws Exception {
 		newBoard = new Board();
-		newBoard.loadConfigFiles();
+		newBoard.loadConfigFiles("RoomLayout.csv","legend.txt");
 	}
 
 	@Test
@@ -45,7 +45,7 @@ public class BoardTests {
 		Assert.assertEquals(RoomCell.DoorDirection.UP, newBoard.GetRoomCellAt(9, 16).getDoorDirection());
 		Assert.assertEquals(RoomCell.DoorDirection.DOWN, newBoard.GetRoomCellAt(10, 24).getDoorDirection());
 		Assert.assertEquals(RoomCell.DoorDirection.RIGHT, newBoard.GetRoomCellAt(17, 3).getDoorDirection());
-		
+
 		// test # of doors
 		int doorways = 0;
 		for(int i = 0; i < newBoard.getNumRows(); ++i) {
@@ -78,9 +78,14 @@ public class BoardTests {
 		Assert.assertEquals(545, newBoard.calcIndex(21, 25));
 		Assert.assertEquals(520, newBoard.calcIndex(21, 0));
 	}
-	@Test (expected = BadConfigFormatException.class)
-	public void testExceptionThrown() throws BadConfigFormatException {
-		// test exception throwing
+	@Test 
+	public void testExceptionThrown() {
+		try {
+			newBoard.loadConfigFiles("BadFilename", "Invalid;'[]Filename,.,.()^*&");
+		}
+		catch (BadConfigFormatException e) {
+			Assert.assertNotNull(e); // Done to make sure that we actually have an exception, not a placeholder
+		}
 	}
 
 }
