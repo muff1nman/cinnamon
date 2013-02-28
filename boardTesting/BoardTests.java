@@ -78,14 +78,9 @@ public class BoardTests {
 		Assert.assertEquals(545, newBoard.calcIndex(21, 25));
 		Assert.assertEquals(520, newBoard.calcIndex(21, 0));
 	}
-	@Test 
-	public void testExceptionThrown() {
-		try {
-			newBoard.loadConfigFiles("BadFilename", "Invalid;'[]Filename,.,.()^*&");
-		}
-		catch (BadConfigFormatException e) {
-			Assert.assertNotNull(e); // Done to make sure that we actually have an exception, not a placeholder
-		}
+	@Test (expected = BadConfigFormatException.class)
+	public void testExceptionThrown() throws BadConfigFormatException  {
+		newBoard.loadConfigFiles("BadFilename", "Invalid;'[]Filename,.,.()^*&");
 	}
 
 }
