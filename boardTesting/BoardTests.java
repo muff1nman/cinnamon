@@ -41,9 +41,7 @@ public class BoardTests {
 	public void testBoardConfiguration() {
 		Assert.assertEquals(21, newBoard.getNumRows());
 		Assert.assertEquals(26, newBoard.getNumColumns());
-		// test door direction ??
-		// I wasn't sure how to assert an
-		// enum type
+		Assert.assertEquals(newBoard.GetRoomCellAt(0, 15).getDoorDirection())
 		
 		
 		// test # of doors
@@ -66,7 +64,7 @@ public class BoardTests {
 	}
 	@Test
 	public void testCalcIndex() {
-		Assert.assertEquals(0,newBoard.calcIndex(0,0));
+		Assert.assertEquals(0, newBoard.calcIndex(0,0));
 		Assert.assertEquals(25, newBoard.calcIndex(0,25));
 		Assert.assertEquals(28, newBoard.calcIndex(1, 3));
 		Assert.assertEquals(545, newBoard.calcIndex(21, 25));

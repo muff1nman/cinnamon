@@ -1,7 +1,7 @@
 package board;
 
 public class RoomCell extends BoardCell {
-	private enum DoorDirection {
+	public enum DoorDirection {
 		NONE,UP,DOWN,LEFT,RIGHT
 	}
 	private DoorDirection doorDirection;
@@ -14,6 +14,9 @@ public class RoomCell extends BoardCell {
 	void draw() {
 		// TODO Auto-generated method stub
 		
+	}
+	public DoorDirection getDoorDirection() {
+		return doorDirection;
 	}
 
 }
