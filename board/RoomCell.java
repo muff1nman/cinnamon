@@ -1,6 +1,7 @@
 package board;
 
 public class RoomCell extends BoardCell {
+	private boolean isDoor = false;
 	public enum DoorDirection {
 		NONE,UP,DOWN,LEFT,RIGHT
 	}
@@ -9,6 +10,7 @@ public class RoomCell extends BoardCell {
 	public RoomCell(String roomName) {
 		roomClassifier = roomName.charAt(0);
 		if(roomName.length() == 2) {
+			isDoor = true;
 			if(roomName.charAt(1) == 'U') {
 				doorDirection = DoorDirection.UP;
 			} else if(roomName.charAt(1) == 'D') {
@@ -25,6 +27,10 @@ public class RoomCell extends BoardCell {
 	@Override
 	public boolean isRoom() {
 		return true;
+	}
+	@Override
+	public boolean isDoorway() {
+		return isDoor;
 	}
 	@Override
 	void draw() {
