@@ -53,21 +53,21 @@ public class BoardTests {
 				}
 			}
 		}
-		System.out.println(doorways);
+//		System.out.println(doorways);
 		Assert.assertEquals(21, doorways);
 	}
 	@Test
 	public void testCorrectInitial() {
-		Assert.assertEquals('C', newBoard.getRoomCellAt(0, 0));
-		Assert.assertEquals('R', newBoard.getRoomCellAt(0, 8));
-		Assert.assertEquals('R', newBoard.getRoomCellAt(1, 7));
-		Assert.assertEquals('D', newBoard.getRoomCellAt(12, 10));
-		Assert.assertEquals('K', newBoard.getRoomCellAt(17, 3));
-		Assert.assertEquals('O', newBoard.getRoomCellAt(20, 25));
-		Assert.assertEquals('L', newBoard.getRoomCellAt(15, 18));
-		Assert.assertEquals('S', newBoard.getRoomCellAt(4, 15));
-		Assert.assertEquals('B', newBoard.getRoomCellAt(0, 25));
-		Assert.assertEquals('K', newBoard.getRoomCellAt(20, 0));
+		Assert.assertEquals('C', newBoard.getRoomCellAt(0, 0).getRoomClassifier());
+		Assert.assertEquals('R', newBoard.getRoomCellAt(0, 8).getRoomClassifier());
+		Assert.assertEquals('R', newBoard.getRoomCellAt(1, 7).getRoomClassifier());
+		Assert.assertEquals('D', newBoard.getRoomCellAt(12, 10).getRoomClassifier());
+		Assert.assertEquals('K', newBoard.getRoomCellAt(17, 3).getRoomClassifier());
+		Assert.assertEquals('O', newBoard.getRoomCellAt(20, 25).getRoomClassifier());
+		Assert.assertEquals('L', newBoard.getRoomCellAt(15, 18).getRoomClassifier());
+		Assert.assertEquals('S', newBoard.getRoomCellAt(4, 15).getRoomClassifier());
+		Assert.assertEquals('B', newBoard.getRoomCellAt(0, 25).getRoomClassifier());
+		Assert.assertEquals('K', newBoard.getRoomCellAt(20, 0).getRoomClassifier());
 	}
 	@Test
 	public void testCalcIndex() {

@@ -30,10 +30,10 @@ public class Board {
 				++numRows;
 				for(int i = 0; i < csvSplit.length; ++i) {
 					if(csvSplit[i].charAt(0) == 'W') { // how to determine if is walkway without hardcoding a w?
-						System.out.println(csvSplit[i].charAt(0) + " is a walkway");
+//						System.out.println(csvSplit[i].charAt(0) + " is a walkway");
 						cells.add(new WalkwayCell());
 					} else {
-						System.out.println(csvSplit[i].charAt(0) + " is a room");
+//						System.out.println(csvSplit[i].charAt(0) + " is a room");
 						cells.add(new RoomCell(csvSplit[i]));
 					}
 				}
