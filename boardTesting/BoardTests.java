@@ -78,7 +78,7 @@ public class BoardTests {
 		Assert.assertEquals(520, newBoard.calcIndex(21, 0));
 	}
 	@Test (expected = BadConfigFormatException.class)
-	public void testExceptionThrown() throws BadConfigFormatException  {
+	public void testExceptionThrown() throws Exception  {
 		newBoard.loadConfigFiles("BadFilename", "Invalid;'[]Filename,.,.()^*&");
 	}
 

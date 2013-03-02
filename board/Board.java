@@ -19,7 +19,7 @@ public class Board {
 		numColumns = 0;
 	}
 	
-	public void loadConfigFiles(String csv, String legend) throws BadConfigFormatException {
+	public void loadConfigFiles(String csv, String legend) throws Exception {
 		try {
 			Scanner csvFile = new Scanner(new File(csv));
 			String csvLine;
@@ -48,7 +48,7 @@ public class Board {
 			}
 			legendFile.close();
 		} catch(FileNotFoundException e) {
-			e.printStackTrace();
+			throw new BadConfigFormatException("I/O error: Config file " + csv + "not found!");
 		}
 	}
 	public int calcIndex(int row, int col) {
