@@ -73,9 +73,12 @@ public class BoardTests {
 	public void testCalcIndex() {
 		Assert.assertEquals(0, newBoard.calcIndex(0,0));
 		Assert.assertEquals(25, newBoard.calcIndex(0,25));
-		Assert.assertEquals(28, newBoard.calcIndex(1, 3));
-		Assert.assertEquals(545, newBoard.calcIndex(21, 25));
-		Assert.assertEquals(520, newBoard.calcIndex(21, 0));
+		Assert.assertEquals(29, newBoard.calcIndex(1, 3));
+		Assert.assertEquals(-1, newBoard.calcIndex(21, 25));
+		Assert.assertEquals(520, newBoard.calcIndex(20, 0));
+		Assert.assertEquals(545, newBoard.calcIndex(20, 25));
+		Assert.assertEquals(520, newBoard.calcIndex(20, 0));
+		Assert.assertEquals(520, newBoard.calcIndex(20, 0));
 	}
 	@Test (expected = BadConfigFormatException.class)
 	public void testExceptionThrown() throws Exception  {
