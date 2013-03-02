@@ -1,6 +1,9 @@
 package board;
 
 public class WalkwayCell extends BoardCell {
+	public WalkwayCell() {
+		super();
+	}
 	@Override
 	public boolean isWalkway() {
 		return true;

@@ -6,5 +6,5 @@ L, Library
 S, Study
 D, Dining Room
 O, Lounge
-H, Hall
+W, Walkway
 X, Closet

@@ -28,45 +28,46 @@ public class BoardTests {
 		Assert.assertEquals("Study", newBoard.getRooms().get('S'));
 		Assert.assertEquals("Dining Room", newBoard.getRooms().get('D'));
 		Assert.assertEquals("Lounge", newBoard.getRooms().get('O'));
-		Assert.assertEquals("Hall", newBoard.getRooms().get('H'));
-		Assert.assertEquals("Closet", newBoard.getRooms().get('C'));
+		Assert.assertEquals("Walkway", newBoard.getRooms().get('W'));
+		Assert.assertEquals("Closet", newBoard.getRooms().get('X'));
 	}
 	@Test
 	public void testBoardConfiguration() {
 		Assert.assertEquals(21, newBoard.getNumRows());
 		Assert.assertEquals(26, newBoard.getNumColumns());
-		Assert.assertEquals(RoomCell.DoorDirection.LEFT, newBoard.GetRoomCellAt(0, 15).getDoorDirection());
-		Assert.assertEquals(RoomCell.DoorDirection.RIGHT, newBoard.GetRoomCellAt(1, 5).getDoorDirection());
-		Assert.assertEquals(RoomCell.DoorDirection.DOWN, newBoard.GetRoomCellAt(5, 23).getDoorDirection());
-		Assert.assertEquals(RoomCell.DoorDirection.UP, newBoard.GetRoomCellAt(12, 10).getDoorDirection());
-		Assert.assertEquals(RoomCell.DoorDirection.LEFT, newBoard.GetRoomCellAt(13, 7).getDoorDirection());
-		Assert.assertEquals(RoomCell.DoorDirection.UP, newBoard.GetRoomCellAt(9, 16).getDoorDirection());
-		Assert.assertEquals(RoomCell.DoorDirection.DOWN, newBoard.GetRoomCellAt(10, 24).getDoorDirection());
-		Assert.assertEquals(RoomCell.DoorDirection.RIGHT, newBoard.GetRoomCellAt(17, 3).getDoorDirection());
+		Assert.assertEquals(RoomCell.DoorDirection.LEFT, newBoard.getRoomCellAt(0, 15).getDoorDirection());
+		Assert.assertEquals(RoomCell.DoorDirection.RIGHT, newBoard.getRoomCellAt(1, 5).getDoorDirection());
+		Assert.assertEquals(RoomCell.DoorDirection.DOWN, newBoard.getRoomCellAt(5, 23).getDoorDirection());
+		Assert.assertEquals(RoomCell.DoorDirection.UP, newBoard.getRoomCellAt(12, 10).getDoorDirection());
+		Assert.assertEquals(RoomCell.DoorDirection.LEFT, newBoard.getRoomCellAt(13, 7).getDoorDirection());
+		Assert.assertEquals(RoomCell.DoorDirection.UP, newBoard.getRoomCellAt(9, 16).getDoorDirection());
+		Assert.assertEquals(RoomCell.DoorDirection.DOWN, newBoard.getRoomCellAt(10, 24).getDoorDirection());
+		Assert.assertEquals(RoomCell.DoorDirection.RIGHT, newBoard.getRoomCellAt(17, 3).getDoorDirection());
 
 		// test # of doors
 		int doorways = 0;
 		for(int i = 0; i < newBoard.getNumRows(); ++i) {
 			for(int j = 0; j < newBoard.getNumColumns(); ++j) {
-				if(newBoard.GetRoomCellAt(i, j).isDoorway()) {
+				if(newBoard.getCellAt(i, j).isDoorway()) {
 					doorways++;
 				}
 			}
 		}
+		System.out.println(doorways);
 		Assert.assertEquals(21, doorways);
 	}
 	@Test
 	public void testCorrectInitial() {
-		Assert.assertEquals('C', newBoard.GetRoomCellAt(0, 0));
-		Assert.assertEquals('R', newBoard.GetRoomCellAt(0, 8));
-		Assert.assertEquals('R', newBoard.GetRoomCellAt(1, 7));
-		Assert.assertEquals('D', newBoard.GetRoomCellAt(12, 10));
-		Assert.assertEquals('K', newBoard.GetRoomCellAt(17, 3));
-		Assert.assertEquals('O', newBoard.GetRoomCellAt(20, 25));
-		Assert.assertEquals('L', newBoard.GetRoomCellAt(15, 18));
-		Assert.assertEquals('S', newBoard.GetRoomCellAt(4, 15));
-		Assert.assertEquals('B', newBoard.GetRoomCellAt(0, 25));
-		Assert.assertEquals('K', newBoard.GetRoomCellAt(20, 0));
+		Assert.assertEquals('C', newBoard.getRoomCellAt(0, 0));
+		Assert.assertEquals('R', newBoard.getRoomCellAt(0, 8));
+		Assert.assertEquals('R', newBoard.getRoomCellAt(1, 7));
+		Assert.assertEquals('D', newBoard.getRoomCellAt(12, 10));
+		Assert.assertEquals('K', newBoard.getRoomCellAt(17, 3));
+		Assert.assertEquals('O', newBoard.getRoomCellAt(20, 25));
+		Assert.assertEquals('L', newBoard.getRoomCellAt(15, 18));
+		Assert.assertEquals('S', newBoard.getRoomCellAt(4, 15));
+		Assert.assertEquals('B', newBoard.getRoomCellAt(0, 25));
+		Assert.assertEquals('K', newBoard.getRoomCellAt(20, 0));
 	}
 	@Test
 	public void testCalcIndex() {
