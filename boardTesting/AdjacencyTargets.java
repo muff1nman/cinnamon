@@ -12,13 +12,14 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import board.Board;
+import board.BoardCell;
 
 public class AdjacencyTargets {
 	public static Board newBoard;
 	@BeforeClass
 	public static void doOnce() throws Exception {
-		newBoard = new Board();
-		newBoard.loadConfigFiles("RoomLayout.csv","legend.txt");
+		newBoard = new Board("RoomLayout.csv","legend.txt");
+		newBoard.loadConfigFiles();
 		newBoard.calcAdjacencies();
 	}
 	// locations that are at each edge of the board (4)
@@ -106,7 +107,7 @@ public class AdjacencyTargets {
 	@Test
 	public void targets1() {
 		newBoard.startTargets(newBoard.calcIndex(18,9), 2);
-		Set<Integer> testTargets = newBoard.getTargets();
+		Set<BoardCell> testTargets = newBoard.getTargets();
 		Assert.assertEquals(3,testTargets.size());
 		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(18,11)));
 		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(19,10)));
@@ -115,7 +116,7 @@ public class AdjacencyTargets {
 	@Test
 	public void targets2() {
 		newBoard.startTargets(newBoard.calcIndex(19,14), 1);
-		Set<Integer> testTargets = newBoard.getTargets();
+		Set<BoardCell> testTargets = newBoard.getTargets();
 		Assert.assertEquals(3,testTargets.size());
 		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(20,14)));
 		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(18,14)));
@@ -125,14 +126,14 @@ public class AdjacencyTargets {
 	@Test
 	public void target3() {
 		newBoard.startTargets(newBoard.calcIndex(9,0), 4);
-		Set<Integer> testTargets = newBoard.getTargets();
+		Set<BoardCell> testTargets = newBoard.getTargets();
 		Assert.assertEquals(1,testTargets.size());
 		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(9,3)));
 	}
 	@Test
 	public void targets4() {
 		newBoard.startTargets(newBoard.calcIndex(6,14), 3);
-		Set<Integer> testTargets = newBoard.getTargets();
+		Set<BoardCell> testTargets = newBoard.getTargets();
 		Assert.assertEquals(4,testTargets.size());
 		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(4,15)));
 		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(3,14)));
@@ -143,7 +144,7 @@ public class AdjacencyTargets {
 	@Test
 	public void targetEnter1() {
 		newBoard.startTargets(newBoard.calcIndex(0,14), 2);
-		Set<Integer> testTargets = newBoard.getTargets();
+		Set<BoardCell> testTargets = newBoard.getTargets();
 		Assert.assertEquals(3,testTargets.size());
 		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(0,15)));
 		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(1,13)));
@@ -152,7 +153,7 @@ public class AdjacencyTargets {
 	@Test
 	public void targetEnter2() {
 		newBoard.startTargets(newBoard.calcIndex(20,19), 4);
-		Set<Integer> testTargets = newBoard.getTargets();
+		Set<BoardCell> testTargets = newBoard.getTargets();
 		Assert.assertEquals(3,testTargets.size());
 		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(18,20)));
 		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(17,20)));
@@ -162,7 +163,7 @@ public class AdjacencyTargets {
 	@Test
 	public void targetLeave1() {
 		newBoard.startTargets(newBoard.calcIndex(1,5), 2);
-		Set<Integer> testTargets = newBoard.getTargets();
+		Set<BoardCell> testTargets = newBoard.getTargets();
 		Assert.assertEquals(3,testTargets.size());
 		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(1,7)));
 		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(0,6)));
@@ -171,7 +172,7 @@ public class AdjacencyTargets {
 	@Test
 	public void targetLeave2() {
 		newBoard.startTargets(newBoard.calcIndex(12,10), 5);
-		Set<Integer> testTargets = newBoard.getTargets();
+		Set<BoardCell> testTargets = newBoard.getTargets();
 		Assert.assertEquals(2,testTargets.size());
 		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(11,14)));
 		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(11,6)));

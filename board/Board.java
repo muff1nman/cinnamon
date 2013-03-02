@@ -13,6 +13,7 @@ public class Board {
 	private Map<Character,String> rooms;
 	private int numRows;
 	private int numColumns;
+	private String csvFilepath, legendFilepath;
 	
 	public Board() {
 		cells = new ArrayList<BoardCell>();
@@ -21,36 +22,66 @@ public class Board {
 		numColumns = 0;
 	}
 	
-	public void loadConfigFiles(String csv, String legend) throws Exception {
+	public Board(String csv, String legend) {
+		cells = new ArrayList<BoardCell>();
+		rooms = new HashMap<Character, String>();
+		numRows = 0;
+		numColumns = 0;
+		csvFilepath = csv;
+		legendFilepath = legend;
+	}
+	public void loadConfigFiles() {
 		try {
-			Scanner csvFile = new Scanner(new File(csv));
-			String csvLine;
-			String[] csvSplit;
-			while(csvFile.hasNextLine()) {
-				csvLine = csvFile.nextLine();
-				csvSplit = csvLine.split(",");
-				++numRows;
-				for(int i = 0; i < csvSplit.length; ++i) {
-					if(csvSplit[i].charAt(0) == 'W') { // how to determine if is walkway without hardcoding a w?
-						cells.add(new WalkwayCell());
-					} else {
-						cells.add(new RoomCell(csvSplit[i]));
-					}
+			loadRoomConfig();
+			loadBoardConfig();
+		} catch(BadConfigFormatException e) {
+			e.toString();
+		}
+	}
+	public void loadRoomConfig() throws BadConfigFormatException  {
+		Scanner legendFile = null;
+		try {
+			legendFile = new Scanner(new File(legendFilepath));
+		} catch (FileNotFoundException e) {
+				throw new BadConfigFormatException("I/O Error: " + legendFilepath + "not found!");
+		}
+		String[] legendSplit;
+		while(legendFile.hasNextLine()) {
+			legendSplit = legendFile.nextLine().split(", ");
+			if(legendSplit.length > 2) {
+				throw new BadConfigFormatException(legendFilepath + " contains data in an invalid format");
+			}
+			rooms.put(legendSplit[0].charAt(0), legendSplit[1]);
+		}
+		legendFile.close();
+	}
+	public void loadBoardConfig() throws BadConfigFormatException {
+		Scanner csvFile = null;
+		try {
+			csvFile = new Scanner(new File(csvFilepath));
+		} catch (FileNotFoundException e) {
+			throw new BadConfigFormatException("csvFilepath was invalid");
+		}
+		String csvLine;
+		String[] csvSplit;
+		while(csvFile.hasNextLine()) {
+			csvLine = csvFile.nextLine();
+			csvSplit = csvLine.split(",");
+			++numRows;
+			for(int i = 0; i < csvSplit.length; ++i) {
+				if(csvSplit[i].charAt(0) == 'W') { 
+					cells.add(new WalkwayCell());
+				} else {
+					if(!rooms.containsKey(csvSplit[i].charAt(0))) throw new BadConfigFormatException("Unrecognized room detected");
+					cells.add(new RoomCell(csvSplit[i]));
 				}
 			}
-			numColumns = cells.size() / numRows;
-			// TODO throw exception if cols*rows > cells.size()
-			csvFile.close();
-			Scanner legendFile = new Scanner(new File(legend));
-			String[] legendSplit;
-			while(legendFile.hasNextLine()) {
-				legendSplit = legendFile.nextLine().split(", ");
-				rooms.put(legendSplit[0].charAt(0), legendSplit[1]);
-			}
-			legendFile.close();
-		} catch(FileNotFoundException e) {
-			throw new BadConfigFormatException("I/O error: Config file " + csv + "not found!");
 		}
+		numColumns = cells.size() / numRows;
+		if(numColumns*numRows != cells.size()) {
+			throw new BadConfigFormatException("Columns bad");
+		}
+		csvFile.close();
 	}
 	public int calcIndex(int row, int col) {
 		if (row >= numRows) return -1;
@@ -94,7 +125,7 @@ public class Board {
 	public void startTargets(int location, int steps) {
 		
 	}
-	public Set<Integer> getTargets() {
+	public Set<BoardCell> getTargets() {
 		return null;
 	}
 }

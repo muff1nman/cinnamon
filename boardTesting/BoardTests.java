@@ -13,13 +13,13 @@ public class BoardTests {
 	static Board newBoard;
 	@BeforeClass
 	public static void beforeClass() throws Exception {
-		newBoard = new Board();
-		newBoard.loadConfigFiles("RoomLayout.csv","legend.txt");
+		newBoard = new Board("RoomLayout.csv","legend.txt");
+		newBoard.loadConfigFiles();
 	}
 
 	@Test
 	public void testRoomLegend() {
-		Assert.assertEquals(10,newBoard.getRooms().size());
+		Assert.assertEquals(11,newBoard.getRooms().size());
 		Assert.assertEquals("Conservatory",newBoard.getRooms().get('C'));
 		Assert.assertEquals("Kitchen", newBoard.getRooms().get('K'));
 		Assert.assertEquals("Ballroom", newBoard.getRooms().get('B'));
@@ -80,8 +80,10 @@ public class BoardTests {
 		Assert.assertEquals(545, newBoard.calcIndex(20, 25));
 	}
 	@Test (expected = BadConfigFormatException.class)
-	public void testExceptionThrown() throws Exception  {
-		newBoard.loadConfigFiles("BadFilename", "Invalid;'[]Filename,.,.()^*&");
+	public void testExceptionThrown() throws BadConfigFormatException  {
+		Board otherBoard = new Board("BadFilename", "Invalid;'[]Filename,.,.()^*&");
+		otherBoard.loadRoomConfig();
+		otherBoard.loadBoardConfig();
 	}
 
 }

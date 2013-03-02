@@ -9,7 +9,7 @@ public class RoomCell extends BoardCell {
 	private char roomClassifier;
 	public RoomCell(String roomName) {
 		roomClassifier = roomName.charAt(0);
-		if(roomName.length() == 2) {
+		if(roomName.length() == 2 && roomName.charAt(1) != 'N') {
 			isDoor = true;
 			if(roomName.charAt(1) == 'U') {
 				doorDirection = DoorDirection.UP;
