@@ -3,8 +3,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Board {
 	private ArrayList<BoardCell> cells;
@@ -30,15 +32,14 @@ public class Board {
 				++numRows;
 				for(int i = 0; i < csvSplit.length; ++i) {
 					if(csvSplit[i].charAt(0) == 'W') { // how to determine if is walkway without hardcoding a w?
-//						System.out.println(csvSplit[i].charAt(0) + " is a walkway");
 						cells.add(new WalkwayCell());
 					} else {
-//						System.out.println(csvSplit[i].charAt(0) + " is a room");
 						cells.add(new RoomCell(csvSplit[i]));
 					}
 				}
 			}
 			numColumns = cells.size() / numRows;
+			// TODO throw exception if cols*rows > cells.size()
 			csvFile.close();
 			Scanner legendFile = new Scanner(new File(legend));
 			String[] legendSplit;
@@ -81,5 +82,19 @@ public class Board {
 	}
 	public int getNumColumns() {
 		return numColumns;
+	}
+
+	public void calcAdjacencies() {
+		// TODO Auto-generated method stub
+		
+	}
+	public LinkedList<Integer> getAdjList(int location) {
+		return null;
+	}
+	public void startTargets(int location, int steps) {
+		
+	}
+	public Set<Integer> getTargets() {
+		return null;
 	}
 }
