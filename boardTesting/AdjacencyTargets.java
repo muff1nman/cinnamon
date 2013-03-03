@@ -110,18 +110,18 @@ public class AdjacencyTargets {
 		newBoard.startTargets(newBoard.calcIndex(18,9), 2);
 		Set<BoardCell> testTargets = newBoard.getTargets();
 		Assert.assertEquals(3,testTargets.size());
-		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(18,11)));
-		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(19,10)));
-		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(20,9)));
+		Assert.assertTrue(testTargets.contains(newBoard.getCellAt(18, 11)));
+		Assert.assertTrue(testTargets.contains(newBoard.getCellAt(19,10)));
+		Assert.assertTrue(testTargets.contains(newBoard.getCellAt(20,9)));
 	}
 	@Test
 	public void targets2() {
 		newBoard.startTargets(newBoard.calcIndex(19,14), 1);
 		Set<BoardCell> testTargets = newBoard.getTargets();
 		Assert.assertEquals(3,testTargets.size());
-		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(20,14)));
-		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(18,14)));
-		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(19,13)));
+		Assert.assertTrue(testTargets.contains(newBoard.getCellAt(20,14)));
+		Assert.assertTrue(testTargets.contains(newBoard.getCellAt(18,14)));
+		Assert.assertTrue(testTargets.contains(newBoard.getCellAt(19,13)));
 
 	}
 	@Test
@@ -136,10 +136,10 @@ public class AdjacencyTargets {
 		newBoard.startTargets(newBoard.calcIndex(6,14), 3);
 		Set<BoardCell> testTargets = newBoard.getTargets();
 		Assert.assertEquals(4,testTargets.size());
-		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(4,15)));
-		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(3,14)));
-		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(8,15)));
-		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(9,14)));
+		Assert.assertTrue(testTargets.contains(newBoard.getCellAt(4,15)));
+		Assert.assertTrue(testTargets.contains(newBoard.getCellAt(3,14)));
+		Assert.assertTrue(testTargets.contains(newBoard.getCellAt(8,15)));
+		Assert.assertTrue(testTargets.contains(newBoard.getCellAt(9,14)));
 	}
 	// targets that allow the user to enter a room (2)
 	@Test
@@ -147,18 +147,18 @@ public class AdjacencyTargets {
 		newBoard.startTargets(newBoard.calcIndex(0,14), 2);
 		Set<BoardCell> testTargets = newBoard.getTargets();
 		Assert.assertEquals(3,testTargets.size());
-		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(0,15)));
-		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(1,13)));
-		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(2,14)));
+		Assert.assertTrue(testTargets.contains(newBoard.getCellAt(0,15)));
+		Assert.assertTrue(testTargets.contains(newBoard.getCellAt(1,13)));
+		Assert.assertTrue(testTargets.contains(newBoard.getCellAt(2,14)));
 	}
 	@Test
 	public void targetEnter2() {
 		newBoard.startTargets(newBoard.calcIndex(20,19), 4);
 		Set<BoardCell> testTargets = newBoard.getTargets();
 		Assert.assertEquals(3,testTargets.size());
-		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(18,20)));
-		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(17,20)));
-		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(16,19)));
+		Assert.assertTrue(testTargets.contains(newBoard.getCellAt(18,20)));
+		Assert.assertTrue(testTargets.contains(newBoard.getCellAt(17,20)));
+		Assert.assertTrue(testTargets.contains(newBoard.getCellAt(16,19)));
 	}
 	// targets calculated when leaving a room (2)
 	@Test
@@ -166,16 +166,16 @@ public class AdjacencyTargets {
 		newBoard.startTargets(newBoard.calcIndex(1,5), 2);
 		Set<BoardCell> testTargets = newBoard.getTargets();
 		Assert.assertEquals(3,testTargets.size());
-		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(1,7)));
-		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(0,6)));
-		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(2,6)));
+		Assert.assertTrue(testTargets.contains(newBoard.getCellAt(1,7)));
+		Assert.assertTrue(testTargets.contains(newBoard.getCellAt(0,6)));
+		Assert.assertTrue(testTargets.contains(newBoard.getCellAt(2,6)));
 	}
 	@Test
 	public void targetLeave2() {
 		newBoard.startTargets(newBoard.calcIndex(12,10), 5);
 		Set<BoardCell> testTargets = newBoard.getTargets();
 		Assert.assertEquals(2,testTargets.size());
-		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(11,14)));
-		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(11,6)));
+		Assert.assertTrue(testTargets.contains(newBoard.getCellAt(11,14)));
+		Assert.assertTrue(testTargets.contains(newBoard.getCellAt(11,6)));
 	}
 }
