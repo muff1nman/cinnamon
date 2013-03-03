@@ -3,7 +3,18 @@ package board;
 public class RoomCell extends BoardCell {
 	private boolean isDoor = false;
 	public enum DoorDirection {
-		NONE,UP,DOWN,LEFT,RIGHT
+		NONE(0,0),UP(0,-1),DOWN(0,1),LEFT(-1,0),RIGHT(1,0);
+		DoorDirection(int X, int Y) {
+			x = X;
+			y = Y;
+		}
+		private int x,y;
+		public int getX() {
+			return x;
+		}
+		public int getY() {
+			return y;
+		}
 	}
 	private DoorDirection doorDirection;
 	private char roomClassifier;

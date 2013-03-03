@@ -48,13 +48,11 @@ public class BoardTests {
 		int doorways = 0;
 		for(int i = 0; i < newBoard.getNumRows(); ++i) {
 			for(int j = 0; j < newBoard.getNumColumns(); ++j) {
-				System.out.println(newBoard.getCellAt(i,j).isDoorway());
 				if(newBoard.getCellAt(i, j).isDoorway()) {
 					doorways++;
 				}
 			}
 		}
-		System.out.println(doorways);
 		Assert.assertEquals(20, doorways);
 	}
 	@Test

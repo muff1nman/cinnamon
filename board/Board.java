@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Scanner;
@@ -14,14 +15,10 @@ public class Board {
 	private int numRows;
 	private int numColumns;
 	private String csvFilepath, legendFilepath;
-	
-	public Board() {
-		cells = new ArrayList<BoardCell>();
-		rooms = new HashMap<Character, String>();
-		numRows = 0;
-		numColumns = 0;
-	}
-	
+	private boolean visited[];
+	private Map<Integer, LinkedList<Integer>> adjacencyLists;
+	private Set<BoardCell> targets;
+
 	public Board(String csv, String legend) {
 		cells = new ArrayList<BoardCell>();
 		rooms = new HashMap<Character, String>();
@@ -29,6 +26,69 @@ public class Board {
 		numColumns = 0;
 		csvFilepath = csv;
 		legendFilepath = legend;
+		adjacencyLists = new HashMap<Integer, LinkedList<Integer>>();
+		targets = new HashSet<BoardCell>();
+	}
+	public void calcAdjacencies() {
+		LinkedList<Integer> adjacency;
+		for (int i = 0; i < numRows; ++i) {
+			for (int j = 0; j < numColumns; ++j) {
+				adjacency = new LinkedList<Integer>();
+				if(cells.get(calcIndex(i,j)).isDoorway()) {
+					RoomCell thisCell = (RoomCell) cells.get(calcIndex(i,j));
+					adjacency.add(calcIndex(i + thisCell.getDoorDirection().getX(), j + thisCell.getDoorDirection().getY()));
+				} else {
+				if(adjacencyLogic(i,j+1))
+					adjacency.add(calcIndex(i,j+1));
+				if(adjacencyLogic(i,j-1))
+					adjacency.add(calcIndex(i,j-1));
+				if(adjacencyLogic(i+1,j))
+					adjacency.add(calcIndex(i+1,j));
+				if(adjacencyLogic(i-1,j))
+					adjacency.add(calcIndex(i-1,j));
+				}
+				adjacencyLists.put(calcIndex(i, j), adjacency);
+			}
+		}
+
+	}
+	private boolean adjacencyLogic(int i, int j) {
+		return calcIndex(i, j) != -1 && (!cells.get(calcIndex(i, j)).isRoom() || cells.get(calcIndex(i,j)).isDoorway());
+	}
+	public void startTargets(int location, int steps) {
+		visited[location] = true;
+		calcTargets(location, steps);
+	}
+	private void calcTargets(int location, int steps) {
+		LinkedList<Integer> adjacentCells = new LinkedList<Integer>();
+		for(int adjCell : adjacencyLists.get(location)) {
+			if(visited[adjCell] == false) {
+				adjacentCells.add(adjCell);
+			}
+		}
+		for(int adjCell : adjacentCells) {
+			visited[adjCell] = true;
+			BoardCell thisCell = cells.get(adjCell);
+			if(steps == 1) {
+				targets.add(thisCell);
+			} else {
+				calcTargets(adjCell, steps - 1);
+			}
+			visited[adjCell] = false;
+		}
+	}
+	public Set<BoardCell> getTargets() {
+		return targets;
+		
+	}
+	public LinkedList<Integer> getAdjList(int location) {
+		return adjacencyLists.get(location);
+	}
+	public Board() {
+		cells = new ArrayList<BoardCell>();
+		rooms = new HashMap<Character, String>();
+		numRows = 0;
+		numColumns = 0;
 	}
 	public void loadConfigFiles() {
 		try {
@@ -82,6 +142,7 @@ public class Board {
 			throw new BadConfigFormatException("Columns bad");
 		}
 		csvFile.close();
+		visited = new boolean[numRows * numColumns];
 	}
 	public int calcIndex(int row, int col) {
 		if (row >= numRows) return -1;
@@ -113,19 +174,5 @@ public class Board {
 	}
 	public int getNumColumns() {
 		return numColumns;
-	}
-
-	public void calcAdjacencies() {
-		// TODO Auto-generated method stub
-		
-	}
-	public LinkedList<Integer> getAdjList(int location) {
-		return null;
-	}
-	public void startTargets(int location, int steps) {
-		
-	}
-	public Set<BoardCell> getTargets() {
-		return null;
 	}
 }

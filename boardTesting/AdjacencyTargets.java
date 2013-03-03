@@ -31,8 +31,9 @@ public class AdjacencyTargets {
 	@Test
 	public void edgeUp() {
 		LinkedList<Integer> testList = newBoard.getAdjList(newBoard.calcIndex(0,14));
-		Assert.assertEquals(1,testList.size());
+		Assert.assertEquals(2,testList.size());
 		Assert.assertTrue(testList.contains(newBoard.calcIndex(1,14)));
+		Assert.assertTrue(testList.contains(newBoard.calcIndex(0,15)));
 	}
 	@Test
 	public void edgeLeft() {
