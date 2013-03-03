@@ -128,8 +128,9 @@ public class AdjacencyTargets {
 	public void target3() {
 		newBoard.startTargets(newBoard.calcIndex(9,0), 4);
 		Set<BoardCell> testTargets = newBoard.getTargets();
-		Assert.assertEquals(1,testTargets.size());
-		Assert.assertTrue(testTargets.contains(newBoard.calcIndex(9,3)));
+		Assert.assertEquals(2,testTargets.size());
+		Assert.assertTrue(testTargets.contains(newBoard.getCellAt(9,4)));
+		Assert.assertTrue(testTargets.contains(newBoard.getCellAt(8,3)));
 	}
 	@Test
 	public void targets4() {

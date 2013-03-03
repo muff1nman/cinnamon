@@ -56,6 +56,7 @@ public class Board {
 		return calcIndex(i, j) != -1 && (!cells.get(calcIndex(i, j)).isRoom() || cells.get(calcIndex(i,j)).isDoorway());
 	}
 	public void startTargets(int location, int steps) {
+		targets = new HashSet<BoardCell>();
 		visited[location] = true;
 		calcTargets(location, steps);
 	}
