@@ -54,14 +54,14 @@ public class AdjacencyTargets {
 	public void door1() {
 		LinkedList<Integer> testList = newBoard.getAdjList(newBoard.calcIndex(8, 3));
 		Assert.assertEquals(1, testList.size());
-		Assert.assertTrue(testList.contains(newBoard.calcIndex(8,4)));
+		Assert.assertTrue(testList.contains(newBoard.calcIndex(9,3)));
 	
 	}
 	@Test
 	public void door2() {
 		LinkedList<Integer> testList = newBoard.getAdjList(newBoard.calcIndex(6,  5));
 		Assert.assertEquals(1, testList.size());
-		Assert.assertTrue(testList.contains(newBoard.calcIndex(7,5)));
+		Assert.assertTrue(testList.contains(newBoard.calcIndex(6,6)));
 	}
 	// locations that are adjacent to a doorway with needed direction (2)
 	@Test

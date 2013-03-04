@@ -36,15 +36,17 @@ public class Board {
 				adjacency = new LinkedList<Integer>();
 				if(cells.get(calcIndex(i,j)).isDoorway()) {
 					RoomCell thisCell = (RoomCell) cells.get(calcIndex(i,j));
+					LinkedList<Integer> doorAdj = new LinkedList<Integer>();
+					doorAdj.add(calcIndex(i,j));
 					adjacency.add(calcIndex(i + thisCell.getDoorDirection().getX(), j + thisCell.getDoorDirection().getY()));
-				} else {
-				if(adjacencyLogic(i,j+1))
+				} else if(!cells.get(calcIndex(i,j)).isRoom()) {
+				if(adjacencyLogic(i,j,i,j+1))
 					adjacency.add(calcIndex(i,j+1));
-				if(adjacencyLogic(i,j-1))
+				if(adjacencyLogic(i,j,i,j-1))
 					adjacency.add(calcIndex(i,j-1));
-				if(adjacencyLogic(i+1,j))
+				if(adjacencyLogic(i,j,i+1,j))
 					adjacency.add(calcIndex(i+1,j));
-				if(adjacencyLogic(i-1,j))
+				if(adjacencyLogic(i,j,i-1,j))
 					adjacency.add(calcIndex(i-1,j));
 				}
 				adjacencyLists.put(calcIndex(i, j), adjacency);
@@ -52,8 +54,17 @@ public class Board {
 		}
 
 	}
-	private boolean adjacencyLogic(int i, int j) {
-		return calcIndex(i, j) != -1 && (!cells.get(calcIndex(i, j)).isRoom() || cells.get(calcIndex(i,j)).isDoorway());
+	private boolean adjacencyLogic(int i0, int j0, int i1, int j1) {
+		if(calcIndex(i1,j1) != -1) {
+			if(cells.get(calcIndex(i1,j1)).isDoorway()) {
+				RoomCell thisRoom = (RoomCell) cells.get(calcIndex(i1,j1));
+				if(i1 + thisRoom.getDoorDirection().getX() == i0 && j1 + thisRoom.getDoorDirection().getY() == j0) return true;
+				return false;
+			} else {
+				return !cells.get(calcIndex(i1,j1)).isRoom();
+			}
+		}
+		return false;
 	}
 	public void startTargets(int location, int steps) {
 		targets = new HashSet<BoardCell>();
