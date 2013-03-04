@@ -70,7 +70,7 @@ public class Board {
 		for(int adjCell : adjacentCells) {
 			visited[adjCell] = true;
 			BoardCell thisCell = cells.get(adjCell);
-			if(steps == 1) {
+			if(steps == 1 || thisCell.isDoorway()) {
 				targets.add(thisCell);
 			} else {
 				calcTargets(adjCell, steps - 1);
