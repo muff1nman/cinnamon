@@ -1,5 +1,10 @@
+/*
+ * JUnit Test Case: BoardTests
+ * Authors: Brandon Rodriguez, Hunter Lang
+ * This class encompasses the testing of the main clue board implementation
+ * Relies on the JUnit 4 Test Suite
+ */
 package boardTesting;
-
 import junit.framework.Assert;
 
 import org.junit.BeforeClass;
@@ -9,14 +14,25 @@ import board.BadConfigFormatException;
 import board.Board;
 import board.RoomCell;
 
+// BoardTests class. Allows for testing using JUnit 4
 public class BoardTests {
+	
+	// Create a new board, static so that it may be used across all functions
 	static Board newBoard;
+	
+	// BeforeClass method. Runs at the start of the test suite so that the board is properly initialized before the tests are run.
+	// Can throw BadConfigFormatException
 	@BeforeClass
-	public static void beforeClass() throws Exception {
+	public static void beforeClass() throws BadConfigFormatException {
+		
+		//Instantiate the board, and load / apply the config files.
 		newBoard = new Board("RoomLayout.csv","legend.txt");
 		newBoard.loadConfigFiles();
+		
 	}
-
+	
+	// Testing Suite for the RoomLegend.
+	// Assures the program reads the legend config file correctly and
 	@Test
 	public void testRoomLegend() {
 		Assert.assertEquals(11,newBoard.getRooms().size());
@@ -31,10 +47,22 @@ public class BoardTests {
 		Assert.assertEquals("Walkway", newBoard.getRooms().get('W'));
 		Assert.assertEquals("Closet", newBoard.getRooms().get('X'));
 	}
+	
+	/*
+	 * Testing suite for the BoardConfiguration
+	 * Tests: 	correct number of rows
+	 *		  	correct number of columns
+	 *		  	two cells of each door direction
+	 *			the number of doorways is correct
+	 */
 	@Test
 	public void testBoardConfiguration() {
+		
+		// Testing the amount of rows and cols are correct
 		Assert.assertEquals(21, newBoard.getNumRows());
 		Assert.assertEquals(26, newBoard.getNumColumns());
+		
+		// Testing that the door directions are correct
 		Assert.assertEquals(RoomCell.DoorDirection.LEFT, newBoard.getRoomCellAt(0, 15).getDoorDirection());
 		Assert.assertEquals(RoomCell.DoorDirection.RIGHT, newBoard.getRoomCellAt(1, 5).getDoorDirection());
 		Assert.assertEquals(RoomCell.DoorDirection.DOWN, newBoard.getRoomCellAt(5, 23).getDoorDirection());
@@ -44,7 +72,7 @@ public class BoardTests {
 		Assert.assertEquals(RoomCell.DoorDirection.DOWN, newBoard.getRoomCellAt(10, 24).getDoorDirection());
 		Assert.assertEquals(RoomCell.DoorDirection.RIGHT, newBoard.getRoomCellAt(17, 3).getDoorDirection());
 
-		// test # of doors
+		// Testing the number of doors is correct
 		int doorways = 0;
 		for(int i = 0; i < newBoard.getNumRows(); ++i) {
 			for(int j = 0; j < newBoard.getNumColumns(); ++j) {
@@ -55,6 +83,7 @@ public class BoardTests {
 		}
 		Assert.assertEquals(20, doorways);
 	}
+	// Testing suite for assuring that the initial of the cells is correctly read and displayed on the board
 	@Test
 	public void testCorrectInitial() {
 		Assert.assertEquals('C', newBoard.getRoomCellAt(0, 0).getRoomClassifier());
@@ -68,6 +97,8 @@ public class BoardTests {
 		Assert.assertEquals('B', newBoard.getRoomCellAt(0, 25).getRoomClassifier());
 		Assert.assertEquals('K', newBoard.getRoomCellAt(20, 0).getRoomClassifier());
 	}
+	
+	// Testing the calcIndex function yields a correct value
 	@Test
 	public void testCalcIndex() {
 		Assert.assertEquals(0, newBoard.calcIndex(0,0));
@@ -77,9 +108,16 @@ public class BoardTests {
 		Assert.assertEquals(520, newBoard.calcIndex(20, 0));
 		Assert.assertEquals(545, newBoard.calcIndex(20, 25));
 	}
-	@Test (expected = BadConfigFormatException.class)
+	
+	// Testing that an exception is thrown properly when the config formats are wrong
+	// Throws: BadConfigFormatException (used for testing)
+	@Test (expected = BadConfigFormatException.class) // Make sure we have this class at the end of the function instantiated
 	public void testExceptionThrown() throws BadConfigFormatException  {
+		// Try to make a bad board
 		Board otherBoard = new Board("BadFilename", "Invalid;'[]Filename,.,.()^*&");
+		
+		// Try to call the config functions on a bad board.
+		// Exception will be thrown
 		otherBoard.loadRoomConfig();
 		otherBoard.loadBoardConfig();
 	}
