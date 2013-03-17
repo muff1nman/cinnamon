@@ -37,16 +37,15 @@ public class BadConfigFormatException extends Exception {
 		try {
 			// Try to make the file writer
 			out = new PrintWriter(new FileWriter(new File("log.txt"), true));
+			// Write out the message to the log
+			out.println(this.message);
+			// Close the log file
+			out.close();
 		
-			 // If something goes wrong, catch the error, print a message, and don't log.
+		// If something goes wrong, catch the error, print a message, and don't log.
 		} catch(Exception e) {
 			System.out.println("Error opening log file.");
 		}
 		
-		// Write out the message to the log
-		out.println(this.message);
-		
-		// Close the log file
-		out.close();
 	}
 }
