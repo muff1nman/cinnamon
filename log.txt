@@ -96,3 +96,7 @@ Unrecognized room detected
 Columns bad
 ClueLegendBadFormat.txt contains data in an invalid format
 I/O Error: Invalid;'[]Filename,.,.()^*&not found!
+Unrecognized room detected
+Columns bad
+ClueLegendBadFormat.txt contains data in an invalid format
+I/O Error: Invalid;'[]Filename,.,.()^*&not found!

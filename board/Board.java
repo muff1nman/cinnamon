@@ -44,37 +44,32 @@ public class Board {
 
 	// Default constructor for board. Simply initializes the values, nothing else
 	public Board() {
-		// Create the cells list as a blank
-		cells = new ArrayList<BoardCell>();
-
-		// Create the rooms map as a blank
-		rooms = new HashMap<Character, String>();
-		numRows = 0;
-		numColumns = 0;
+		// Initialize cells, rooms, numRows, numColumns
+		initialize();
 	}
 
 	// Parameterized constructor, sets all the fields of board using the configuration files
 	public Board(String csv, String legend) {
-		// Create the cells list as a blank
-		cells = new ArrayList<BoardCell>();
-
-		// Create the rooms map as a blank
-		rooms = new HashMap<Character, String>();
-
-		// Initialize the rows and columns to 0
-		numRows = 0;
-		numColumns = 0;
-
+		// Initialize cells, rooms, numRows, numColumns
+		initialize();
 		// Create the filepaths for the configuration files
 		csvFilepath = csv;
 		legendFilepath = legend;
-
 		// Set up the adjacencies list as a blank map
 		adjacencyLists = new HashMap<Integer, LinkedList<Integer>>();
-
 		// Set up the targets as a blank set
 		targets = new HashSet<BoardCell>();
-
+	}
+	
+	// Initializes default values of cells, rooms, numRows, and numColumns
+	private void initialize() {
+		// Create the cells list as a blank
+		cells = new ArrayList<BoardCell>();
+		// Create the rooms map as a blank
+		rooms = new HashMap<Character, String>();
+		// Initialize the rows and columns to 0
+		numRows = 0;
+		numColumns = 0;
 	}
 
 	// Method loadConfigFiles relies on two other functions to finish initializing the board
