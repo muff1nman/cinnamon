@@ -240,25 +240,25 @@ public class Board {
 	}
 	
 	// This function verifies that the adjacency is correct for the given cell, (i0,j0)
-	private boolean adjacencyLogic(int i0, int j0, int i1, int j1) {
-		// If calcIndex detects an issue, it is not correct. return false.
-		if(calcIndex(i1,j1) != -1) {
-			// Otherwise, if calcIndex says its fine and the cell is a doorway
-			if(cells.get(calcIndex(i1,j1)).isDoorway()) {
-				// Make a room cell from the doorway cell we're checking
-				RoomCell thisRoom = (RoomCell) cells.get(calcIndex(i1,j1));
-				// If the you remove the differences in distance between the cells and now the x's and y's are equal, return true 
-				if(i1 + thisRoom.getDoorDirection().getX() == i0 && j1 + thisRoom.getDoorDirection().getY() == j0) return true;
-				// Otherwise return false
-				return false;
+		private boolean adjacencyLogic(int i0, int j0, int i1, int j1) {
+			// If calcIndex detects an issue, it is not correct. return false.
+			if(calcIndex(i1,j1) != -1) {
+				// Otherwise, if calcIndex says its fine and the cell is a doorway
+				if(cells.get(calcIndex(i1,j1)).isDoorway()) {
+					// Make a room cell from the doorway cell we're checking
+					RoomCell thisRoom = (RoomCell) cells.get(calcIndex(i1,j1));
+					// If the you remove the differences in distance between the cells and now the x's and y's are equal, return true 
+					if(i1 + thisRoom.getDoorDirection().getX() == i0 && j1 + thisRoom.getDoorDirection().getY() == j0) return true;
+					// Otherwise return false
+					return false;
+				}
+				// If this is not a doorway cell, return the opposite of isRoom from the target cell
+				else {
+					return !cells.get(calcIndex(i1,j1)).isRoom();
+				}
 			}
-			// If this is not a doorway cell, return the opposite of isRoom from the target cell
-			else {
-				return !cells.get(calcIndex(i1,j1)).isRoom();
-			}
+			return false;
 		}
-		return false;
-	}
 	
 	// Start targets uses calcTargets to calculate the correct targets for moving in the game
 	public void startTargets(int location, int steps) {

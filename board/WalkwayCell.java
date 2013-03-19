@@ -21,11 +21,7 @@ public class WalkwayCell extends BoardCell {
 		return true;
 	}
 	
-	// Overridden draw function from the parent. Will be used to draw the correct shapes to the gui when implemented.
-	@Override
-	void draw() {
-		// TODO Auto-generated method stub
-		
-	}
+	
+	
 
 }

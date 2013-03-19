@@ -23,6 +23,5 @@ public abstract class BoardCell {
 		return false;
 	}
 	
-	// abstract function draw is used to render the appropriate cell in the gui
-	abstract void draw();
+	
 }

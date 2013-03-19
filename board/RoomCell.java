@@ -63,12 +63,6 @@ public class RoomCell extends BoardCell {
 		}
 	}
 	
-	// Overridden draw function to be used in rendering when the gui is created
-	@Override
-	void draw() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	// Overridden isRoom function, used to identify that this cell is a room
 	@Override
