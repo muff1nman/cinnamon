@@ -12,4 +12,6 @@ public class Player {
 	public boolean disproveSuggestion() {
 		return false;
 	}
+
+	
 }
