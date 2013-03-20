@@ -4,11 +4,15 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class GameActionTests {
 
+
+public class GameActionTests {
+	private Board board = new Board();
+	private ClueGame game = new ClueGame();
+	
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testAccusation() {
+		
 	}
 
 }
