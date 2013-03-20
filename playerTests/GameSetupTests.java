@@ -10,5 +10,20 @@ public class GameSetupTests {
 	public void test() {
 		fail("Not yet implemented");
 	}
+	
+	@Test
+	public void testLoadingPeople() {
+		
+	}
+	
+	@Test
+	public void testLoadingCards() {
+		
+	}
+	
+	@Test
+	public void testDealingCards() {
+		
+	}
 
 }
