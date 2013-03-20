@@ -1,23 +1,34 @@
 package playerTests;
 
 import static org.junit.Assert.*;
+import junit.framework.Assert;
+
+import misc.ClueGame;
+import misc.ComputerPlayer;
+import misc.HumanPlayer;
+import misc.Player;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class GameSetupTests {
+	
+	ClueGame testGame;
 
 	@BeforeClass
 	public void setup() {
-		
+		testGame = new ClueGame();
+		testGame.loadConfigFiles();
 	}
 	
 	// Each tests name, color, starting location
 	@Test
 	public void testLoadingPeople() {
+		Assert.assertEquals(new HumanPlayer("Bob Lob Lah","Yellow",9,0), testGame.getBob());
 		// Tests person at beginning
-		// Tests arbitrary middle person
+		Assert.assertEquals(new ComputerPlayer("Colonel Mustard","Orange",0,19), testGame.getCpuPlayers().get(0));
 		// Tests person at end
+		Assert.assertEquals(new ComputerPlayer("Mr. White","Blue",0,6), testGame.getCpuPlayers().get(3));
 	}
 	
 	@Test
@@ -31,7 +42,7 @@ public class GameSetupTests {
 	
 	@Test
 	public void testDealingCards() {
-		// Tests all cardds are dealt
+		// Tests all cards are dealt
 		// Tests all players have within 1 card of each other
 		// Tests one card is not given to multiple players
 	}
