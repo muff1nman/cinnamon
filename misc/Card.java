@@ -1,16 +1,19 @@
 package misc;
 
+import misc.Card.CardType;
+
 
 public class Card {
 
 	private String name;
-	private enum Type {PERSON, WEAPON, ROOM;}
-	private Type type;
+	public enum CardType {PERSON, WEAPON, ROOM;}
+	private CardType type;
 	
-	public Type getType() {
+	public Card(String string, CardType room) {}
+	public CardType getCardType() {
 		return type;
 	}
-	public void setType(Type type) {
+	public void setCardType(CardType cardType) {
 		this.type = type;
 	}
 	public String getName() {

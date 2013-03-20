@@ -3,27 +3,31 @@ package playerTests;
 import static org.junit.Assert.*;
 import junit.framework.Assert;
 
+import misc.Card.CardType;
 import misc.ClueGame;
 import misc.ComputerPlayer;
 import misc.HumanPlayer;
 import misc.Player;
+import misc.Card;
 
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class GameSetupTests {
 	
-	ClueGame testGame;
+	private ClueGame testGame;
 
-	@BeforeClass
+	@Before
 	public void setup() {
-		testGame = new ClueGame();
+		testGame = new ClueGame("legend.txt","RoomLayout.csv", "players.txt", "weapons.txt");
 		testGame.loadConfigFiles();
 	}
 	
 	// Each tests name, color, starting location
 	@Test
 	public void testLoadingPeople() {
+		testGame.loadPeople();
 		Assert.assertEquals(new HumanPlayer("Bob Lob Lah","Yellow",9,0), testGame.getBob());
 		// Tests person at beginning
 		Assert.assertEquals(new ComputerPlayer("Colonel Mustard","Orange",0,19), testGame.getCpuPlayers().get(0));
@@ -33,11 +37,20 @@ public class GameSetupTests {
 	
 	@Test
 	public void testLoadingCards() {
-		// Tests Deck has proper number of cards
+		testGame.loadDeck();
+		/* Tests Deck has proper number of cards (first integer: number of rooms (not including walkway)
+		plus number people plus number weapons */
+		Assert.assertEquals(10+5+7,testGame.getDeck().size());
 		// Tests deck contains proper number of each type of card
+		Assert.assertEquals(10, testGame.getDeckRoomSize());
+		Assert.assertEquals(5, testGame.getDeckPlayerSize());
+		Assert.assertEquals(7, testGame.getDeckWeaponSize());
 		// Tests one room
+		Assert.assertTrue(testGame.getDeck().contains(new Card("Dining Room", CardType.ROOM)));
 		// Tests one weapon
+		Assert.assertTrue(testGame.getDeck().contains(new Card("Miss Scarlet", CardType.PERSON)));
 		// Tests one person
+		Assert.assertTrue(testGame.getDeck().contains(new Card("drywall", CardType.WEAPON)));
 	}
 	
 	@Test

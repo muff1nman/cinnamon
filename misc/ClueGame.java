@@ -11,8 +11,19 @@ public class ClueGame {
 	private ArrayList<ComputerPlayer> cpuPlayers = new ArrayList<ComputerPlayer>();
 	private HumanPlayer Bob = new HumanPlayer();
 	private Player whosTurn;
+	public ClueGame(String legend, String layout, String players, String weapons) {}
 	public void loadConfigFiles() {}
-	
+	public void loadPeople() {}
+	public void loadDeck() {}
+	public int getDeckWeaponSize() {
+		return 0;
+	}
+	public int getDeckPlayerSize() {
+		return 0;
+	}
+	public int getDeckRoomSize() {
+		return 0;
+	}
 	public ArrayList<Card> getDeck() {
 		return deck;
 	}
