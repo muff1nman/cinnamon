@@ -31,12 +31,12 @@ public class GameActionTests {
 	public void setUp() {
 		game = new ClueGame();
 		board = new Board();
-		mustardCard = new Card("Colonel Mustard", Card.Type.PERSON);
-		whiteCard = new Card("Mr. White", Card.Type.PERSON);
-		knifeCard = new Card("knife", Card.Type.WEAPON);
-		pipeCard = new Card("pipe", Card.Type.WEAPON);
-		kitchenCard = new Card("kitchen", Card.Type.ROOM);
-		conservatoryCard = new Card("conservatory", Card.Type.ROOM);
+		mustardCard = new Card("Colonel Mustard", Card.CardType.PERSON);
+		whiteCard = new Card("Mr. White", Card.CardType.PERSON);
+		knifeCard = new Card("knife", Card.CardType.WEAPON);
+		pipeCard = new Card("pipe", Card.CardType.WEAPON);
+		kitchenCard = new Card("kitchen", Card.CardType.ROOM);
+		conservatoryCard = new Card("conservatory", Card.CardType.ROOM);
 		
 	}
 	//@Before

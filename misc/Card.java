@@ -1,17 +1,22 @@
 package misc;
 
+import misc.Card.CardType;
+
 
 public class Card {
 
 	private String name;
-	public enum Type {PERSON, WEAPON, ROOM;}
-	private Type type;
+
+	public enum CardType {PERSON, WEAPON, ROOM;}
+	private CardType type;
+
 	
-	public Type getType() {
+	
+	public CardType getCardType() {
 		return type;
 	}
-	
-	public void setType(Type type) {
+
+	public void setCardType(CardType cardType) {
 		this.type = type;
 	}
 	
@@ -23,7 +28,7 @@ public class Card {
 		this.name = name;
 	}
 	
-	public Card(String name, Type type) {
+	public Card(String name, CardType type) {
 		super();
 		this.name = name;
 		this.type = type;
