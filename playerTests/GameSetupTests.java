@@ -60,7 +60,7 @@ public class GameSetupTests {
 		// Tests all players have within 1 card of each other
 		int numCards = testGame.getBob().getCards().size();
 		for(Player a : testGame.getCpuPlayers()) {
-			Assert.assertTrue(Math.abs(a.getCards().size() - numCards) > 1);
+			Assert.assertTrue(Math.abs(a.getCards().size() - numCards) <= 1);
 		}
 		// Tests one card is not given to multiple players
 		for(Player a : testGame.getCpuPlayers()) {
