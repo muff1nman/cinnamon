@@ -3,6 +3,8 @@ package misc;
 import java.util.ArrayList;
 import java.util.Set;
 
+import misc.Card.CardType;
+
 import board.BoardCell;
 
 
@@ -19,7 +21,13 @@ public class ComputerPlayer extends Player {
 	}
 
 	public ArrayList<Card> createSuggestion(int location) {
-		return null;
+		ArrayList<Card> suggestion = new ArrayList<Card>();
+		suggestion.add(new Card("temp1", CardType.PERSON));
+		suggestion.add(new Card("temp2", CardType.ROOM));
+		suggestion.add(new Card("temp3", CardType.WEAPON));
+		System.out.println(suggestion.size());
+		
+		return suggestion;
 		//first item in arrayList is person
 		//2nd item is room
 		//3rd item is weapon

@@ -39,5 +39,9 @@ public class Player {
 	}
 	
 
+	public void giveCard(Card card) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

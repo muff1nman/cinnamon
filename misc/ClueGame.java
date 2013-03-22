@@ -17,11 +17,8 @@ public class ClueGame {
 
 
 	public ClueGame(String legend, String layout, String players, String weapons) {}
-	public ClueGame() {
-		// TODO Auto-generated constructor stub
-	}
+	public ClueGame() {}
 	
-	public void handleSuggestion(String person, String room, String weapon, Player accusingPerson) {}
 	
 	public void loadConfigFiles() {}
 	public void loadPeople() {}
@@ -69,6 +66,18 @@ public class ClueGame {
 	}
 	public void setWhosTurn(Player whosTurn) {
 		this.whosTurn = whosTurn;
+	}
+	public Object handleSuggestion(String person, String room, String weapon, Player playerOne) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public void addPlayer(ComputerPlayer player) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void addPlayer(HumanPlayer player) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	
