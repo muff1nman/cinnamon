@@ -23,6 +23,7 @@ public class GameActionTests {
 	private static ClueGame game;
 	private static Board board;
 	//private Solution solution;
+	//private static Card mustardCard, whiteCard, plumCard, revolverCard, knifeCard, pipeCard, libraryCard, kitchenCard, conservatoryCard;
 	private static Card mustardCard, whiteCard, knifeCard, pipeCard, kitchenCard, conservatoryCard;
 	//temp stuff yo. delete this and add legit deal functionality i think.
 	//ououeoeuo
@@ -34,12 +35,23 @@ public class GameActionTests {
 		board = new Board("RoomLayout.csv","legend.txt");
 		board.loadConfigFiles();
 		board.calcAdjacencies();
+		ArrayList<Card> allCards = new ArrayList<Card>();
 		mustardCard = new Card("Colonel Mustard", Card.CardType.PERSON);
+		allCards.add(mustardCard);
 		whiteCard = new Card("Mr. White", Card.CardType.PERSON);
+		allCards.add(whiteCard);
+		//plumCard = new Card("Professor Plum", Card.CardType.PERSON);
+		//revolverCard = new Card("revolver", Card.CardType.WEAPON);
 		knifeCard = new Card("knife", Card.CardType.WEAPON);
+		allCards.add(knifeCard);
 		pipeCard = new Card("pipe", Card.CardType.WEAPON);
+		allCards.add(pipeCard);
+		//libraryCard = new Card("library", Card.CardType.ROOM);
 		kitchenCard = new Card("kitchen", Card.CardType.ROOM);
+		allCards.add(kitchenCard);
 		conservatoryCard = new Card("conservatory", Card.CardType.ROOM);
+		allCards.add(conservatoryCard);
+		
 		
 	}
 	//@Before
@@ -149,6 +161,47 @@ public class GameActionTests {
 				assertTrue(loc_17_20 > 5);
 				assertTrue(loc_18_19 > 5);
 	}
+	
+
+	
+	@Test
+	public void testComputerMakingSuggestion() {
+		ComputerPlayer cpu1 = new ComputerPlayer();
+		//ArrayList<Card> ownedCards = new ArrayList<Card>();
+		
+		//only 1 possible suggestion
+		//cpu1.updateSeen(conservatoryCard);
+		//cpu1.updateSeen(knifeCard);
+		cpu1.updateSeen(mustardCard);
+		cpu1.updateSeen(pipeCard);
+		cpu1.setLocation(board.calcIndex(18, 3));
+		
+		ArrayList<Card> suggestion = cpu1.createSuggestion(cpu1.getLocation());
+		
+		//checks to see if the suggestion contains a person or weapon that has already been seen.
+		assertFalse(cpu1.getCards().contains(suggestion.get(0)));
+		assertFalse(cpu1.getCards().contains(suggestion.get(2)));
+		//since there is only one possible suggestion in this scenario
+		assertTrue(suggestion.get(0).equals(whiteCard));
+		assertTrue(suggestion.get(1).equals(kitchenCard));
+		assertTrue(suggestion.get(2).equals(knifeCard));
+		
+		//ComputerPlayer cpu2 = new ComputerPlayer();
+		//ComputerPlayer cpu3 = new ComputerPlaer();
+		//cpu1.u
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 
 

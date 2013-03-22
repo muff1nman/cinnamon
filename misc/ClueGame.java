@@ -21,6 +21,8 @@ public class ClueGame {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public void handleSuggestion(String person, String room, String weapon, Player accusingPerson) {}
+	
 	public void loadConfigFiles() {}
 	public void loadPeople() {}
 	public void loadDeck() {}

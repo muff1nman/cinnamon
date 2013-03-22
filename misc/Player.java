@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class Player {
 
+	private int location;
 	private String name;
 	private ArrayList<Card> cards = new ArrayList<Card>();
 	
@@ -16,6 +17,27 @@ public class Player {
 	public ArrayList<Card> getCards() {
 		return null;
 	}
+
+	public int getLocation() {
+		return location;
+	}
+
+	public void setLocation(int location) {
+		this.location = location;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setCards(ArrayList<Card> cards) {
+		this.cards = cards;
+	}
+	
 
 	
 }

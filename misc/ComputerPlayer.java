@@ -1,5 +1,6 @@
 package misc;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import board.BoardCell;
@@ -17,7 +18,16 @@ public class ComputerPlayer extends Player {
 		this.lastRoomVisited = lastRoomVisited;
 	}
 
-	public void pickLocation() {}
+	public ArrayList<Card> createSuggestion(int location) {
+		return null;
+		//first item in arrayList is person
+		//2nd item is room
+		//3rd item is weapon
+	}
+	
+	public void updateSeen(Card seen) {}
+	
+	public void updateSeen(ArrayList<Card> seen) {}
 	
 	public BoardCell pickLocation(Set<BoardCell> targets) {
 		return null;
