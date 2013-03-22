@@ -10,8 +10,6 @@ public class Card {
 	public enum CardType {PERSON, WEAPON, ROOM;}
 	private CardType type;
 
-	
-	
 	public CardType getCardType() {
 		return type;
 	}

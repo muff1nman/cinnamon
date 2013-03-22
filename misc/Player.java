@@ -12,6 +12,10 @@ public class Player {
 	public boolean disproveSuggestion() {
 		return false;
 	}
+	
+	public ArrayList<Card> getCards() {
+		return null;
+	}
 
 	
 }
