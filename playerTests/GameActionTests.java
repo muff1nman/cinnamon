@@ -29,12 +29,9 @@ public class GameActionTests {
 	final int PERSON = 0;
 	final int ROOM = 1;
 	final int WEAPON = 2;
-	//private Solution solution;
-	//private static Card mustardCard, whiteCard, plumCard, revolverCard, knifeCard, pipeCard, libraryCard, kitchenCard, conservatoryCard;
+	
 	private static Card mustardCard, whiteCard, knifeCard, pipeCard, kitchenCard, conservatoryCard;
-	//temp stuff yo. delete this and add legit deal functionality i think.
-	//ououeoeuo
-	//oueiuoeuioeuioeuio
+	
 	
 	@BeforeClass
 	public static void setUp() {
@@ -56,14 +53,10 @@ public class GameActionTests {
 		allCards.add(kitchenCard);
 		conservatoryCard = new Card("conservatory", Card.CardType.ROOM);
 		allCards.add(conservatoryCard);
+		//set the deck to our reduced set
 		game.setDeck(allCards);
 		
 	}
-	//@Before
-	//public void setUp() {
-	//	game = new ClueGame();
-	//	//solution = new Solution();	
-	//}
 	
 	
 	@Test
