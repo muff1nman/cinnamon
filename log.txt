@@ -123,3 +123,4 @@ I/O Error: Invalid;'[]Filename,.,.()^*&not found!
 Columns bad
 ClueLegendBadFormat.txt contains data in an invalid format
 Unrecognized room detected
+Columns bad
