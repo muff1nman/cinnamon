@@ -17,5 +17,10 @@ public class Player {
 		return null;
 	}
 
+	public void giveCard(Card card) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }

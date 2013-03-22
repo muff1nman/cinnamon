@@ -5,9 +5,13 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.Set;
 
+import junit.framework.Assert;
+
 import misc.Card;
 import misc.ClueGame;
 import misc.ComputerPlayer;
+import misc.HumanPlayer;
+import misc.Player;
 import misc.Solution;
 
 import org.junit.Before;
@@ -148,6 +152,76 @@ public class GameActionTests {
 				assertTrue(loc_16_21 > 5);
 				assertTrue(loc_17_20 > 5);
 				assertTrue(loc_18_19 > 5);
+	}
+	
+	@Test
+	public void testDisprovingSuggestion() {
+		// Computer Player
+		ComputerPlayer playerOne = new ComputerPlayer();
+		playerOne.giveCard(whiteCard);
+		
+		// Computer Player
+		ComputerPlayer playerTwo = new ComputerPlayer();
+		playerTwo.giveCard(mustardCard);
+		playerTwo.giveCard(kitchenCard);
+		
+		// Human player
+		HumanPlayer playerThree = new HumanPlayer();
+		playerThree.giveCard(pipeCard);
+		
+		// Computer Player
+		ComputerPlayer playerFour = new ComputerPlayer();
+		playerFour.giveCard(knifeCard);
+		playerFour.giveCard(conservatoryCard);
+		game.addPlayer(playerOne);
+		game.addPlayer(playerTwo);
+		game.addPlayer(playerThree);
+		game.addPlayer(playerFour);
+		
+		// Test one player, one correct match (Computer Player returns card)
+		Assert.assertEquals(mustardCard, game.handleSuggestion("Colonel Mustard", "garbage1", "garbage2", playerOne));
+		
+		// Test one player, one correct match (Human player returns card)
+		Assert.assertEquals(mustardCard, game.handleSuggestion("pipe", "garbage1", "garbage2", playerOne));
+		
+		// Test player whose turn it is does not return card (Computer Player)
+		Assert.assertNotSame(whiteCard, game.handleSuggestion("Mr. White", "garbage1", "garbage2", playerOne));
+		
+		// Test player whose turn it is does not return card (Human Player)
+		Assert.assertNotSame(whiteCard, game.handleSuggestion("pipe", "garbage1", "garbage2", playerThree));
+		
+		// Test one player, multiple possible matches
+		int timesMustard = 0;
+		int timesKitchen = 0;
+		for(int i = 0; i < 100; ++i) {
+			Card testCard = (Card) game.handleSuggestion("Colonel Mustard", "kitchen", "garbage1", playerOne);
+			if(testCard.equals(mustardCard)) {
+				timesMustard++;
+			} else if (testCard.equals(kitchenCard)) {
+				timesKitchen++;
+			}
+		}
+		Assert.assertFalse(timesMustard == 0);
+		Assert.assertFalse(timesKitchen == 0);
+		
+		// Test all players are queried (Mix of human and computer players)
+		timesMustard = 0;
+		int timesPipe = 0;
+		int timesConservatory = 0;
+		for(int i = 0; i < 300; ++i) {
+			Card testCard = (Card) game.handleSuggestion("Colonel Mustard", "pipe", "conservatory", playerOne);
+			if(testCard.equals(mustardCard)) {
+				timesMustard++;
+			} else if (testCard.equals(pipeCard)) {
+				timesPipe++;
+			} else if (testCard.equals(conservatoryCard)) {
+				timesConservatory++;
+			}
+		}
+		Assert.assertFalse(timesMustard == 0);
+		Assert.assertFalse(timesPipe == 0);
+		Assert.assertFalse(timesConservatory == 0);
+		
 	}
 }
 
