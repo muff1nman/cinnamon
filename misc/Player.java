@@ -5,9 +5,24 @@ import misc.Card.CardType;
 
 public class Player {
 
-	private int location;
+	private int row;
+	private int column;
+	private int location;	//	?
 	private String name;
-	private ArrayList<Card> cards = new ArrayList<Card>();
+	private String color;
+	private ArrayList<Card> cards;
+	
+	public Player(String name, String color, int row, int column) {
+		this.row = row;
+		this.column = column;
+		this.name = name;
+		this.color = color;
+		cards = new ArrayList<Card>();
+	}
+	
+	public Player() {
+		cards = new ArrayList<Card>();
+	}
 	
 	public Card disproveSuggestion(String person, String room, String weapon) {
 		if(cards.contains(new Card(person, CardType.PERSON)))
@@ -42,7 +57,6 @@ public class Player {
 	public void setCards(ArrayList<Card> cards) {
 		this.cards = cards;
 	}
-	
 
 	public void giveCard(Card card) {
 		cards.add(card);
