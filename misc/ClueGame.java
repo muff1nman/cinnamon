@@ -2,6 +2,8 @@ package misc;
 
 import java.util.ArrayList;
 
+import misc.Card.CardType;
+
 public class ClueGame {
 
 	private Solution solution;
@@ -24,13 +26,28 @@ public class ClueGame {
 	}
 
 	public int getDeckWeaponSize() {
-		return 0;
+		int weapons = 0;
+		for(Card a : deck) {
+			if(a.getCardType() == CardType.WEAPON)
+				weapons++;
+		}
+		return weapons;
 	}
 	public int getDeckPlayerSize() {
-		return 0;
+		int players = 0;
+		for(Card a : deck) {
+			if(a.getCardType() == CardType.PERSON)
+				players++;
+		}
+		return players;
 	}
 	public int getDeckRoomSize() {
-		return 0;
+		int rooms = 0;
+		for(Card a : deck) {
+			if(a.getCardType() == CardType.ROOM)
+				rooms++;
+		}
+		return rooms;
 	}
 	public ArrayList<Card> getDeck() {
 		return deck;
@@ -67,12 +84,10 @@ public class ClueGame {
 		return null;
 	}
 	public void addPlayer(ComputerPlayer player) {
-		// TODO Auto-generated method stub
-		
+		cpuPlayers.add(player);
 	}
 	public void addPlayer(HumanPlayer player) {
-		// TODO Auto-generated method stub
-		
+		Bob = player;
 	}
 
 	
