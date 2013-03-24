@@ -52,10 +52,12 @@ public class ComputerPlayer extends Player {
 		return null;
 	}
 
-	public ComputerPlayer(String string, String string2, int i, int j) {}
+	public ComputerPlayer(String name, String color, int row, int column) {
+		super(name, color, row, column);
+	}
 
 	public ComputerPlayer() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 

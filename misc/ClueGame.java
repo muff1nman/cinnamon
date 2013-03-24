@@ -2,8 +2,6 @@ package misc;
 
 import java.util.ArrayList;
 
-
-
 public class ClueGame {
 
 	private Solution solution;
@@ -14,11 +12,8 @@ public class ClueGame {
 	private HumanPlayer Bob = new HumanPlayer();
 	private Player whosTurn;
 
-
-
 	public ClueGame(String legend, String layout, String players, String weapons) {}
 	public ClueGame() {}
-	
 	
 	public void loadConfigFiles() {}
 	public void loadPeople() {}
