@@ -1,8 +1,7 @@
 package misc;
 import java.util.ArrayList;
 
-
-
+import misc.Card.CardType;
 
 public class Player {
 
@@ -10,12 +9,18 @@ public class Player {
 	private String name;
 	private ArrayList<Card> cards = new ArrayList<Card>();
 	
-	public boolean disproveSuggestion() {
-		return false;
+	public Card disproveSuggestion(String person, String room, String weapon) {
+		if(cards.contains(new Card(person, CardType.PERSON)))
+			return cards.get(cards.indexOf(new Card(person, CardType.PERSON)));
+		if(cards.contains(new Card(room, CardType.ROOM)))
+			return cards.get(cards.indexOf(new Card(room, CardType.ROOM)));
+		if(cards.contains(new Card(weapon, CardType.WEAPON)))
+			return cards.get(cards.indexOf(new Card(weapon, CardType.WEAPON)));
+		return null;
 	}
 	
 	public ArrayList<Card> getCards() {
-		return null;
+		return cards;
 	}
 
 	public int getLocation() {
@@ -40,8 +45,7 @@ public class Player {
 	
 
 	public void giveCard(Card card) {
-		// TODO Auto-generated method stub
-		
+		cards.add(card);
 	}
 	
 }
