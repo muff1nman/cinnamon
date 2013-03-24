@@ -8,6 +8,7 @@ public class Player {
 	private int location;
 	private String name;
 	private ArrayList<Card> cards = new ArrayList<Card>();
+	protected ArrayList<Card> knownCards = new ArrayList<Card>();
 	
 	public Card disproveSuggestion(String person, String room, String weapon) {
 		if(cards.contains(new Card(person, CardType.PERSON)))

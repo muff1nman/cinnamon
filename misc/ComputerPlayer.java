@@ -25,7 +25,7 @@ public class ComputerPlayer extends Player {
 		suggestion.add(new Card("temp1", CardType.PERSON));
 		suggestion.add(new Card("temp2", CardType.ROOM));
 		suggestion.add(new Card("temp3", CardType.WEAPON));
-		System.out.println(suggestion.size());
+		
 		
 		return suggestion;
 		//first item in arrayList is person
@@ -33,11 +33,22 @@ public class ComputerPlayer extends Player {
 		//3rd item is weapon
 	}
 	
-	public void updateSeen(Card seen) {}
+	public void updateSeen(Card seen) {
+		knownCards.add(seen);
+	}
 	
-	public void updateSeen(ArrayList<Card> seen) {}
+	public void updateSeen(ArrayList<Card> seen) {
+		knownCards.addAll(seen);
+	}
 	
 	public BoardCell pickLocation(Set<BoardCell> targets) {
+	
+		for (BoardCell selection : targets) {
+			if (selection.isRoom()) {
+				
+			}
+		}
+		
 		return null;
 	}
 
