@@ -1,9 +1,9 @@
 package misc;
 
 public class Solution {
-	public String person;
-	public String weapon;
-	public String room;
+	private String person;
+	private String weapon;
+	private String room;
 	
 
 	public Solution(String person, String weapon, String room) {
@@ -11,5 +11,15 @@ public class Solution {
 		this.person = person;
 		this.weapon = weapon;
 		this.room = room;
+	}
+	
+	public boolean checkSolution(String person, String weapon, String room) {
+		if(!this.person.equals(person))
+			return false;
+		if(!this.weapon.equals(weapon))
+			return false;
+		if(!this.room.equals(room))
+			return false;
+		return true;
 	}
 }
