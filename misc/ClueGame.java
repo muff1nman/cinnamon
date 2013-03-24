@@ -19,6 +19,7 @@ public class ClueGame {
 	public ClueGame(String legend, String layout, String players, String weapons) {}
 	public ClueGame() {}
 	
+	
 	public void loadConfigFiles() {}
 	public void loadPeople() {}
 	public void loadDeck() {}

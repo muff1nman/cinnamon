@@ -26,31 +26,37 @@ import board.BoardCell;
 public class GameActionTests {
 	private static ClueGame game;
 	private static Board board;
-	//private Solution solution;
+	final int PERSON = 0;
+	final int ROOM = 1;
+	final int WEAPON = 2;
+	
 	private static Card mustardCard, whiteCard, knifeCard, pipeCard, kitchenCard, conservatoryCard;
-	//temp stuff yo. delete this and add legit deal functionality i think.
-	//ououeoeuo
-	//oueiuoeuioeuioeuio
+	
 	
 	@BeforeClass
 	public static void setUp() {
+		
 		game = new ClueGame();
 		board = new Board("RoomLayout.csv","legend.txt");
 		board.loadConfigFiles();
 		board.calcAdjacencies();
+		ArrayList<Card> allCards = new ArrayList<Card>();
 		mustardCard = new Card("Colonel Mustard", Card.CardType.PERSON);
+		allCards.add(mustardCard);
 		whiteCard = new Card("Mr. White", Card.CardType.PERSON);
+		allCards.add(whiteCard);
 		knifeCard = new Card("knife", Card.CardType.WEAPON);
+		allCards.add(knifeCard);
 		pipeCard = new Card("pipe", Card.CardType.WEAPON);
+		allCards.add(pipeCard);
 		kitchenCard = new Card("kitchen", Card.CardType.ROOM);
+		allCards.add(kitchenCard);
 		conservatoryCard = new Card("conservatory", Card.CardType.ROOM);
+		allCards.add(conservatoryCard);
+		//set the deck to our reduced set
+		game.setDeck(allCards);
 		
 	}
-	//@Before
-	//public void setUp() {
-	//	game = new ClueGame();
-	//	//solution = new Solution();	
-	//}
 	
 	
 	@Test
@@ -104,6 +110,7 @@ public class GameActionTests {
 	public void testSelectUnvisitedRoom() {
 		ComputerPlayer cpuPlayer = new ComputerPlayer();
 		int loc_14_15 = 0;
+		//location with an unvisited door in range.
 		board.startTargets(board.calcIndex(15, 14), 3);
 		
 		//ensure it picks the correct room every time
@@ -154,6 +161,61 @@ public class GameActionTests {
 				assertTrue(loc_18_19 > 5);
 	}
 	
+	
+	//only 1 possible suggestions
+	@Test
+	public void testComputerMakingSuggestion1() {
+		ComputerPlayer cpu1 = new ComputerPlayer();
+		cpu1.updateSeen(mustardCard);
+		cpu1.updateSeen(pipeCard);
+		cpu1.setLocation(board.calcIndex(18, 3));
+		
+		//createSuggestion returns an ArrayList of 3 cards. //the first entry is a person. 2nd entry is a room, and 3rd entry is a weapon
+		ArrayList<Card> suggestion = cpu1.createSuggestion(cpu1.getLocation());
+		//checks to see if the suggestion contains a person or weapon that has already been seen.
+		assertFalse(cpu1.getCards().contains(suggestion.get(PERSON)));
+		assertFalse(cpu1.getCards().contains(suggestion.get(WEAPON)));
+		//since there is only one possible suggestion in this scenario
+		assertTrue(suggestion.get(PERSON).equals(whiteCard));
+		assertTrue(suggestion.get(ROOM).equals(kitchenCard));
+		assertTrue(suggestion.get(WEAPON).equals(knifeCard));
+	}
+	
+	//multiple possible suggestions (2 possible person cards)
+	@Test
+	public void testComputerMakingSuggestion2() {
+		ComputerPlayer cpu1 = new ComputerPlayer();
+		cpu1.updateSeen(pipeCard);
+		cpu1.setLocation(board.calcIndex(18, 3));
+		int mustard = 0;
+		int white = 0;
+		
+		//make sure both options are chosen a reasonable amount
+		for(int x = 0; x < 100; x++) {
+			//createSuggestion returns an ArrayList of 3 cards. //the first entry is a person. 2nd entry is a room, and 3rd entry is a weapon
+			ArrayList<Card> suggestion = cpu1.createSuggestion(cpu1.getLocation());
+			//checks to see if the suggestion contains a person or weapon that has already been seen.
+			assertFalse(cpu1.getCards().contains(suggestion.get(PERSON)));
+			assertFalse(cpu1.getCards().contains(suggestion.get(WEAPON)));
+			//makes sure room is correct
+			assertTrue(suggestion.get(ROOM).equals(kitchenCard));
+			//makes sure weapon is correct
+			assertTrue(suggestion.get(WEAPON).equals(knifeCard));
+			
+			if (suggestion.get(PERSON).equals(mustardCard)) {
+				mustard++;
+			}
+			else if (suggestion.get(PERSON).equals(whiteCard)) {
+				white++;
+			}
+			else fail("incorrect card");
+		}
+		//make sure totals are reasonable
+		assertTrue(mustard > 10);
+		assertTrue(white > 10);
+	}
+	
+
 	@Test
 	public void testDisprovingSuggestion() {
 		// Computer Player
@@ -173,6 +235,7 @@ public class GameActionTests {
 		ComputerPlayer playerFour = new ComputerPlayer();
 		playerFour.giveCard(knifeCard);
 		playerFour.giveCard(conservatoryCard);
+		
 		game.addPlayer(playerOne);
 		game.addPlayer(playerTwo);
 		game.addPlayer(playerThree);
@@ -223,6 +286,7 @@ public class GameActionTests {
 		Assert.assertFalse(timesConservatory == 0);
 		
 	}
+
 }
 
 
