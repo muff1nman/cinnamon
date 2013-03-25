@@ -62,12 +62,15 @@ public class GameActionTests {
 	
 	@Test
 	public void testAccusation() {
-		Solution goodSolution = new Solution("Colonel Mustard", "pipe", "kitchen");
+		ArrayList<Card> thisCloset = new ArrayList<Card>();
+		thisCloset.add(mustardCard);
+		thisCloset.add(pipeCard);
+		thisCloset.add(kitchenCard);
+		game.setClosetCards(thisCloset);
+		Solution goodSolution = new Solution("Colonel Mustard", "Pipe", "Kitchen");
 		Solution badSolution1 = new Solution("Mr. White", "pipe", "kitchen");
 		Solution badSolution2 = new Solution("Colonel Mustard", "knife", "kitchen");
 		Solution badSolution3 = new Solution("Colonel Mustard", "pipe", "conservatory");
-		
-		ArrayList<Card> testCards = new ArrayList<Card>();
 		assertTrue(game.checkAccusation(goodSolution));
 		assertFalse(game.checkAccusation(badSolution1));
 		assertFalse(game.checkAccusation(badSolution2));
@@ -269,7 +272,7 @@ public class GameActionTests {
 		ComputerPlayer playerFour = new ComputerPlayer();
 		playerFour.giveCard(knifeCard);
 		playerFour.giveCard(conservatoryCard);
-		
+		game.resetPlayers();
 		game.addPlayer(playerOne);
 		game.addPlayer(playerTwo);
 		game.addPlayer(playerThree);
@@ -279,13 +282,13 @@ public class GameActionTests {
 		Assert.assertEquals(mustardCard, game.handleSuggestion("Colonel Mustard", "garbage1", "garbage2", playerOne));
 		
 		// Test one player, one correct match (Human player returns card)
-		Assert.assertEquals(mustardCard, game.handleSuggestion("pipe", "garbage1", "garbage2", playerOne));
+		Assert.assertEquals(pipeCard, game.handleSuggestion("garbage1", "Pipe", "garbage2", playerOne));
 		
 		// Test player whose turn it is does not return card (Computer Player)
 		Assert.assertNotSame(whiteCard, game.handleSuggestion("Mr. White", "garbage1", "garbage2", playerOne));
 		
 		// Test player whose turn it is does not return card (Human Player)
-		Assert.assertNotSame(whiteCard, game.handleSuggestion("pipe", "garbage1", "garbage2", playerThree));
+		Assert.assertNotSame(whiteCard, game.handleSuggestion("garbage1", "Pipe", "garbage2", playerThree));
 		
 		// Test one player, multiple possible matches
 		int timesMustard = 0;

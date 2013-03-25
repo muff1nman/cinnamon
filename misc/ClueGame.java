@@ -3,11 +3,8 @@ package misc;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Random;
+import java.util.Collections;
 import java.util.Scanner;
-import board.BadConfigFormatException;
 import board.Board;
 
 import misc.Card.CardType;
@@ -67,9 +64,11 @@ public class ClueGame {
 		while(peopleFile.hasNextLine()) {
 			peopleSplit = peopleFile.nextLine().split(",");
 			if(peopleSplit[0].charAt(0) == '+') {
-				Bob = new HumanPlayer(peopleSplit[0].substring(1), peopleSplit[1], Integer.parseInt(peopleSplit[2]), Integer.parseInt(peopleSplit[3]));
+				Bob = new HumanPlayer(peopleSplit[0].substring(1), peopleSplit[1], Integer.parseInt(peopleSplit[2]), 
+						Integer.parseInt(peopleSplit[3]));
 			} else {
-				cpuPlayers.add(new ComputerPlayer(peopleSplit[0], peopleSplit[1], Integer.parseInt(peopleSplit[2]), Integer.parseInt(peopleSplit[3])));
+				cpuPlayers.add(new ComputerPlayer(peopleSplit[0], peopleSplit[1], Integer.parseInt(peopleSplit[2]), 
+						Integer.parseInt(peopleSplit[3])));
 			}
 		}
 		peopleFile.close();
@@ -126,10 +125,20 @@ public class ClueGame {
 		Bob.resetCards();
 		for(Player a : cpuPlayers)
 			a.resetCards();
+		boolean weaponInSolution = false;
+		boolean personInSolution = false;
+		boolean roomInSolution = false;
 		for(Card a : deck) {
-			if(i == 0)
+			CardType theType = a.getCardType();
+			if((!weaponInSolution)&&(theType==CardType.WEAPON))
+				closetCards.add(a);
+			else if((!personInSolution)&&(theType==CardType.PERSON))
+				closetCards.add(a);
+			else if((!roomInSolution)&&(theType==CardType.ROOM))
+				closetCards.add(a);
+			else if(i == 0)
 				Bob.giveCard(a);
-			if(i > 0)
+			else if(i > 0)
 				cpuPlayers.get(i - 1).giveCard(a);
 			i++;
 			if(i > cpuPlayers.size())
@@ -137,7 +146,18 @@ public class ClueGame {
 		}
 	}
 	public boolean checkAccusation(Solution solution) {
-		return false;
+		String person = null;
+		String weapon = null;
+		String room = null;
+		for(Card a : closetCards) {
+			if(a.getCardType() == CardType.PERSON)
+				person = a.getName();
+			else if(a.getCardType() == CardType.WEAPON)
+				weapon = a.getName();
+			else if(a.getCardType() == CardType.ROOM)
+				room = a.getName();
+		}
+		return solution.checkSolution(person, weapon, room);
 	}
 
 	public int getDeckWeaponSize() {
@@ -194,15 +214,42 @@ public class ClueGame {
 	public void setWhosTurn(Player whosTurn) {
 		this.whosTurn = whosTurn;
 	}
-	public Object handleSuggestion(String person, String room, String weapon, Player playerOne) {
-		// TODO Auto-generated method stub
+	public Object handleSuggestion(String person, String room, String weapon, Player thePlayer) {
+		ArrayList<Player> thesePlayers = new ArrayList<Player>();
+		ArrayList<String> theseStrings = new ArrayList<String>();
+		theseStrings.add(room);
+		theseStrings.add(weapon);
+		theseStrings.add(person);
+		thesePlayers.add(Bob);
+		for(Player a : cpuPlayers)
+			thesePlayers.add(a);
+		Collections.shuffle(thesePlayers);
+		System.out.println("ThesePlayers size" + thesePlayers.size());
+		boolean success = thesePlayers.remove(thePlayer);
+		System.out.println("success:" + success);
+		System.out.println("ThesePlayers size" + thesePlayers.size());
+		for(Player a : thesePlayers) {
+			ArrayList<Card> theseCards = a.getCards();
+			Collections.shuffle(theseCards);
+			for(Card b : theseCards) {
+				if(theseStrings.contains(b.getName())) {
+					return b;
+				}
+			}
+		}
 		return null;
 	}
 	public void addPlayer(ComputerPlayer player) {
+		System.out.println("size" + cpuPlayers.size());
 		cpuPlayers.add(player);
 	}
 	public void addPlayer(HumanPlayer player) {
 		Bob = player;
+		System.out.println("human");
+	}
+	public void resetPlayers() {
+		Bob = null;
+		cpuPlayers = new ArrayList<ComputerPlayer>();
 	}
 
 	

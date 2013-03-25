@@ -64,6 +64,8 @@ public class GameSetupTests {
 		for(Card a : testGame.getDeck()) {
 			if(testGame.getBob().getCards().contains(a))
 				testCardsDealt = true;
+			else if(testGame.getClosetCards().contains(a))
+				testCardsDealt = true;
 			else {
 				for(ComputerPlayer b : testGame.getCpuPlayers()) {
 					if(b.getCards().contains(a))
@@ -86,6 +88,8 @@ public class GameSetupTests {
 				if(b.getCards().contains(a))
 					i++;
 			}
+			if(testGame.getClosetCards().contains(a))
+				i++;
 			Assert.assertTrue(i == 1);
 		}
 	}
