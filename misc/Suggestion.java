@@ -2,34 +2,29 @@ package misc;
 
 public class Suggestion {
 	
-	private String person;
-	private String room;
-	private String weapon;
+	private Card person;
+	private Card room;
+	private Card weapon;
 	
-	
-	public Suggestion(String person, String room, String weapon) {
-		super();
-		this.person = person;
-		this.room = room;
-		this.weapon = weapon;
-	}
-	
-	public String getPerson() {
+	public Card getPerson() {
 		return person;
 	}
-	public void setPerson(String person) {
+	public void setPerson(Card person) {
 		this.person = person;
 	}
-	public String getRoom() {
+	public Card getRoom() {
 		return room;
 	}
-	public void setRoom(String room) {
+	public void setRoom(Card room) {
 		this.room = room;
 	}
-	public String getWeapon() {
+	public Card getWeapon() {
 		return weapon;
 	}
-	public void setWeapon(String weapon) {
+	public void setWeapon(Card weapon) {
 		this.weapon = weapon;
 	}
+	
+	
+	
 }

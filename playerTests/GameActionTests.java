@@ -13,6 +13,7 @@ import misc.ComputerPlayer;
 import misc.HumanPlayer;
 import misc.Player;
 import misc.Solution;
+import misc.Suggestion;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -45,13 +46,13 @@ public class GameActionTests {
 		allCards.add(mustardCard);
 		whiteCard = new Card("Mr. White", Card.CardType.PERSON);
 		allCards.add(whiteCard);
-		knifeCard = new Card("knife", Card.CardType.WEAPON);
+		knifeCard = new Card("Knife", Card.CardType.WEAPON);
 		allCards.add(knifeCard);
-		pipeCard = new Card("pipe", Card.CardType.WEAPON);
+		pipeCard = new Card("Pipe", Card.CardType.WEAPON);
 		allCards.add(pipeCard);
-		kitchenCard = new Card("kitchen", Card.CardType.ROOM);
+		kitchenCard = new Card("Kitchen", Card.CardType.ROOM);
 		allCards.add(kitchenCard);
-		conservatoryCard = new Card("conservatory", Card.CardType.ROOM);
+		conservatoryCard = new Card("Conservatory", Card.CardType.ROOM);
 		allCards.add(conservatoryCard);
 		//set the deck to our reduced set
 		game.setDeck(allCards);
@@ -78,87 +79,95 @@ public class GameActionTests {
 	public void testTargetRandomSelection() {
 		ComputerPlayer cpuPlayer = new ComputerPlayer();
 		//location with no rooms and 3 possible targets
-		board.startTargets(0, 2);
-		int loc_2 = 0;
-		int loc_52 = 0;
-		int loc_27 = 0;
+		board.startTargets(board.calcIndex(0, 17), 2);
+		System.out.println("random");
+		System.out.println("target size " + board.getTargets().size());
+		int loc_2_17 = 0;
+		int loc_1_18 = 0;
+		int loc_0_19 = 0;
 		//run lots of times to test that rooms are being randomly selected
 		for (int x = 0; x < 100; x++) {
 			BoardCell selection = cpuPlayer.pickLocation(board.getTargets());
-			if (selection == board.getCellAt(0, 2)) {
-				loc_2++;
+			if (selection == board.getCellAt(2,17)) {
+				loc_2_17++;
 			}
-			else if (selection == board.getCellAt(1, 1)) {
-				loc_27++;
+			else if (selection == board.getCellAt(1,18)) {
+				loc_1_18++;
 			}
-			else if (selection == board.getCellAt(2, 0)) {
-				loc_52++;
+			else if (selection == board.getCellAt(0,19)) {
+				loc_0_19++;
 			}
 			else {
 				fail("invalid target");
 			}
 		}
 		//check to make sure all location selections were successful
-		assertEquals(100, loc_2 + loc_52 + loc_27);
+		assertEquals(100, loc_2_17 + loc_1_18 + loc_0_19);
 		//make sure each target was chosen a reasonable number of times
-		assertTrue(loc_2 > 10);
-		assertTrue(loc_52 > 10);
-		assertTrue(loc_27 > 10);
+		assertTrue(loc_2_17 > 10);
+		assertTrue(loc_1_18 > 10);
+		assertTrue(loc_0_19 > 10);
 	}
 	
 	@Test
 	public void testSelectUnvisitedRoom() {
 		ComputerPlayer cpuPlayer = new ComputerPlayer();
-		int loc_14_15 = 0;
+		int loc_13_15 = 0;
 		//location with an unvisited door in range.
 		board.startTargets(board.calcIndex(15, 14), 3);
+		//System.out.println("target size " + board.getTargets().size());
 		
 		//ensure it picks the correct room every time
 		for(int x = 0; x<100; x++) {
-			cpuPlayer.setLastRoomVisited('L');
+			cpuPlayer.setLastRoomVisited('D');
 			BoardCell selection = cpuPlayer.pickLocation(board.getTargets());
-			if (selection == board.getCellAt(14, 15)) {
-				loc_14_15++;
+			if (selection == board.getCellAt(13, 15)) {
+				loc_13_15++;
 			}
 		}
 		//true if unvisited room was picked every time.
-		assertTrue(loc_14_15 == 100);
+		//System.out.println(loc_14_15);
+		//assert(loc_14_15 == 100);
+		Assert.assertTrue(loc_13_15 == 100);
+		
 	}
 	
 	@Test
 	public void testSelectRandomIfRoomLastVisited() {
 		ComputerPlayer cpuPlayer = new ComputerPlayer();
-		int loc_19_20 = 0; 
-		int loc_16_21 = 0;
+		int loc_20_19 = 0; 
+		int loc_18_20 = 0;
+		int loc_16_19 = 0;
 		int loc_17_20 = 0;
-		int loc_18_19 = 0;
 		//location with only 1 door in range
-		board.startTargets(board.calcIndex(18, 21), 2);
+		board.startTargets(board.calcIndex(18, 19), 2);
+		//System.out.println("target size " + board.getTargets().size());
 		cpuPlayer.setLastRoomVisited('O');
 		
 		for( int x = 0; x < 100; x++) {
 			BoardCell selection = cpuPlayer.pickLocation(board.getTargets());
-			if (selection == board.getCellAt(19, 20)) {
-				loc_19_20++;
+			if (selection == board.getCellAt(20, 19)) {
+				loc_20_19++;
 			}
-			else if (selection == board.getCellAt(16, 21)) {
-				loc_16_21++;
+			else if (selection == board.getCellAt(18, 20)) {
+				loc_18_20++;
+			}
+			else if (selection == board.getCellAt(16, 19)) {
+				loc_16_19++;
 			}
 			else if (selection == board.getCellAt(17, 20)) {
 				loc_17_20++;
 			}
-			else if (selection == board.getCellAt(19, 20)) {
-				loc_18_19++;
-			}
 			else fail("invalid targets");
 		}
 		//check to make sure all location selections were successful
-				assertEquals(100, loc_19_20 + loc_16_21 + loc_17_20 + loc_18_19);
+				assertEquals(100, loc_20_19 + loc_18_20 + loc_16_19 + loc_17_20);
 				//make sure each target was chosen a reasonable number of times
-				assertTrue(loc_19_20 > 5);
-				assertTrue(loc_16_21 > 5);
+				System.out.println(loc_20_19 + " " + loc_18_20 + " " + loc_16_19 +" " + loc_17_20);
+				assertTrue(loc_20_19 > 5);
+				assertTrue(loc_18_20 > 5);
+				assertTrue(loc_16_19 > 5);
 				assertTrue(loc_17_20 > 5);
-				assertTrue(loc_18_19 > 5);
 	}
 	
 	
@@ -168,17 +177,41 @@ public class GameActionTests {
 		ComputerPlayer cpu1 = new ComputerPlayer();
 		cpu1.updateSeen(mustardCard);
 		cpu1.updateSeen(pipeCard);
-		cpu1.setLocation(board.calcIndex(18, 3));
+		//cpu1.setLocation(board.calcIndex(18, 3));
+		cpu1.setRow(18);
+		cpu1.setColumn(3);
 		
-		//createSuggestion returns an ArrayList of 3 cards. //the first entry is a person. 2nd entry is a room, and 3rd entry is a weapon
-		ArrayList<Card> suggestion = cpu1.createSuggestion(cpu1.getLocation());
+		//cpu1.setRoom(board.getRoomCellAt(18, 3).getRoomClassifier());
+		//Suggestion suggestion = new Suggestion();
+		//Assert.assertEquals("Conservatory",newBoard.getRooms().get('C'));
+		//System.out.println("oeuou " + board.getRooms().get(cpu1.getRoom()));
+		
+		
+		//Suggestion suggestion = cpu1.createSuggestion(board.getRooms().get(cpu1.getRoom()), game.getDeck());
+		
+		
+		Suggestion suggestion = cpu1.createSuggestion(cpu1.getRow(), cpu1.getColumn(), game.getDeck(), board);
+		
+		
 		//checks to see if the suggestion contains a person or weapon that has already been seen.
-		assertFalse(cpu1.getCards().contains(suggestion.get(PERSON)));
-		assertFalse(cpu1.getCards().contains(suggestion.get(WEAPON)));
+		assertFalse(cpu1.getKnownCards().contains(suggestion.getPerson()));
+		assertFalse(cpu1.getKnownCards().contains(suggestion.getWeapon()));
+		//since there is only one possible suggestion in this scenario
+		assertTrue(suggestion.getPerson().equals(whiteCard));
+		System.out.println(suggestion.getRoom().getName());
+		assertTrue(suggestion.getRoom().equals(kitchenCard));
+		assertTrue(suggestion.getWeapon().equals(knifeCard));
+		/*
+		//createSuggestion returns an ArrayList of 3 cards. //the first entry is a person. 2nd entry is a room, and 3rd entry is a weapon
+		ArrayList<Card> suggestion = cpu1.createSuggestion(cpu1.getLocation(), game.getDeck());
+		//checks to see if the suggestion contains a person or weapon that has already been seen.
+		assertFalse(cpu1.getKnownCards().contains(suggestion.get(PERSON)));
+		assertFalse(cpu1.getKnownCards().contains(suggestion.get(WEAPON)));
 		//since there is only one possible suggestion in this scenario
 		assertTrue(suggestion.get(PERSON).equals(whiteCard));
 		assertTrue(suggestion.get(ROOM).equals(kitchenCard));
 		assertTrue(suggestion.get(WEAPON).equals(knifeCard));
+		*/
 	}
 	
 	//multiple possible suggestions (2 possible person cards)
@@ -186,26 +219,27 @@ public class GameActionTests {
 	public void testComputerMakingSuggestion2() {
 		ComputerPlayer cpu1 = new ComputerPlayer();
 		cpu1.updateSeen(pipeCard);
-		cpu1.setLocation(board.calcIndex(18, 3));
+		cpu1.setRow(18);
+		cpu1.setColumn(3);
+		//cpu1.setLocation(board.calcIndex(18, 3));
 		int mustard = 0;
 		int white = 0;
 		
 		//make sure both options are chosen a reasonable amount
 		for(int x = 0; x < 100; x++) {
 			//createSuggestion returns an ArrayList of 3 cards. //the first entry is a person. 2nd entry is a room, and 3rd entry is a weapon
-			ArrayList<Card> suggestion = cpu1.createSuggestion(cpu1.getLocation());
+			Suggestion suggestion = cpu1.createSuggestion(cpu1.getRow(), cpu1.getColumn(), game.getDeck(), board);
 			//checks to see if the suggestion contains a person or weapon that has already been seen.
-			assertFalse(cpu1.getCards().contains(suggestion.get(PERSON)));
-			assertFalse(cpu1.getCards().contains(suggestion.get(WEAPON)));
+			assertFalse(cpu1.getCards().contains(suggestion.getPerson()));
+			assertFalse(cpu1.getCards().contains(suggestion.getWeapon()));
 			//makes sure room is correct
-			assertTrue(suggestion.get(ROOM).equals(kitchenCard));
+			assertTrue(suggestion.getRoom().equals(kitchenCard));
 			//makes sure weapon is correct
-			assertTrue(suggestion.get(WEAPON).equals(knifeCard));
-			
-			if (suggestion.get(PERSON).equals(mustardCard)) {
+			assertTrue(suggestion.getWeapon().equals(knifeCard));
+			if (suggestion.getPerson().equals(mustardCard)) {
 				mustard++;
 			}
-			else if (suggestion.get(PERSON).equals(whiteCard)) {
+			else if (suggestion.getPerson().equals(whiteCard)) {
 				white++;
 			}
 			else fail("incorrect card");

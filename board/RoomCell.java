@@ -9,6 +9,8 @@ package board;
 // BoardCell class body
 public class RoomCell extends BoardCell {
 	
+	private String roomName;
+	
 	// Enumerated type for determining the door direction
 	public enum DoorDirection {
 		
@@ -41,6 +43,10 @@ public class RoomCell extends BoardCell {
 	// Parameterized constructor for RoomCell
 	public RoomCell(String roomName) {
 		
+		//-------------------------------------
+		this.roomName = roomName;
+		//-------------------------------
+		
 		// Set the classifier to the first char in the config at this cell
 		roomClassifier = roomName.charAt(0);
 		// If the length is 2 and the second char is not N
@@ -63,7 +69,17 @@ public class RoomCell extends BoardCell {
 		}
 	}
 	
-	
+	//-------------------------------------------------
+	public String getRoomName() {
+		return roomName;
+	}
+
+
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
+	}
+//----------------------------------------------------------
+
 	// Overridden isRoom function, used to identify that this cell is a room
 	@Override
 	public boolean isRoom() {

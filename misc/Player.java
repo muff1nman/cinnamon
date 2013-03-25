@@ -1,16 +1,42 @@
 package misc;
 import java.util.ArrayList;
-
+import board.BoardCell;
 import misc.Card.CardType;
 
 public class Player {
 
 	private int row;
 	private int column;
-	private int location;	//	?
+	//private BoardCell room;
+	private char room;
+	//private int location;
 	private String name;
 
 	
+	public char getRoom() {
+		return room;
+	}
+
+	public void setRoom(char room) {
+		this.room = room;
+	}
+
+	public int getRow() {
+		return row;
+	}
+
+	public void setRow(int row) {
+		this.row = row;
+	}
+
+	public int getColumn() {
+		return column;
+	}
+
+	public void setColumn(int column) {
+		this.column = column;
+	}
+
 	protected ArrayList<Card> knownCards;
 
 	private String color;
@@ -45,6 +71,7 @@ public class Player {
 		return cards;
 	}
 
+	/*
 	public int getLocation() {
 		return location;
 	}
@@ -52,7 +79,7 @@ public class Player {
 	public void setLocation(int location) {
 		this.location = location;
 	}
-
+*/
 	public String getName() {
 		return name;
 	}
@@ -67,6 +94,14 @@ public class Player {
 
 	public void giveCard(Card card) {
 		cards.add(card);
+	}
+	
+	public ArrayList<Card> getKnownCards() {
+		return knownCards;
+	}
+
+	public void setKnownCards(ArrayList<Card> knownCards) {
+		this.knownCards = knownCards;
 	}
 	
 }
