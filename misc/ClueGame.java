@@ -3,8 +3,10 @@ package misc;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Random;
 import java.util.Scanner;
-
 import board.BadConfigFormatException;
 import board.Board;
 
@@ -54,6 +56,7 @@ public class ClueGame {
 		loadDeck();
 	}
 	public void loadPeople() {
+		cpuPlayers = new ArrayList<ComputerPlayer>();
 		Scanner peopleFile = null;
 		try {
 			peopleFile = new Scanner(new File(players));
@@ -71,8 +74,68 @@ public class ClueGame {
 		}
 		peopleFile.close();
 	}
-	public void loadDeck() {}
-	
+	public void loadDeck() {
+		deck = new ArrayList<Card>();
+		Scanner peopleFile = null;
+		try {
+			peopleFile = new Scanner(new File(players));
+		} catch (FileNotFoundException e) {
+			System.out.println("Players file not found");
+		}
+		String[] peopleSplit;
+		while(peopleFile.hasNextLine()) {
+			peopleSplit = peopleFile.nextLine().split(",");
+			if(peopleSplit[0].charAt(0) == '+') {
+				deck.add(new Card(peopleSplit[0].substring(1), CardType.PERSON));
+			} else {
+				deck.add(new Card(peopleSplit[0], CardType.PERSON));
+			}
+		}
+		peopleFile.close();
+		
+		Scanner roomFile = null;
+		try {
+			roomFile = new Scanner(new File(legend));
+		} catch (FileNotFoundException e) {
+			System.out.println("Legend file not found");
+		}
+		String[] roomSplit;
+		while(roomFile.hasNextLine()) {
+			roomSplit = roomFile.nextLine().split(", ");
+			if(!roomSplit[1].equalsIgnoreCase("Closet")) {
+				deck.add(new Card(roomSplit[1], CardType.ROOM));
+			}
+		}
+		roomFile.close();
+		
+		Scanner weaponFile = null;
+		try {
+			weaponFile = new Scanner(new File(weapons));
+		} catch (FileNotFoundException e) {
+			System.out.println("Weapons file not found");
+		}
+		String weaponSplit;
+		while(weaponFile.hasNextLine()) {
+			weaponSplit = weaponFile.nextLine();
+			deck.add(new Card(weaponSplit, CardType.WEAPON));
+		}
+		weaponFile.close();
+	}
+	public void deal() {
+		int i = 0;
+		Bob.resetCards();
+		for(Player a : cpuPlayers)
+			a.resetCards();
+		for(Card a : deck) {
+			if(i == 0)
+				Bob.giveCard(a);
+			if(i > 0)
+				cpuPlayers.get(i - 1).giveCard(a);
+			i++;
+			if(i > cpuPlayers.size())
+				i = 0;
+		}
+	}
 	public boolean checkAccusation(Solution solution) {
 		return false;
 	}

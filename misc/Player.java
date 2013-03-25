@@ -12,7 +12,6 @@ public class Player {
 	//private int location;
 	private String name;
 
-
 	public char getRoom() {
 		return room;
 	}
@@ -40,6 +39,11 @@ public class Player {
 	protected ArrayList<Card> knownCards;
 	private String color;
 	private ArrayList<Card> cards;
+	
+	public void resetCards() {
+		knownCards = new ArrayList<Card>();
+		cards = new ArrayList<Card>();
+	}
 	
 	public Player(String name, String color, int row, int column) {
 		this.row = row;
