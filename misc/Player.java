@@ -12,7 +12,7 @@ public class Player {
 	//private int location;
 	private String name;
 
-	
+
 	public char getRoom() {
 		return room;
 	}
@@ -38,7 +38,6 @@ public class Player {
 	}
 
 	protected ArrayList<Card> knownCards;
-
 	private String color;
 	private ArrayList<Card> cards;
 	
@@ -95,7 +94,46 @@ public class Player {
 	public void giveCard(Card card) {
 		cards.add(card);
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((color == null) ? 0 : color.hashCode());
+		result = prime * result + column;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + row;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Player other = (Player) obj;
+		if (color == null) {
+			if (other.color != null)
+				return false;
+		} else if (!color.equals(other.color))
+			return false;
+		if (column != other.column)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (row != other.row)
+			return false;
+		return true;
+	}
+
 	
+
 	public ArrayList<Card> getKnownCards() {
 		return knownCards;
 	}
@@ -104,4 +142,6 @@ public class Player {
 		this.knownCards = knownCards;
 	}
 	
+
+
 }

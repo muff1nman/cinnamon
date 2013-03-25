@@ -56,7 +56,19 @@ public class GameSetupTests {
 	@Test
 	public void testDealingCards() {
 		// Tests all cards are dealt
-		Assert.assertTrue(testGame.getDeck().size() == 0);
+		Assert.assertTrue(testGame.getDeck().size() > 0);
+		boolean test = false;
+		for(Card a : testGame.getDeck()) {
+			if(testGame.getBob().getCards().contains(a))
+				test = true;
+			else {
+				for(ComputerPlayer b : testGame.getCpuPlayers()) {
+					if(b.getCards().contains(a))
+						test = true;
+				}
+			}
+		}
+		Assert.assertTrue(test);
 		// Tests all players have within 1 card of each other
 		int numCards = testGame.getBob().getCards().size();
 		for(Player a : testGame.getCpuPlayers()) {
