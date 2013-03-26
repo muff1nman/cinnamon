@@ -34,8 +34,8 @@ public class GameActionTests {
 	private static Card mustardCard, whiteCard, knifeCard, pipeCard, kitchenCard, conservatoryCard;
 	
 	
-	@BeforeClass
-	public static void setUp() {
+	@Before
+	public void setUp() {
 		
 		game = new ClueGame();
 		board = new Board("RoomLayout.csv","legend.txt");
@@ -258,16 +258,16 @@ public class GameActionTests {
 		// Computer Player
 		ComputerPlayer playerOne = new ComputerPlayer();
 		playerOne.giveCard(whiteCard);
-		
+				
 		// Computer Player
 		ComputerPlayer playerTwo = new ComputerPlayer();
 		playerTwo.giveCard(mustardCard);
 		playerTwo.giveCard(kitchenCard);
-		
+			
 		// Human player
 		HumanPlayer playerThree = new HumanPlayer();
 		playerThree.giveCard(pipeCard);
-		
+				
 		// Computer Player
 		ComputerPlayer playerFour = new ComputerPlayer();
 		playerFour.giveCard(knifeCard);
@@ -294,7 +294,7 @@ public class GameActionTests {
 		int timesMustard = 0;
 		int timesKitchen = 0;
 		for(int i = 0; i < 100; ++i) {
-			Card testCard = (Card) game.handleSuggestion("Colonel Mustard", "kitchen", "garbage1", playerOne);
+			Card testCard = (Card) game.handleSuggestion("Colonel Mustard", "Kitchen", "garbage1", playerOne);
 			if(testCard.equals(mustardCard)) {
 				timesMustard++;
 			} else if (testCard.equals(kitchenCard)) {
@@ -309,7 +309,7 @@ public class GameActionTests {
 		int timesPipe = 0;
 		int timesConservatory = 0;
 		for(int i = 0; i < 300; ++i) {
-			Card testCard = (Card) game.handleSuggestion("Colonel Mustard", "pipe", "conservatory", playerOne);
+			Card testCard = (Card) game.handleSuggestion("Colonel Mustard", "Pipe", "Conservatory", playerOne);
 			if(testCard.equals(mustardCard)) {
 				timesMustard++;
 			} else if (testCard.equals(pipeCard)) {

@@ -214,30 +214,36 @@ public class ClueGame {
 	public void setWhosTurn(Player whosTurn) {
 		this.whosTurn = whosTurn;
 	}
-	public Object handleSuggestion(String person, String room, String weapon, Player thePlayer) {
+	public Object handleSuggestion(String thePerson, String theRoom, String theWeapon, Player thePlayer) {
 		ArrayList<Player> thesePlayers = new ArrayList<Player>();
 		ArrayList<String> theseStrings = new ArrayList<String>();
-		theseStrings.add(room);
-		theseStrings.add(weapon);
-		theseStrings.add(person);
+		ArrayList<Card> theseCards = new ArrayList<Card>();
+		Object answer = null;
+		theseStrings.add(theRoom);
+		theseStrings.add(theWeapon);
+		theseStrings.add(thePerson);
+		
 		thesePlayers.add(Bob);
 		for(Player a : cpuPlayers)
 			thesePlayers.add(a);
 		Collections.shuffle(thesePlayers);
-		System.out.println("ThesePlayers size" + thesePlayers.size());
-		boolean success = thesePlayers.remove(thePlayer);
-		System.out.println("success:" + success);
-		System.out.println("ThesePlayers size" + thesePlayers.size());
+		thesePlayers.remove(thePlayer);
+		
 		for(Player a : thesePlayers) {
-			ArrayList<Card> theseCards = a.getCards();
-			Collections.shuffle(theseCards);
-			for(Card b : theseCards) {
-				if(theseStrings.contains(b.getName())) {
-					return b;
-				}
+			for(Card b : a.getCards()) {
+				theseCards.add(b);
 			}
 		}
-		return null;
+		Collections.shuffle(theseCards);
+		
+		for(Card a : theseCards) {
+			if(theseStrings.contains(a.getName())) {
+				answer = a;
+				break;
+			}
+		}
+
+		return answer;
 	}
 	public void addPlayer(ComputerPlayer player) {
 		System.out.println("size" + cpuPlayers.size());
