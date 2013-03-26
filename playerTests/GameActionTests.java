@@ -256,20 +256,20 @@ public class GameActionTests {
 	@Test
 	public void testDisprovingSuggestion() {
 		// Computer Player
-		ComputerPlayer playerOne = new ComputerPlayer();
+		ComputerPlayer playerOne = new ComputerPlayer("PlayerOne", "red", 0, 0);
 		playerOne.giveCard(whiteCard);
 				
 		// Computer Player
-		ComputerPlayer playerTwo = new ComputerPlayer();
+		ComputerPlayer playerTwo = new ComputerPlayer("PlayerTwo", "orange", 0, 0);
 		playerTwo.giveCard(mustardCard);
 		playerTwo.giveCard(kitchenCard);
 			
 		// Human player
-		HumanPlayer playerThree = new HumanPlayer();
+		HumanPlayer playerThree = new HumanPlayer("PlayerThree", "yellow", 0, 0);
 		playerThree.giveCard(pipeCard);
 				
 		// Computer Player
-		ComputerPlayer playerFour = new ComputerPlayer();
+		ComputerPlayer playerFour = new ComputerPlayer("PlayerFour", "blue", 0, 0);
 		playerFour.giveCard(knifeCard);
 		playerFour.giveCard(conservatoryCard);
 		game.resetPlayers();

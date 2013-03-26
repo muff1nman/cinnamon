@@ -234,9 +234,12 @@ public class ClueGame {
 				theseCards.add(b);
 			}
 		}
+		System.out.println("thesecards size"+theseCards.size());
 		Collections.shuffle(theseCards);
+		System.out.println("thesecards size"+theseCards.size());
 		
 		for(Card a : theseCards) {
+			System.out.println(a.getName());
 			if(theseStrings.contains(a.getName())) {
 				answer = a;
 				break;
