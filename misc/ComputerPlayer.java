@@ -38,41 +38,6 @@ public class ComputerPlayer extends Player {
 		
 		return suggestion;
 		
-		//String room = board.getRooms().get(this.getRoom());
-		//this.setRoom(board.getRoomCellAt(row, column).getRoomClassifier()); //possibly move to update position
-		/*
-		ArrayList<Card> suggestion = new ArrayList<Card>();
-		ArrayList<Card> knownCards = this.getKnownCards();
-		Card person = null;
-		//Card room = null;
-		Card weapon = null;
-		
-		for (Card x : deck) {
-			if (x.getCardType().equals(CardType.PERSON) && !knownCards.contains(x)) {
-				person = x;
-			}
-		}
-		suggestion.add(person);
-		//temp
-		suggestion.add(new Card("kitchen", CardType.ROOM));
-		for (Card x : deck) {
-			if (x.getCardType().equals(CardType.WEAPON) && !knownCards.contains(x)) {
-				weapon = x;
-			}
-		}
-		suggestion.add(weapon);
-		
-		//suggestion.add(new Card("temp1", CardType.PERSON));
-		//suggestion.add(new Card("temp2", CardType.ROOM));
-		//suggestion.add(new Card("temp3", CardType.WEAPON));
-		
-		
-		return suggestion;
-		//first item in arrayList is person
-		//2nd item is room
-		//3rd item is weapon
-		 * 
-		 */
 	}
 	
 	public Card findValidCard(ArrayList<Card> deck, CardType type) {
@@ -105,10 +70,8 @@ public class ComputerPlayer extends Player {
 			}
 		}
 		Random generator = new Random();
-		//System.out.println("targets size in pick "+targets.size());
 		int random = generator.nextInt();
 		random = Math.abs(random % targets.size());
-		//System.out.println("random value" + random);
 		Object[] targArr =  targets.toArray();
 		return (BoardCell) targArr[random];
 	}

@@ -234,12 +234,8 @@ public class ClueGame {
 				theseCards.add(b);
 			}
 		}
-		System.out.println("thesecards size"+theseCards.size());
 		Collections.shuffle(theseCards);
-		System.out.println("thesecards size"+theseCards.size());
-		
 		for(Card a : theseCards) {
-			System.out.println(a.getName());
 			if(theseStrings.contains(a.getName())) {
 				answer = a;
 				break;
@@ -249,12 +245,10 @@ public class ClueGame {
 		return answer;
 	}
 	public void addPlayer(ComputerPlayer player) {
-		System.out.println("size" + cpuPlayers.size());
 		cpuPlayers.add(player);
 	}
 	public void addPlayer(HumanPlayer player) {
 		Bob = player;
-		System.out.println("human");
 	}
 	public void resetPlayers() {
 		Bob = null;
