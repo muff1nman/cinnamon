@@ -1,41 +1,13 @@
 package misc;
 import java.util.ArrayList;
-import board.BoardCell;
 import misc.Card.CardType;
 
 public class Player {
 
 	private int row;
 	private int column;
-	//private BoardCell room;
 	private char room;
-	//private int location;
 	private String name;
-
-	public char getRoom() {
-		return room;
-	}
-
-	public void setRoom(char room) {
-		this.room = room;
-	}
-
-	public int getRow() {
-		return row;
-	}
-
-	public void setRow(int row) {
-		this.row = row;
-	}
-
-	public int getColumn() {
-		return column;
-	}
-
-	public void setColumn(int column) {
-		this.column = column;
-	}
-
 	protected ArrayList<Card> knownCards;
 	private String color;
 	private ArrayList<Card> cards;
@@ -70,19 +42,34 @@ public class Player {
 		return null;
 	}
 	
+	public char getRoom() {
+		return room;
+	}
+
+	public void setRoom(char room) {
+		this.room = room;
+	}
+
+	public int getRow() {
+		return row;
+	}
+
+	public void setRow(int row) {
+		this.row = row;
+	}
+
+	public int getColumn() {
+		return column;
+	}
+
+	public void setColumn(int column) {
+		this.column = column;
+	}
+	
 	public ArrayList<Card> getCards() {
 		return cards;
 	}
 
-	/*
-	public int getLocation() {
-		return location;
-	}
-
-	public void setLocation(int location) {
-		this.location = location;
-	}
-*/
 	public String getName() {
 		return name;
 	}
@@ -113,7 +100,9 @@ public class Player {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((color == null) ? 0 : color.hashCode());
+		result = prime * result + column;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + row;
 		return result;
 	}
 
@@ -131,14 +120,18 @@ public class Player {
 				return false;
 		} else if (!color.equals(other.color))
 			return false;
+		if (column != other.column)
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (row != other.row)
+			return false;
 		return true;
 	}
 	
-
+	
 
 }

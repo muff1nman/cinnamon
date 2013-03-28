@@ -11,12 +11,10 @@ import misc.Card.CardType;
 
 public class ClueGame {
 
-	private Solution solution;
-	
 	private ArrayList<Card> deck;
 	private ArrayList<Card> closetCards;
 	private ArrayList<ComputerPlayer> cpuPlayers;
-	private HumanPlayer Bob;
+	private HumanPlayer humanPlayer;
 	private Player whosTurn;
 	private Board board;
 	private String legend;
@@ -32,9 +30,10 @@ public class ClueGame {
 		deck = new ArrayList<Card>();
 		closetCards = new ArrayList<Card>();
 		cpuPlayers = new ArrayList<ComputerPlayer>();
-		Bob = new HumanPlayer();
+		humanPlayer = new HumanPlayer();
 		board = new Board(layout, legend);
 	}
+	
 	public ClueGame() {
 		legend = "legend.txt";
 		layout = "RoomLayout.csv";
@@ -43,7 +42,7 @@ public class ClueGame {
 		deck = new ArrayList<Card>();
 		closetCards = new ArrayList<Card>();
 		cpuPlayers = new ArrayList<ComputerPlayer>();
-		Bob = new HumanPlayer();
+		humanPlayer = new HumanPlayer();
 		board = new Board(layout, legend);
 	}
 	
@@ -64,7 +63,7 @@ public class ClueGame {
 		while(peopleFile.hasNextLine()) {
 			peopleSplit = peopleFile.nextLine().split(",");
 			if(peopleSplit[0].charAt(0) == '+') {
-				Bob = new HumanPlayer(peopleSplit[0].substring(1), peopleSplit[1], Integer.parseInt(peopleSplit[2]), 
+				humanPlayer = new HumanPlayer(peopleSplit[0].substring(1), peopleSplit[1], Integer.parseInt(peopleSplit[2]), 
 						Integer.parseInt(peopleSplit[3]));
 			} else {
 				cpuPlayers.add(new ComputerPlayer(peopleSplit[0], peopleSplit[1], Integer.parseInt(peopleSplit[2]), 
@@ -122,7 +121,7 @@ public class ClueGame {
 	}
 	public void deal() {
 		int i = 0;
-		Bob.resetCards();
+		humanPlayer.resetCards();
 		for(Player a : cpuPlayers)
 			a.resetCards();
 		boolean weaponInSolution = false;
@@ -130,17 +129,22 @@ public class ClueGame {
 		boolean roomInSolution = false;
 		for(Card a : deck) {
 			CardType theType = a.getCardType();
-			if((!weaponInSolution)&&(theType==CardType.WEAPON))
+			if((!weaponInSolution)&&(theType==CardType.WEAPON)) {
 				closetCards.add(a);
-			else if((!personInSolution)&&(theType==CardType.PERSON))
+				weaponInSolution = true;
+			} else if((!personInSolution)&&(theType==CardType.PERSON)) {
 				closetCards.add(a);
-			else if((!roomInSolution)&&(theType==CardType.ROOM))
+				personInSolution = true;
+			} else if((!roomInSolution)&&(theType==CardType.ROOM)) {
 				closetCards.add(a);
-			else if(i == 0)
-				Bob.giveCard(a);
-			else if(i > 0)
+				roomInSolution = true;
+			} else if(i == 0) {
+				humanPlayer.giveCard(a);
+				i++;
+			} else if(i > 0) {
 				cpuPlayers.get(i - 1).giveCard(a);
-			i++;
+				i++;
+			}
 			if(i > cpuPlayers.size())
 				i = 0;
 		}
@@ -159,27 +163,45 @@ public class ClueGame {
 		}
 		return solution.checkSolution(person, weapon, room);
 	}
-
-	public int getDeckWeaponSize() {
-		int weapons = 0;
-		for(Card a : deck) {
-			if(a.getCardType() == CardType.WEAPON)
-				weapons++;
+	public Object handleSuggestion(String thePerson, String theRoom, String theWeapon, Player thePlayer) {
+		ArrayList<Player> thesePlayers = new ArrayList<Player>();
+		ArrayList<String> theseStrings = new ArrayList<String>();
+		ArrayList<Card> theseCards = new ArrayList<Card>();
+		Object answer = null;
+		theseStrings.add(theRoom);
+		theseStrings.add(theWeapon);
+		theseStrings.add(thePerson);
+		thesePlayers.add(humanPlayer);
+		for(Player a : cpuPlayers)
+			thesePlayers.add(a);
+		thesePlayers.remove(thePlayer);
+		for(Player a : thesePlayers) {
+			for(Card b : a.getCards()) {
+				theseCards.add(b);
+			}
 		}
-		return weapons;
+		Collections.shuffle(theseCards);
+		for(Card a : theseCards) {
+			if(theseStrings.contains(a.getName())) {
+				answer = a;
+				break;
+			}
+		}
+		return answer;
+	}
+	public int getDeckWeaponSize() {
+		return getRoomSizeCardType(CardType.WEAPON);
 	}
 	public int getDeckPlayerSize() {
-		int players = 0;
-		for(Card a : deck) {
-			if(a.getCardType() == CardType.PERSON)
-				players++;
-		}
-		return players;
+		return getRoomSizeCardType(CardType.PERSON);
 	}
 	public int getDeckRoomSize() {
+		return getRoomSizeCardType(CardType.ROOM);
+	}
+	private int getRoomSizeCardType(CardType cardType) {
 		int rooms = 0;
 		for(Card a : deck) {
-			if(a.getCardType() == CardType.ROOM)
+			if(a.getCardType() == cardType)
 				rooms++;
 		}
 		return rooms;
@@ -202,11 +224,11 @@ public class ClueGame {
 	public void setCpuPlayers(ArrayList<ComputerPlayer> cpuPlayers) {
 		this.cpuPlayers = cpuPlayers;
 	}
-	public HumanPlayer getBob() {
-		return Bob;
+	public HumanPlayer getHumanPlayer() {
+		return humanPlayer;
 	}
-	public void setBob(HumanPlayer bob) {
-		Bob = bob;
+	public void setHumanPlayer(HumanPlayer bob) {
+		humanPlayer = bob;
 	}
 	public Player getWhosTurn() {
 		return whosTurn;
@@ -214,46 +236,14 @@ public class ClueGame {
 	public void setWhosTurn(Player whosTurn) {
 		this.whosTurn = whosTurn;
 	}
-	public Object handleSuggestion(String thePerson, String theRoom, String theWeapon, Player thePlayer) {
-		ArrayList<Player> thesePlayers = new ArrayList<Player>();
-		ArrayList<String> theseStrings = new ArrayList<String>();
-		ArrayList<Card> theseCards = new ArrayList<Card>();
-		Object answer = null;
-		theseStrings.add(theRoom);
-		theseStrings.add(theWeapon);
-		theseStrings.add(thePerson);
-		
-		thesePlayers.add(Bob);
-		for(Player a : cpuPlayers)
-			thesePlayers.add(a);
-		Collections.shuffle(thesePlayers);
-		thesePlayers.remove(thePlayer);
-		
-		for(Player a : thesePlayers) {
-			for(Card b : a.getCards()) {
-				theseCards.add(b);
-			}
-		}
-		Collections.shuffle(theseCards);
-		for(Card a : theseCards) {
-			if(theseStrings.contains(a.getName())) {
-				answer = a;
-				break;
-			}
-		}
-
-		return answer;
-	}
 	public void addPlayer(ComputerPlayer player) {
 		cpuPlayers.add(player);
 	}
 	public void addPlayer(HumanPlayer player) {
-		Bob = player;
+		humanPlayer = player;
 	}
 	public void resetPlayers() {
-		Bob = null;
+		humanPlayer = null;
 		cpuPlayers = new ArrayList<ComputerPlayer>();
 	}
-
-	
 }

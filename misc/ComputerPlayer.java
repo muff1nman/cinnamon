@@ -15,29 +15,15 @@ import board.RoomCell;
 public class ComputerPlayer extends Player {
 	
 	private char lastRoomVisited;
-	
-	public char getLastRoomVisited() {
-		return lastRoomVisited;
-	}
-
-	public void setLastRoomVisited(char lastRoomVisited) {
-		this.lastRoomVisited = lastRoomVisited;
-	}
 
 	public Suggestion createSuggestion(int row, int column, ArrayList<Card> deck, Board board) {
-		
 		Suggestion suggestion = new Suggestion();
 		String room = board.getRooms().get(board.getRoomCellAt(row, column).getRoomClassifier());
-		
 		suggestion.setRoom(new Card (room, CardType.ROOM));
-		ArrayList<Card> knownCards = this.getKnownCards();
 		Collections.shuffle(deck);
-		
 		suggestion.setPerson(findValidCard(deck, CardType.PERSON));
 		suggestion.setWeapon(findValidCard(deck, CardType.WEAPON));
-		
 		return suggestion;
-		
 	}
 	
 	public Card findValidCard(ArrayList<Card> deck, CardType type) {
@@ -49,14 +35,6 @@ public class ComputerPlayer extends Player {
 		}
 		return null;
 		
-	}
-	
-	public void updateSeen(Card seen) {
-		knownCards.add(seen);
-	}
-	
-	public void updateSeen(ArrayList<Card> seen) {
-		knownCards.addAll(seen);
 	}
 	
 	public BoardCell pickLocation(Set<BoardCell> targets) {
@@ -83,7 +61,21 @@ public class ComputerPlayer extends Player {
 	public ComputerPlayer() {
 		super();
 	}
+	
+	public void updateSeen(Card seen) {
+		knownCards.add(seen);
+	}
+	
+	public void updateSeen(ArrayList<Card> seen) {
+		knownCards.addAll(seen);
+	}
 
+	public char getLastRoomVisited() {
+		return lastRoomVisited;
+	}
 
+	public void setLastRoomVisited(char lastRoomVisited) {
+		this.lastRoomVisited = lastRoomVisited;
+	}
 	
 }

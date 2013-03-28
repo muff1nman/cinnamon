@@ -1,8 +1,5 @@
 package misc;
 
-import misc.Card.CardType;
-
-
 public class Card {
 
 	private String name;
@@ -15,7 +12,7 @@ public class Card {
 	}
 
 	public void setCardType(CardType cardType) {
-		this.type = type;
+		this.type = cardType;
 	}
 	
 	public String getName() {
@@ -60,8 +57,5 @@ public class Card {
 			return false;
 		return true;
 	}
-	
-	
-	
 	
 }

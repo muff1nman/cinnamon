@@ -1,6 +1,5 @@
 package playerTests;
 
-import static org.junit.Assert.*;
 import junit.framework.Assert;
 
 import misc.Card.CardType;
@@ -9,9 +8,7 @@ import misc.ComputerPlayer;
 import misc.HumanPlayer;
 import misc.Player;
 import misc.Card;
-
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class GameSetupTests {
@@ -28,7 +25,7 @@ public class GameSetupTests {
 	@Test
 	public void testLoadingPeople() {
 		testGame.loadPeople();
-		Assert.assertEquals(new HumanPlayer("Bob Lob Lah","Yellow",9,0), testGame.getBob());
+		Assert.assertEquals(new HumanPlayer("Bob Lob Lah","Yellow",9,0), testGame.getHumanPlayer());
 		// Tests person at beginning
 		Assert.assertEquals(new ComputerPlayer("Colonel Mustard","Orange",0,19), testGame.getCpuPlayers().get(0));
 		// Tests person at end
@@ -62,7 +59,7 @@ public class GameSetupTests {
 		Assert.assertTrue(testGame.getDeck().size() > 0);
 		boolean testCardsDealt = false;
 		for(Card a : testGame.getDeck()) {
-			if(testGame.getBob().getCards().contains(a))
+			if(testGame.getHumanPlayer().getCards().contains(a))
 				testCardsDealt = true;
 			else if(testGame.getClosetCards().contains(a))
 				testCardsDealt = true;
@@ -75,14 +72,14 @@ public class GameSetupTests {
 		}
 		Assert.assertTrue(testCardsDealt);
 		// Tests all players have within 1 card of each other
-		int numCards = testGame.getBob().getCards().size();
+		int numCards = testGame.getHumanPlayer().getCards().size();
 		for(Player a : testGame.getCpuPlayers()) {
 			Assert.assertTrue(Math.abs(a.getCards().size() - numCards) <= 1);
 		}
 		// Tests one card is not given to multiple players
 		for(Card a : testGame.getDeck()) {
 			int i = 0;
-			if(testGame.getBob().getCards().contains(a))
+			if(testGame.getHumanPlayer().getCards().contains(a))
 				i++;
 			for(Player b : testGame.getCpuPlayers()) {
 				if(b.getCards().contains(a))

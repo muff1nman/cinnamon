@@ -3,20 +3,16 @@ package playerTests;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-import java.util.Set;
-
 import junit.framework.Assert;
 
 import misc.Card;
 import misc.ClueGame;
 import misc.ComputerPlayer;
 import misc.HumanPlayer;
-import misc.Player;
 import misc.Solution;
 import misc.Suggestion;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import board.Board;
