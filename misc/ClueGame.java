@@ -8,8 +8,10 @@ import java.util.Scanner;
 import board.Board;
 
 import misc.Card.CardType;
+import javax.swing.*;
 
-public class ClueGame {
+import java.awt.Graphics;
+public class ClueGame extends JFrame{
 
 	private ArrayList<Card> deck;
 	private ArrayList<Card> closetCards;
@@ -21,8 +23,17 @@ public class ClueGame {
 	private String layout;
 	private String players;
 	private String weapons;
+	private JPanel boardPanel;
+	private static ClueGame game;
+	
+	
 
 	public ClueGame(String legend, String layout, String players, String weapons) {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(1000,1000);
+		this.setVisible(true);
+		
+		boardPanel = new JPanel();
 		this.legend = legend;
 		this.layout = layout;
 		this.players = players;
@@ -35,6 +46,10 @@ public class ClueGame {
 	}
 	
 	public ClueGame() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(1000,1000);
+		this.setVisible(true);
+		
 		legend = "legend.txt";
 		layout = "RoomLayout.csv";
 		players = "players.txt";
@@ -245,5 +260,16 @@ public class ClueGame {
 	public void resetPlayers() {
 		humanPlayer = null;
 		cpuPlayers = new ArrayList<ComputerPlayer>();
+	}
+	
+	public static void main(String[] args) {
+		game = new ClueGame();
+		game.board.loadConfigFiles();
+		game.board.calcAdjacencies();
+		System.out.println(game.board.getCells().size());
+		//game.boardPanel.add(game.board);
+		game.add(game.board);
+		
+		//game.board.paintComponent(Graphics g);
 	}
 }

@@ -6,6 +6,7 @@
  */
 package board;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 // BoardCell class body
@@ -104,8 +105,14 @@ public class RoomCell extends BoardCell {
 	}
 
 	@Override
-	public void draw(Graphics g, Board b) {
-		// TODO Auto-generated method stub
+	public void draw(Graphics g, Board b, int z) {
+		int numColumns = b.getNumColumns();
+		int numRows = b.getNumRows();
+		int row = z/numColumns;
+		int column = z - (row*numColumns);
+		g.setColor(Color.red);
+		g.fillRect(column*5, row*5, 5, 5);
+		
 		
 	}
 }

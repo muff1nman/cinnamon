@@ -11,8 +11,8 @@ import java.awt.Graphics;
 public abstract class BoardCell {
 	
 	// Cells require that they have a row and a column
-	private int row;
-	private int column;
+	protected int row;
+	protected int column;
 	
 	// "is" functions are set to false then overridden in the appropriate cell to suit that cell's needs
 	public boolean isWalkway() {
@@ -25,7 +25,7 @@ public abstract class BoardCell {
 		return false;
 	}
 	
-	public abstract void draw(Graphics g, Board b);
+	public abstract void draw(Graphics g, Board b, int z);
 	
 	
 }

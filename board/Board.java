@@ -7,6 +7,7 @@
  */
 
 package board;
+import java.awt.Graphics;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -22,9 +23,12 @@ import javax.swing.JPanel;
 // Board class body
 public class Board extends JPanel{
 
-	public void paintComponent() {
+	public void paintComponent(Graphics g) {
+		System.out.println(cells.size());
+		int z = 0;
 		for (BoardCell x: cells) {
-			x.draw(null, null);
+			x.draw(g, this, z);
+			z++;
 		}
 	}
 	// The list of cells for the board
