@@ -5,6 +5,8 @@
  */
 package board;
 
+import java.awt.Graphics;
+
 // BoardCell class body
 public abstract class BoardCell {
 	
@@ -22,6 +24,8 @@ public abstract class BoardCell {
 	public boolean isDoorway() {
 		return false;
 	}
+	
+	public abstract void draw(Graphics g, Board b);
 	
 	
 }

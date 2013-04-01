@@ -7,6 +7,8 @@
 
 package board;
 
+import java.awt.Graphics;
+
 // WalkwayCell class body, extending BoardCell
 public class WalkwayCell extends BoardCell {
 	
@@ -19,6 +21,12 @@ public class WalkwayCell extends BoardCell {
 	@Override
 	public boolean isWalkway() {
 		return true;
+	}
+
+	@Override
+	public void draw(Graphics g, Board b) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

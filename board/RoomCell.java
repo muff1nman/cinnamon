@@ -6,6 +6,8 @@
  */
 package board;
 
+import java.awt.Graphics;
+
 // BoardCell class body
 public class RoomCell extends BoardCell {
 	
@@ -99,5 +101,11 @@ public class RoomCell extends BoardCell {
 	// Getter for the room classifier. Must return a char listed in the legend config file
 	public char getRoomClassifier() {
 		return roomClassifier;
+	}
+
+	@Override
+	public void draw(Graphics g, Board b) {
+		// TODO Auto-generated method stub
+		
 	}
 }
