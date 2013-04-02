@@ -1,5 +1,7 @@
 package misc;
 
+import gui.DetectiveNotes;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -12,6 +14,8 @@ import javax.swing.*;
 
 import java.awt.BorderLayout;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 public class ClueGame extends JFrame{
 
 	private ArrayList<Card> deck;
@@ -26,6 +30,7 @@ public class ClueGame extends JFrame{
 	private String weapons;
 	private JPanel boardPanel;
 	private JMenuBar menubar;
+	private DetectiveNotes notes;
 	private static ClueGame game;
 	private ArrayList<Player> allPlayers;
 	
@@ -50,6 +55,7 @@ public class ClueGame extends JFrame{
 		allPlayers = new ArrayList<Player>();
 		humanPlayer = new HumanPlayer();
 		board = new Board(layout, legend);
+		notes = new DetectiveNotes();
 		loadConfigFiles();
 	}
 	
@@ -70,6 +76,7 @@ public class ClueGame extends JFrame{
 		humanPlayer = new HumanPlayer();
 		board = new Board(layout, legend);
 		menubar = new JMenuBar();
+		notes = new DetectiveNotes();
 		setJMenuBar(menubar);
 		loadConfigFiles();
 	}
@@ -81,13 +88,33 @@ public class ClueGame extends JFrame{
 		loadMenuBar();
 	}
 	
-	public void loadMenuBar() {
+	private void loadMenuBar() {
 		JMenu file = new JMenu("File");
-		file.add(new JMenuItem("Detective Notes"));
-		file.add(new JMenuItem("Exit"));
+		file.add(createDetectiveNotesItem());
+		file.add(createFileExitItem());
 		menubar.add(file);
 	}
-	
+	private JMenuItem createFileExitItem() {
+	  JMenuItem item = new JMenuItem("Exit");
+	  class MenuItemListener implements ActionListener {
+	    public void actionPerformed(ActionEvent e)
+	    {
+	       System.exit(0);
+	    }
+	  }
+	  item.addActionListener(new MenuItemListener());
+	  return item;
+	}
+	private JMenuItem createDetectiveNotesItem() {
+		JMenuItem item = new JMenuItem("Detective Notes");
+		class NotesListener implements ActionListener {
+			public void actionPerformed(ActionEvent e) {
+				notes.setVisible(true);
+			}
+		}
+		item.addActionListener(new NotesListener());
+		return item;
+	}
 	public void loadPeople() {
 		cpuPlayers = new ArrayList<ComputerPlayer>();
 		Scanner peopleFile = null;
