@@ -30,7 +30,7 @@ public class ClueGame extends JFrame{
 
 	public ClueGame(String legend, String layout, String players, String weapons) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(1000,1000);
+		setSize(800,600);
 		this.setVisible(true);
 		
 		boardPanel = new JPanel();
@@ -44,11 +44,12 @@ public class ClueGame extends JFrame{
 		allPlayers = new ArrayList<Player>();
 		humanPlayer = new HumanPlayer();
 		board = new Board(layout, legend);
+		loadConfigFiles();
 	}
 	
 	public ClueGame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(1000,1000);
+		setSize(800,700);
 		this.setVisible(true);
 		
 		legend = "legend.txt";
@@ -61,17 +62,16 @@ public class ClueGame extends JFrame{
 		allPlayers = new ArrayList<Player>();
 		humanPlayer = new HumanPlayer();
 		board = new Board(layout, legend);
+		loadConfigFiles();
 	}
 	
 	public void loadConfigFiles() {
-		System.out.println("load peeps");
 		loadPeople();
 		board.loadConfigFiles();
 		
 		loadDeck();
 	}
 	public void loadPeople() {
-		System.out.println("load peeps");
 		cpuPlayers = new ArrayList<ComputerPlayer>();
 		Scanner peopleFile = null;
 		try {
@@ -90,10 +90,8 @@ public class ClueGame extends JFrame{
 						Integer.parseInt(peopleSplit[3])));
 			}
 		}
-		System.out.println("cpuPlayers" + cpuPlayers.size());
 		allPlayers.addAll(cpuPlayers);
 		allPlayers.add(humanPlayer);
-		System.out.println("in f all players: " + allPlayers.size());
 		peopleFile.close();
 	}
 	public void loadDeck() {
@@ -273,17 +271,10 @@ public class ClueGame extends JFrame{
 	
 	public static void main(String[] args) {
 		game = new ClueGame();
-		game.loadConfigFiles();
-		System.out.println("loda config");
 		game.board.calcAdjacencies();
 		
 		game.board.setPlayers(game.allPlayers);
-	//	game.board.setPlayers(players);
-		System.out.println(game.board.getCells().size());
-		//game.boardPanel.add(game.board);
 		game.add(game.board);
 		game.setVisible(true);
-		
-		//game.board.paintComponent(Graphics g);
 	}
 }

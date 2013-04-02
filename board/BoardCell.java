@@ -7,10 +7,8 @@ package board;
 
 import java.awt.Graphics;
 
-// BoardCell class body
 public abstract class BoardCell {
 	
-	// Cells require that they have a row and a column
 	protected int row;
 	protected int column;
 	

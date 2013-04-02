@@ -28,7 +28,6 @@ public class DetectiveNotes extends JDialog {
 		weaponGuess = new JPanel();
 		setLayout(new GridLayout(3,2));
 		createLayout();
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
 	

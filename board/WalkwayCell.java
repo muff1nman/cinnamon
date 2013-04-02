@@ -13,7 +13,6 @@ import java.awt.Graphics;
 // WalkwayCell class body, extending BoardCell
 public class WalkwayCell extends BoardCell {
 	
-	// Default constructor. Simply makes a BoardCell and calls it a WalkwayCell
 	public WalkwayCell() {
 		super();
 	}
@@ -25,9 +24,7 @@ public class WalkwayCell extends BoardCell {
 	}
 
 	@Override
-	public void draw(Graphics g, Board b, int z) {
-		//System.out.println(b.size());
-		
+	public void draw(Graphics g, Board b, int z) {		
 		int numColumns = b.getNumColumns();
 		int numRows = b.getNumRows();
 		int row = z/numColumns;
