@@ -106,13 +106,37 @@ public class RoomCell extends BoardCell {
 
 	@Override
 	public void draw(Graphics g, Board b, int z) {
+		int doorFraction = 5;
 		int numColumns = b.getNumColumns();
 		int numRows = b.getNumRows();
+		//int pixelModifier = b.size().width/numColumns;
+		int pixelModifier = Math.min(b.size().width/numColumns, b.size().height/numRows);
+		//System.out.println("b.width: " + b.WIDTH);
+		//System.out.println("pixelModifier: " + pixelModifier);
+		int doorOffset = pixelModifier/doorFraction;
 		int row = z/numColumns;
 		int column = z - (row*numColumns);
-		g.setColor(Color.red);
-		g.fillRect(column*5, row*5, 5, 5);
 		
+		g.setColor(Color.red);
+		g.fillRect(column*pixelModifier, row*pixelModifier, pixelModifier, pixelModifier);
+		g.setColor(Color.blue);
+		if (this.isDoorway() && (doorDirection.equals(DoorDirection.UP))) {
+			//g.drawLine(column*pixelModifier, row*pixelModifier, column*pixelModifier + pixelModifier, row*pixelModifier);
+			g.fillRect(column*pixelModifier, row*pixelModifier, pixelModifier, doorOffset);
+		}
+		else if (this.isDoorway() && (doorDirection.equals(DoorDirection.DOWN))) {
+			//g.drawLine(column*pixelModifier, row*pixelModifier, column*pixelModifier + pixelModifier, row*pixelModifier);
+			g.fillRect(column*pixelModifier, (row*pixelModifier + pixelModifier)-doorOffset, pixelModifier, doorOffset);
+		}
+		else if (this.isDoorway() && (doorDirection.equals(DoorDirection.LEFT))) {
+			//g.drawLine(column*pixelModifier, row*pixelModifier, column*pixelModifier, row*pixelModifier + pixelModifier);
+			g.fillRect(column*pixelModifier, row*pixelModifier, doorOffset, pixelModifier);	
+		}
+		else if (this.isDoorway() && (doorDirection.equals(DoorDirection.RIGHT))) {
+			//g.drawLine(column*pixelModifier + pixelModifier, row*pixelModifier, column*pixelModifier + pixelModifier, row*pixelModifier + pixelModifier);
+			g.fillRect((column*pixelModifier + pixelModifier)-doorOffset, row*pixelModifier, doorOffset, pixelModifier);
+		}
+
 		
 	}
 }

@@ -26,14 +26,17 @@ public class WalkwayCell extends BoardCell {
 
 	@Override
 	public void draw(Graphics g, Board b, int z) {
+		//System.out.println(b.size());
+		
 		int numColumns = b.getNumColumns();
 		int numRows = b.getNumRows();
 		int row = z/numColumns;
 		int column = z - (row*numColumns);
+		int pixelModifier = Math.min(b.size().width/numColumns, b.size().height/numRows);
 		g.setColor(Color.yellow);
-		g.fillRect(column*5, row*5, 5, 5);
+		g.fillRect(column*pixelModifier, row*pixelModifier, pixelModifier, pixelModifier);
 		g.setColor(Color.black);
-		g.drawRect(column*5, row*5, 5, 5);
+		g.drawRect(column*pixelModifier, row*pixelModifier, pixelModifier, pixelModifier);
 		
 		
 	}

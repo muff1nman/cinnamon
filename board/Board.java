@@ -25,6 +25,7 @@ public class Board extends JPanel{
 
 	public void paintComponent(Graphics g) {
 		System.out.println(cells.size());
+		
 		int z = 0;
 		for (BoardCell x: cells) {
 			x.draw(g, this, z);
@@ -61,6 +62,7 @@ public class Board extends JPanel{
 
 	// Parameterized constructor, sets all the fields of board using the configuration files
 	public Board(String csv, String legend) {
+		//this.setVisible(true);
 		// Initialize cells, rooms, numRows, numColumns
 		initialize();
 		// Create the filepaths for the configuration files

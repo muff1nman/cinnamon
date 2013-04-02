@@ -269,6 +269,7 @@ public class ClueGame extends JFrame{
 		System.out.println(game.board.getCells().size());
 		//game.boardPanel.add(game.board);
 		game.add(game.board);
+		game.setVisible(true);
 		
 		//game.board.paintComponent(Graphics g);
 	}
