@@ -1,5 +1,9 @@
 package misc;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
+
+import board.Board;
 import misc.Card.CardType;
 
 public class Player {
@@ -132,6 +136,46 @@ public class Player {
 		return true;
 	}
 	
+	public void draw(Graphics g, Board b) {
+		int pixelModifier = Math.min(b.size().width/b.getNumColumns(), b.size().height/b.getNumRows());
+		setColor(g);
+		g.fillRoundRect(column*pixelModifier, row*pixelModifier, pixelModifier, pixelModifier, pixelModifier, pixelModifier);
+	}
+	
+	public void setColor(Graphics g) {
+		switch (color) {
+		case "Yellow": g.setColor(Color.black);
+			break;
+		case "Orange": g.setColor(Color.orange);
+			break;
+		case "Red": g.setColor(Color.red);
+			break;
+		case "Green": g.setColor(Color.green);
+			break;
+		case "White" : g.setColor(Color.white);
+		default: 
+			break;
+		}
+	}
 	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

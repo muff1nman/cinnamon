@@ -29,7 +29,7 @@ public class GameSetupTests {
 		// Tests person at beginning
 		Assert.assertEquals(new ComputerPlayer("Colonel Mustard","Orange",0,19), testGame.getCpuPlayers().get(0));
 		// Tests person at end
-		Assert.assertEquals(new ComputerPlayer("Mr. White","Blue",0,6), testGame.getCpuPlayers().get(3));
+		Assert.assertEquals(new ComputerPlayer("Mr. White","White",0,6), testGame.getCpuPlayers().get(3));
 	}
 	
 	@Test

@@ -20,17 +20,27 @@ import java.util.Set;
 
 import javax.swing.JPanel;
 
+import misc.Player;
+
 // Board class body
 public class Board extends JPanel{
 
 	public void paintComponent(Graphics g) {
-		System.out.println(cells.size());
-		
+	//	System.out.println(cells.size());
 		int z = 0;
 		for (BoardCell x: cells) {
 			x.draw(g, this, z);
 			z++;
 		}
+		//System.out.println("players size:" + players.size());
+		for (Player y: players) {
+			y.draw(g, this);
+		}
+	}
+	
+	private ArrayList<Player> players;
+	public void setPlayers(ArrayList<Player> players) {
+		this.players = players;
 	}
 	// The list of cells for the board
 	private ArrayList<BoardCell> cells;

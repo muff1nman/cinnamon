@@ -2,4 +2,4 @@
 Colonel Mustard,Orange,0,19
 Miss Scarlet,Red,19,11
 Mr. Green,Green,5,6
-Mr. White,Blue,0,6
+Mr. White,White,0,6

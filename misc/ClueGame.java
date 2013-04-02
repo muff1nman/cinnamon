@@ -25,7 +25,7 @@ public class ClueGame extends JFrame{
 	private String weapons;
 	private JPanel boardPanel;
 	private static ClueGame game;
-	
+	private ArrayList<Player> allPlayers;
 	
 
 	public ClueGame(String legend, String layout, String players, String weapons) {
@@ -41,6 +41,7 @@ public class ClueGame extends JFrame{
 		deck = new ArrayList<Card>();
 		closetCards = new ArrayList<Card>();
 		cpuPlayers = new ArrayList<ComputerPlayer>();
+		allPlayers = new ArrayList<Player>();
 		humanPlayer = new HumanPlayer();
 		board = new Board(layout, legend);
 	}
@@ -57,16 +58,20 @@ public class ClueGame extends JFrame{
 		deck = new ArrayList<Card>();
 		closetCards = new ArrayList<Card>();
 		cpuPlayers = new ArrayList<ComputerPlayer>();
+		allPlayers = new ArrayList<Player>();
 		humanPlayer = new HumanPlayer();
 		board = new Board(layout, legend);
 	}
 	
 	public void loadConfigFiles() {
-		board.loadConfigFiles();
+		System.out.println("load peeps");
 		loadPeople();
+		board.loadConfigFiles();
+		
 		loadDeck();
 	}
 	public void loadPeople() {
+		System.out.println("load peeps");
 		cpuPlayers = new ArrayList<ComputerPlayer>();
 		Scanner peopleFile = null;
 		try {
@@ -85,6 +90,10 @@ public class ClueGame extends JFrame{
 						Integer.parseInt(peopleSplit[3])));
 			}
 		}
+		System.out.println("cpuPlayers" + cpuPlayers.size());
+		allPlayers.addAll(cpuPlayers);
+		allPlayers.add(humanPlayer);
+		System.out.println("in f all players: " + allPlayers.size());
 		peopleFile.close();
 	}
 	public void loadDeck() {
@@ -264,8 +273,12 @@ public class ClueGame extends JFrame{
 	
 	public static void main(String[] args) {
 		game = new ClueGame();
-		game.board.loadConfigFiles();
+		game.loadConfigFiles();
+		System.out.println("loda config");
 		game.board.calcAdjacencies();
+		
+		game.board.setPlayers(game.allPlayers);
+	//	game.board.setPlayers(players);
 		System.out.println(game.board.getCells().size());
 		//game.boardPanel.add(game.board);
 		game.add(game.board);
