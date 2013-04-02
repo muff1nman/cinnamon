@@ -20,6 +20,7 @@ public class DetectiveNotes extends JDialog {
 	
 	public DetectiveNotes() {
 		setSize(600,450);
+		setTitle("Detective Notes");
 		people = new JPanel();
 		rooms = new JPanel();
 		weapons = new JPanel();
@@ -106,7 +107,7 @@ public class DetectiveNotes extends JDialog {
 	
 	public void createPersonGuess() {
 		personGuess.setLayout(new BorderLayout());
-		JComboBox<String> person = new JComboBox<String>();
+		JComboBox person = new JComboBox();
 		person.addItem("");
 		person.addItem("Miss Scarlet");
 		person.addItem("Mr. Green");
@@ -120,7 +121,7 @@ public class DetectiveNotes extends JDialog {
 	
 	public void createRoomGuess() {
 		roomGuess.setLayout(new BorderLayout());
-		JComboBox<String> room = new JComboBox<String>();
+		JComboBox room = new JComboBox();
 		room.addItem("");
 		room.addItem("Conservatory");
 		room.addItem("Kitchen");
@@ -137,7 +138,7 @@ public class DetectiveNotes extends JDialog {
 	
 	public void createWeaponGuess() {
 		weaponGuess.setLayout(new BorderLayout());
-		JComboBox<String> weapon = new JComboBox<String>();
+		JComboBox weapon = new JComboBox();
 		weapon.addItem("");
 		weapon.addItem("Candlestick");
 		weapon.addItem("Knife");

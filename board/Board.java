@@ -65,7 +65,6 @@ public class Board extends JPanel{
 		legendFilepath = legend;
 		adjacencyLists = new HashMap<Integer, LinkedList<Integer>>();
 		targets = new HashSet<BoardCell>();
-		loadConfigFiles();
 	}
 	
 	// Initializes default values of cells, rooms, numRows, and numColumns

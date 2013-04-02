@@ -10,6 +10,7 @@ import board.Board;
 import misc.Card.CardType;
 import javax.swing.*;
 
+import java.awt.BorderLayout;
 import java.awt.Graphics;
 public class ClueGame extends JFrame{
 
@@ -24,16 +25,21 @@ public class ClueGame extends JFrame{
 	private String players;
 	private String weapons;
 	private JPanel boardPanel;
+	private JMenuBar menubar;
 	private static ClueGame game;
 	private ArrayList<Player> allPlayers;
 	
 
 	public ClueGame(String legend, String layout, String players, String weapons) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(800,600);
+		setTitle("Clue!");
+		setSize(800,800);
 		this.setVisible(true);
 		
 		boardPanel = new JPanel();
+		add(boardPanel, BorderLayout.CENTER);
+		menubar = new JMenuBar();
+		setJMenuBar(menubar);
 		this.legend = legend;
 		this.layout = layout;
 		this.players = players;
@@ -49,7 +55,8 @@ public class ClueGame extends JFrame{
 	
 	public ClueGame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(800,700);
+		setTitle("Clue!");
+		setSize(800,800);
 		this.setVisible(true);
 		
 		legend = "legend.txt";
@@ -62,15 +69,25 @@ public class ClueGame extends JFrame{
 		allPlayers = new ArrayList<Player>();
 		humanPlayer = new HumanPlayer();
 		board = new Board(layout, legend);
+		menubar = new JMenuBar();
+		setJMenuBar(menubar);
 		loadConfigFiles();
 	}
 	
 	public void loadConfigFiles() {
 		loadPeople();
 		board.loadConfigFiles();
-		
 		loadDeck();
+		loadMenuBar();
 	}
+	
+	public void loadMenuBar() {
+		JMenu file = new JMenu("File");
+		file.add(new JMenuItem("Detective Notes"));
+		file.add(new JMenuItem("Exit"));
+		menubar.add(file);
+	}
+	
 	public void loadPeople() {
 		cpuPlayers = new ArrayList<ComputerPlayer>();
 		Scanner peopleFile = null;
