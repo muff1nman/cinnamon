@@ -25,6 +25,10 @@ import misc.Player;
 // Board class body
 public class Board extends JPanel{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public void paintComponent(Graphics g) {
 		int z = 0;
 		for (BoardCell x: cells) {
@@ -65,6 +69,7 @@ public class Board extends JPanel{
 		legendFilepath = legend;
 		adjacencyLists = new HashMap<Integer, LinkedList<Integer>>();
 		targets = new HashSet<BoardCell>();
+		calcAdjacencies();
 	}
 	
 	// Initializes default values of cells, rooms, numRows, and numColumns

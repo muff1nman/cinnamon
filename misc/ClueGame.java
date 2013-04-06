@@ -28,7 +28,6 @@ public class ClueGame extends JFrame{
 	private String layout;
 	private String players;
 	private String weapons;
-	private JPanel boardPanel;
 	private JMenuBar menubar;
 	private DetectiveNotes notes;
 	private static ClueGame game;
@@ -38,11 +37,9 @@ public class ClueGame extends JFrame{
 	public ClueGame(String legend, String layout, String players, String weapons) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Clue!");
-		setSize(800,800);
+		setSize(666,700);
 		this.setVisible(true);
 		
-		boardPanel = new JPanel();
-		add(boardPanel, BorderLayout.CENTER);
 		menubar = new JMenuBar();
 		setJMenuBar(menubar);
 		this.legend = legend;
@@ -86,6 +83,9 @@ public class ClueGame extends JFrame{
 		board.loadConfigFiles();
 		loadDeck();
 		loadMenuBar();
+		board.setPlayers(allPlayers);
+		add(board, BorderLayout.CENTER);
+		add(new ControlPanel(), BorderLayout.SOUTH);
 	}
 	
 	private void loadMenuBar() {
@@ -314,11 +314,8 @@ public class ClueGame extends JFrame{
 	}
 	
 	public static void main(String[] args) {
-		game = new ClueGame();
-		game.board.calcAdjacencies();
-		
-		game.board.setPlayers(game.allPlayers);
-		game.add(game.board);
+		game = new ClueGame("legend.txt", "RoomLayout.csv", "players.txt", "weapons.txt");
 		game.setVisible(true);
+		JOptionPane.showMessageDialog(game, "You are Miss Scarlet, press Next Player to begin play", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
 	}
 }
