@@ -31,7 +31,9 @@ import javax.swing.JPanel;
 import misc.Player;
 
 // Board class body
-public class Board extends JPanel {
+
+public class Board extends JPanel implements MouseListener {
+
 
 	/**
 	 * 
@@ -39,59 +41,8 @@ public class Board extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 
-	class BoardClickListener implements MouseListener {
-		@Override
-		public void mouseClicked(MouseEvent event) {
-			//if(containsClick(event.getX(),event.getY()))
-		}
-		@Override
-		public void mouseEntered(MouseEvent arg0) {}
-		@Override
-		public void mouseExited(MouseEvent arg0) {}
-		@Override
-		public void mousePressed(MouseEvent arg0) {}
-		@Override
-		public void mouseReleased(MouseEvent arg0) {}
-	}
-	
-	public boolean containsClick (int mouseX, int mouseY) {
-		Rectangle rect = new Rectangle(0,0,WIDTH,HEIGHT);
-		if(rect.contains(new Point(mouseX, mouseY)))
-			return true;
-		return false;
-	}
-	public void highlightTargets(int row, int column) {
-		this.startTargets(this.calcIndex(row,column), 5);
-		for (BoardCell x : this.getTargets()) {
-			//x.draw(this.getGraphics(), this, this.calcIndex(row, column), true);
-			x.highlight = true;
-			this.repaint();
-		}
-	}
-
-	public void paintComponent(Graphics g) {
-		//System.out.println("x: " + mouse.ge + " y: " +);
-		int z = 0;
-		//this.startTargets(location, steps)
-		for (BoardCell x: cells) {
-
-			x.draw(g, this, z, false);
-			z++;
-		}
-		for (Player y: players) {
-			y.draw(g, this);
-			//this.startTargets(this.calcIndex(y.getRow(), y.getColumn()), 2);
-			//for (BoardCell x : this.getTargets()) {
-			//	x.draw(g, this, this.calcIndex(x.row, x.column), true);
-			//}
-		}
 
 
-	}
-
-	public void setHighlight(boolean highlight) {
-		this.highlight = highlight;
-	}
 
 	private ArrayList<Player> players;
 	public void setPlayers(ArrayList<Player> players) {
@@ -118,6 +69,7 @@ public class Board extends JPanel {
 
 	// Parameterized constructor, sets all the fields of board using the configuration files
 	public Board(String csv, String legend) {
+		addMouseListener(this);
 		setSize(700,700);
 		initialize();
 		csvFilepath = csv;
@@ -132,7 +84,63 @@ public class Board extends JPanel {
 		//addMouseListener(mouse);
 		
 	}
+	@Override
+	public void mouseClicked(MouseEvent event) {
+		System.out.println("click"); //print
+		for(BoardCell c : targets) {
+			if(c.containsClick(event.getX(), event.getY())) {
+				System.out.println("legal click");
+			}
+		}
+	}
+	@Override
+	public void mouseEntered(MouseEvent arg0) {}
+	@Override
+	public void mouseExited(MouseEvent arg0) {}
+	@Override
+	public void mousePressed(MouseEvent arg0) {}
+	@Override
+	public void mouseReleased(MouseEvent arg0) {}
 
+
+	public boolean containsClick (int mouseX, int mouseY, int rectX, int rectY, int width, int height) {
+		Rectangle rect = new Rectangle(rectX,rectY,width,height);
+		if(rect.contains(new Point(mouseX, mouseY)))
+			return true;
+		return false;
+	}
+	public void highlightTargets(int row, int column) {
+		this.startTargets(this.calcIndex(row,column), 5);
+		for (BoardCell x : this.getTargets()) {
+			//x.draw(this.getGraphics(), this, this.calcIndex(row, column), true);
+			x.highlight = true;
+			this.repaint();
+		}
+	}
+
+	public void paintComponent(Graphics g) {
+		int z = 0;
+		//this.startTargets(location, steps)
+		for (BoardCell x: cells) {
+
+			x.draw(g, this, z, false);
+			z++;
+		}
+		for (Player y: players) {
+			y.draw(g, this);
+			//this.startTargets(this.calcIndex(y.getRow(), y.getColumn()), 2);
+			//for (BoardCell x : this.getTargets()) {
+			//	x.draw(g, this, this.calcIndex(x.row, x.column), true);
+			//}
+		}
+
+
+	}
+
+	public void setHighlight(boolean highlight) {
+		this.highlight = highlight;
+	}
+	
 	// Initializes default values of cells, rooms, numRows, and numColumns
 	private void initialize() {
 		cells = new ArrayList<BoardCell>();
@@ -221,11 +229,19 @@ public class Board extends JPanel {
 		if(numColumns*numRows != cells.size()) {
 			throw new BadConfigFormatException("Columns bad");
 		}
-
 		csvFile.close();
+		addCellAttributes();
 		visited = new boolean[numRows * numColumns];
 	}
 
+	private void addCellAttributes() {
+		//System.out.println(cells.size());
+		for(int i = 0; i < cells.size(); i++) {
+			cells.get(i).setRow(i / numColumns);
+			cells.get(i).setColumn(i % numColumns);
+			//System.out.println("row " + (i/numColumns) + " col " + (i % numColumns));
+		}
+	}
 	// Calculates the appropriate index on a 1D array given a row and column 
 	public int calcIndex(int row, int col) {
 		// Outlier / Bad Input Cases
