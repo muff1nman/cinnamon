@@ -47,7 +47,16 @@ public class ControlPanel extends JPanel {
 			  if(game.isHumanMustFinish()) {
 					JOptionPane.showMessageDialog(game, "You must finish your turn", "Invalid Move", JOptionPane.INFORMATION_MESSAGE);
 			  } else {
-				  
+				  for(int i = 0; i < game.getAllPlayers().size(); i++) {
+					  if(game.getAllPlayers().get(i).equals(game.getWhosTurn())){
+						  game.setWhosTurn(game.getAllPlayers().get((i+1) % game.getAllPlayers().size()));
+					  }
+				  }
+				  if(game.getWhosTurn().isHuman()) {
+					  game.startHumanTurn();
+				  } else {
+					  game.startComputerTurn(game.getWhosTurn());
+				  }
 				  updatePanel();
 			  }
 		  }
