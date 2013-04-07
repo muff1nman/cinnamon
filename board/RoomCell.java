@@ -102,7 +102,7 @@ public class RoomCell extends BoardCell {
 		int doorFraction = 5;
 		int numColumns = b.getNumColumns();
 		int numRows = b.getNumRows();
-		int pixelModifier = Math.min(b.size().width/numColumns, b.size().height/numRows);
+		int pixelModifier = Math.min(b.getSize().width/numColumns, b.getSize().height/numRows);
 		int doorOffset = pixelModifier/doorFraction;
 		int row = z/numColumns;
 		int column = z - (row*numColumns);

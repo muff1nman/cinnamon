@@ -37,7 +37,7 @@ public class ClueGame extends JFrame{
 	public ClueGame(String legend, String layout, String players, String weapons) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Clue!");
-		setSize(800,700);
+		setSize(760,700);
 		this.setVisible(true);
 		
 		menubar = new JMenuBar();
@@ -91,8 +91,8 @@ public class ClueGame extends JFrame{
 		loadMenuBar();
 		board.setPlayers(allPlayers);
 		add(board, BorderLayout.CENTER);
-		//add(new ControlPanel(), BorderLayout.SOUTH);
-		//add(new CardPanel(this), BorderLayout.EAST);
+		add(new ControlPanel(), BorderLayout.SOUTH);
+		add(new CardPanel(this), BorderLayout.EAST);
 	}
 	
 	private void loadMenuBar() {
@@ -327,7 +327,7 @@ public class ClueGame extends JFrame{
 		//testing
 		//board.loadConfigFiles();
 		//game.board.loadConfigFiles();
-	//	game.board.calcAdjacencies();
+		//game.board.calcAdjacencies();
 		game.cpuPlayers.get(1).makeMove(game.board);
 		game.humanPlayer.makeMove(game.board);
 		game.board.setHighlight(true);

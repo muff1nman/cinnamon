@@ -57,7 +57,7 @@ public class ComputerPlayer extends Player {
 
 	public void makeMove (Board board) {
 	//	int location = 0;
-		System.out.println(this.getRow() + " " + this.getColumn());
+		System.out.println(this.getRow() + " " + this.getColumn()); // print
 		board.startTargets(board.calcIndex(this.getRow(), this.getColumn()), 2);
 		BoardCell choice = pickLocation(board.getTargets());
 		for(int x = 0; x < board.getNumColumns(); x++) {

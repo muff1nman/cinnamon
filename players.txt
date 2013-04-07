@@ -1,5 +1,5 @@
-+Bob Lob Lah,Yellow,9,0
+Professor Plum,Magenta,9,0
 Colonel Mustard,Orange,0,19
-Miss Scarlet,Red,19,11
++Miss Scarlet,Red,19,11
 Mr. Green,Green,5,6
-Mr. White,White,0,6
+Mrs. White,White,0,6
