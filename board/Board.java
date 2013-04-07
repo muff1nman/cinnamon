@@ -68,8 +68,7 @@ public class Board extends JPanel{
 		initialize();
 		csvFilepath = csv;
 		legendFilepath = legend;
-		adjacencyLists = new HashMap<Integer, LinkedList<Integer>>();
-		targets = new HashSet<BoardCell>();
+		loadConfigFiles();
 		calcAdjacencies();
 	}
 	
@@ -77,6 +76,8 @@ public class Board extends JPanel{
 	private void initialize() {
 		cells = new ArrayList<BoardCell>();
 		rooms = new HashMap<Character, String>();
+		adjacencyLists = new HashMap<Integer, LinkedList<Integer>>();
+		targets = new HashSet<BoardCell>();
 		numRows = 0;
 		numColumns = 0;
 	}
@@ -144,7 +145,7 @@ public class Board extends JPanel{
 				// Otherwise, it must be a room cell, or an invalid cell
 				else {
 					// If we can't find this cell type in the legend, throw an exception
-					if(!rooms.containsKey(csvSplit[i].charAt(0))) throw new BadConfigFormatException("Unrecognized room detected");
+					if(!rooms.containsKey(csvSplit[i].charAt(0))) throw new BadConfigFormatException("Unrecognized room detected" + csvSplit[i].charAt(0));
 					cells.add(new RoomCell(csvSplit[i]));
 				}
 			}

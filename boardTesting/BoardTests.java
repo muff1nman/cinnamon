@@ -27,7 +27,7 @@ public class BoardTests {
 		
 		//Instantiate the board, and load / apply the config files.
 		newBoard = new Board("RoomLayout.csv","legend.txt");
-		newBoard.loadConfigFiles();
+		//newBoard.loadConfigFiles();
 		
 	}
 	

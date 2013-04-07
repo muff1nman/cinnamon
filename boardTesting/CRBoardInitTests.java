@@ -30,7 +30,7 @@ public class CRBoardInitTests {
 	@BeforeClass
 	public static void setUp() throws Exception {
 		board = new Board("ClueLayout.csv","ClueLegend.txt");
-		board.loadConfigFiles();
+		//board.loadConfigFiles();
 	}
 	@Test
 	public void testRooms() {
