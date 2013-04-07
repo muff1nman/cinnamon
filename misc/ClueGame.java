@@ -146,8 +146,9 @@ public class ClueGame extends JFrame{
 						Integer.parseInt(peopleSplit[3])));
 			}
 		}
-		allPlayers.addAll(cpuPlayers);
 		allPlayers.add(humanPlayer);
+		allPlayers.addAll(cpuPlayers);
+		
 		peopleFile.close();
 	}
 	public void loadDeck() {
@@ -334,6 +335,7 @@ public class ClueGame extends JFrame{
 	private String rollDie() {
 		Random generator = new Random();
 		int x = (Math.abs(generator.nextInt()) % 6) + 1 ;
+		board.setDieRoll(x);
 		return Integer.toString(x);
 	}
 

@@ -1,5 +1,5 @@
++Miss Scarlet,Red,19,11
 Professor Plum,Magenta,9,0
 Colonel Mustard,Orange,0,19
-+Miss Scarlet,Red,19,11
 Mr. Green,Green,5,6
 Mrs. White,White,0,6

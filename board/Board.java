@@ -47,13 +47,16 @@ public class Board extends JPanel implements MouseListener {
 	private ArrayList<Player> players;
 	public void setPlayers(ArrayList<Player> players) {
 		this.players = players;
+		humanPlayer = players.get(0);
 	}
 	private ArrayList<BoardCell> cells;
 	private Map<Character,String> rooms;
 	private int numRows;
 	private int numColumns;
 	private boolean highlight;
+	private int dieRoll;
 
+	
 	// Filepaths for the configuration files
 	private String csvFilepath, legendFilepath;
 
@@ -61,6 +64,7 @@ public class Board extends JPanel implements MouseListener {
 	private boolean visited[];
 	private Map<Integer, LinkedList<Integer>> adjacencyLists;
 	private Set<BoardCell> targets;
+	private Player humanPlayer;
 
 	// Default constructor for board. Simply initializes the values, nothing else
 	public Board() {
@@ -90,6 +94,9 @@ public class Board extends JPanel implements MouseListener {
 		for(BoardCell c : targets) {
 			if(c.containsClick(event.getX(), event.getY())) {
 				System.out.println("legal click");
+				humanPlayer.setRow(c.getRow());
+				humanPlayer.setColumn(c.getColumn());
+				repaint();
 			}
 		}
 	}
@@ -110,7 +117,7 @@ public class Board extends JPanel implements MouseListener {
 		return false;
 	}
 	public void highlightTargets(int row, int column) {
-		this.startTargets(this.calcIndex(row,column), 5);
+		this.startTargets(this.calcIndex(row,column), dieRoll);
 		for (BoardCell x : this.getTargets()) {
 			//x.draw(this.getGraphics(), this, this.calcIndex(row, column), true);
 			x.highlight = true;
@@ -375,4 +382,12 @@ public class Board extends JPanel implements MouseListener {
 		return numColumns;
 	}
 
+	public int getDieRoll() {
+		return dieRoll;
+	}
+
+	public void setDieRoll(int dieRoll) {
+		this.dieRoll = dieRoll;
+	}
+	
 }

@@ -284,3 +284,11 @@ ClueLegendBadFormat.txt contains data in an invalid format
 >>>>>>> 5f4a71cdf1af816bee1dc576191224e5e2023e4b
 I/O Error: Invalid;'[]Filename,.,.()^*&not found!
 I/O Error: Invalid;'[]Filename,.,.()^*&not found!
+I/O Error: Invalid;'[]Filename,.,.()^*&not found!
+I/O Error: Invalid;'[]Filename,.,.()^*&not found!
+Unrecognized room detectedZ
+Unrecognized room detectedZ
+Columns bad
+Columns bad
+ClueLegendBadFormat.txt contains data in an invalid format
+ClueLegendBadFormat.txt contains data in an invalid format

@@ -174,6 +174,9 @@ public class Player {
 		case "Green": g.setColor(Color.green);
 			break;
 		case "White" : g.setColor(Color.white);
+			break;
+		case "Magenta" : g.setColor(Color.magenta);
+			break;
 		default: 
 			break;
 		}
