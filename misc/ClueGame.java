@@ -324,13 +324,9 @@ public class ClueGame extends JFrame{
 		game = new ClueGame("legend.txt", "RoomLayout.csv", "players.txt", "weapons.txt");
 		game.setVisible(true);
 		JOptionPane.showMessageDialog(game, "You are Miss Scarlet, press Next Player to begin play", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
-		//testing
-		//board.loadConfigFiles();
-		//game.board.loadConfigFiles();
-	//	game.board.calcAdjacencies();
 		game.cpuPlayers.get(1).makeMove(game.board);
 		game.humanPlayer.makeMove(game.board);
-		game.board.setHighlight(true);
+		//game.board.setHighlight(true);
 		//game.repaint();
 	}
 }

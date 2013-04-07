@@ -8,6 +8,8 @@
 
 package board;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -23,7 +25,7 @@ import javax.swing.JPanel;
 import misc.Player;
 
 // Board class body
-public class Board extends JPanel{
+public class Board extends JPanel {
 
 	/**
 	 * 
@@ -40,6 +42,7 @@ public class Board extends JPanel{
 	}
 	
 	public void paintComponent(Graphics g) {
+		//System.out.println("x: " + mouse.ge + " y: " +);
 		int z = 0;
 		//this.startTargets(location, steps)
 		for (BoardCell x: cells) {
@@ -97,7 +100,9 @@ public class Board extends JPanel{
 		
 		loadConfigFiles();
 		calcAdjacencies();
-
+		//MouseListener mouse = new CellListener();
+		//addMouseListener(mouse);
+		
 	}
 	
 	// Initializes default values of cells, rooms, numRows, and numColumns
@@ -112,6 +117,7 @@ public class Board extends JPanel{
 
 	public void loadConfigFiles() {
 		try {
+	
 			loadRoomConfig();
 			loadBoardConfig();
 			calcAdjacencies();
@@ -325,4 +331,5 @@ public class Board extends JPanel{
 	public int getNumColumns() {
 		return numColumns;
 	}
+
 }
