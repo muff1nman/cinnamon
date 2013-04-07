@@ -11,6 +11,7 @@ public abstract class BoardCell {
 	
 	protected int row;
 	protected int column;
+	protected boolean highlight;
 	
 	// "is" functions are set to false then overridden in the appropriate cell to suit that cell's needs
 	public boolean isWalkway() {
@@ -23,7 +24,7 @@ public abstract class BoardCell {
 		return false;
 	}
 	
-	public abstract void draw(Graphics g, Board b, int z);
+	public abstract void draw(Graphics g, Board b, int z, boolean highlight);
 	
 	
 }

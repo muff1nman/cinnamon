@@ -29,17 +29,39 @@ public class Board extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	public void highlightTargets(int row, int column) {
+		this.startTargets(this.calcIndex(row,column), 5);
+		for (BoardCell x : this.getTargets()) {
+			//x.draw(this.getGraphics(), this, this.calcIndex(row, column), true);
+			x.highlight = true;
+			this.repaint();
+		}
+	}
+	
 	public void paintComponent(Graphics g) {
 		int z = 0;
+		//this.startTargets(location, steps)
 		for (BoardCell x: cells) {
-			x.draw(g, this, z);
+			
+			x.draw(g, this, z, false);
 			z++;
 		}
 		for (Player y: players) {
 			y.draw(g, this);
+			//this.startTargets(this.calcIndex(y.getRow(), y.getColumn()), 2);
+			//for (BoardCell x : this.getTargets()) {
+			//	x.draw(g, this, this.calcIndex(x.row, x.column), true);
+			//}
 		}
+		
+		
 	}
 	
+	public void setHighlight(boolean highlight) {
+		this.highlight = highlight;
+	}
+
 	private ArrayList<Player> players;
 	public void setPlayers(ArrayList<Player> players) {
 		this.players = players;
@@ -48,6 +70,7 @@ public class Board extends JPanel{
 	private Map<Character,String> rooms;
 	private int numRows;
 	private int numColumns;
+	private boolean highlight;
 
 	// Filepaths for the configuration files
 	private String csvFilepath, legendFilepath;
@@ -70,7 +93,9 @@ public class Board extends JPanel{
 		legendFilepath = legend;
 		adjacencyLists = new HashMap<Integer, LinkedList<Integer>>();
 		targets = new HashSet<BoardCell>();
-		calcAdjacencies();
+		//calcAdjacencies();
+		//sntoeuthnsueotnssnhtoetudnhttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+		//loadConfigFiles();
 	}
 	
 	// Initializes default values of cells, rooms, numRows, and numColumns
@@ -85,6 +110,7 @@ public class Board extends JPanel{
 		try {
 			loadRoomConfig();
 			loadBoardConfig();
+			calcAdjacencies();
 
 		} catch(BadConfigFormatException e) { // If one of those throws an error, catch it, print it to the screen
 			System.out.println(e);
@@ -159,6 +185,7 @@ public class Board extends JPanel{
 		}
 
 		csvFile.close();
+		System.out.println(numRows + " " + numColumns);
 		visited = new boolean[numRows * numColumns];
 	}
 
@@ -224,6 +251,7 @@ public class Board extends JPanel{
 	// Start targets uses calcTargets to calculate the correct targets for moving in the game
 	public void startTargets(int location, int steps) {
 		targets = new HashSet<BoardCell>();
+		//System.out.println("location size");
 		visited[location] = true;
 		calcTargets(location, steps);
 	}

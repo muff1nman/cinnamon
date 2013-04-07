@@ -15,7 +15,25 @@ public class Player {
 	protected ArrayList<Card> knownCards;
 	private String color;
 	private ArrayList<Card> cards;
+	private boolean highlight;
+	private boolean human;
 	
+	public boolean isHuman() {
+		return human;
+	}
+
+	public void setHuman(boolean human) {
+		this.human = human;
+	}
+
+	public boolean isHighlight() {
+		return highlight;
+	}
+
+	public void setHighlight(boolean highlight) {
+		this.highlight = highlight;
+	}
+
 	public void resetCards() {
 		knownCards = new ArrayList<Card>();
 		cards = new ArrayList<Card>();
@@ -28,11 +46,13 @@ public class Player {
 		this.color = color;
 		cards = new ArrayList<Card>();
 		knownCards = new ArrayList<Card>();
+		human = false;
 	}
 	
 	public Player() {
 		cards = new ArrayList<Card>();
 		knownCards = new ArrayList<Card>();
+		human = false;
 	}
 
 	

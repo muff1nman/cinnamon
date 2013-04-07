@@ -43,6 +43,7 @@ public class RoomCell extends BoardCell {
 		
 		//-------------------------------------
 		this.roomName = roomName;
+		highlight = false;
 		//-------------------------------
 		
 		roomClassifier = roomName.charAt(0);
@@ -97,7 +98,7 @@ public class RoomCell extends BoardCell {
 	}
 
 	@Override
-	public void draw(Graphics g, Board b, int z) {
+	public void draw(Graphics g, Board b, int z, boolean highlight) {
 		int doorFraction = 5;
 		int numColumns = b.getNumColumns();
 		int numRows = b.getNumRows();
@@ -107,6 +108,10 @@ public class RoomCell extends BoardCell {
 		int column = z - (row*numColumns);
 		
 		g.setColor(Color.red);
+		if (this.highlight) {
+			System.out.println("oeuoeuo");
+			g.setColor(Color.GREEN);
+		}
 		g.fillRect(column*pixelModifier, row*pixelModifier, pixelModifier, pixelModifier);
 		g.setColor(Color.blue);
 		if (this.isDoorway() && (doorDirection.equals(DoorDirection.UP))) {
