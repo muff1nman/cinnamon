@@ -109,9 +109,9 @@ public class RoomCell extends BoardCell {
 		
 		g.setColor(Color.red);
 		if (this.highlight) {
-			System.out.println("oeuoeuo");
 			g.setColor(Color.GREEN);
 		}
+		
 		g.fillRect(column*pixelModifier, row*pixelModifier, pixelModifier, pixelModifier);
 		g.setColor(Color.blue);
 		if (this.isDoorway() && (doorDirection.equals(DoorDirection.UP))) {
@@ -126,11 +126,8 @@ public class RoomCell extends BoardCell {
 		else if (this.isDoorway() && (doorDirection.equals(DoorDirection.RIGHT))) {
 			g.fillRect((column*pixelModifier + pixelModifier)-doorOffset, row*pixelModifier, doorOffset, pixelModifier);
 		}
-		
 		if(drawName) {
 			g.drawChars(b.getRooms().get(roomClassifier).toCharArray(), 0, b.getRooms().get(roomClassifier).length(), column*pixelModifier, row*pixelModifier);
 		}
-
-		
 	}
 }

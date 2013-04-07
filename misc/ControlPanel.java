@@ -17,13 +17,18 @@ public class ControlPanel extends JPanel {
 	private JButton nextPlayer;
 	private JButton accusation;
 	private JTextField whoseturn;
-	
+	private JTextField response;
+	private JTextField dietext;
+	private JTextField guesstext;
 	
 	public ControlPanel() {
 		createLayout();
 	}
 	
 	public void createLayout() {
+		response = new JTextField(10);
+		dietext = new JTextField(5);
+		guesstext = new JTextField(18);
 		nextPlayer = new JButton("Next Player");
 		accusation = new JButton("Make an Accusation");
 		JLabel turn = new JLabel("Whose turn?");
@@ -46,19 +51,17 @@ public class ControlPanel extends JPanel {
 	private JPanel dieRoll() {
 		JPanel dieRoll = new JPanel();
 		JLabel label = new JLabel("Roll");
-		JTextField text = new JTextField(5);
-		text.setEditable(false);
+		dietext.setEditable(false);
 		dieRoll.add(label);
-		dieRoll.add(text);
+		dieRoll.add(dietext);
 		dieRoll.setBorder(new TitledBorder(new EtchedBorder(), "Die"));
 		return dieRoll;
 	}
 	
 	private JPanel guess() {
 		JPanel guess = new JPanel();
-		JTextField text = new JTextField(18);
-		text.setEditable(false);
-		guess.add(text);
+		guesstext.setEditable(false);
+		guess.add(guesstext);
 		guess.setBorder(new TitledBorder(new EtchedBorder(), "Guess"));
 		return guess;
 	}
@@ -66,7 +69,6 @@ public class ControlPanel extends JPanel {
 	private JPanel result() {
 		JPanel result = new JPanel();
 		JLabel resultLabel = new JLabel("Response");
-		JTextField response = new JTextField(10);
 		response.setEditable(false);
 		result.add(resultLabel);
 		result.add(response);
