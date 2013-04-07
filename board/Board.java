@@ -29,7 +29,7 @@ import javax.swing.JPanel;
 import misc.Player;
 
 // Board class body
-public class Board extends JPanel{
+public class Board extends JPanel implements MouseListener {
 
 	/**
 	 * 
@@ -37,23 +37,68 @@ public class Board extends JPanel{
 	private static final long serialVersionUID = 1L;
 
 
-	class BoardClickListener implements MouseListener {
-		@Override
-		public void mouseClicked(MouseEvent event) {
-			//if(containsClick(event.getX(),event.getY()))
-		}
-		@Override
-		public void mouseEntered(MouseEvent arg0) {}
-		@Override
-		public void mouseExited(MouseEvent arg0) {}
-		@Override
-		public void mousePressed(MouseEvent arg0) {}
-		@Override
-		public void mouseReleased(MouseEvent arg0) {}
+
+
+
+	private ArrayList<Player> players;
+	public void setPlayers(ArrayList<Player> players) {
+		this.players = players;
 	}
-	
-	public boolean containsClick (int mouseX, int mouseY) {
-		Rectangle rect = new Rectangle(0,0,WIDTH,HEIGHT);
+	private ArrayList<BoardCell> cells;
+	private Map<Character,String> rooms;
+	private int numRows;
+	private int numColumns;
+	private boolean highlight;
+
+	// Filepaths for the configuration files
+	private String csvFilepath, legendFilepath;
+
+	// Array used to keep track of visited cells when the fucntion calcAdjacencies is called
+	private boolean visited[];
+	private Map<Integer, LinkedList<Integer>> adjacencyLists;
+	private Set<BoardCell> targets;
+
+	// Default constructor for board. Simply initializes the values, nothing else
+	public Board() {
+		initialize();
+	}
+
+	// Parameterized constructor, sets all the fields of board using the configuration files
+	public Board(String csv, String legend) {
+		addMouseListener(this);
+		setSize(700,700);
+		initialize();
+		csvFilepath = csv;
+		legendFilepath = legend;
+
+		adjacencyLists = new HashMap<Integer, LinkedList<Integer>>();
+		targets = new HashSet<BoardCell>();
+
+		loadConfigFiles();
+		calcAdjacencies();
+
+	}
+	@Override
+	public void mouseClicked(MouseEvent event) {
+		System.out.println("click"); //print
+		for(BoardCell c : targets) {
+			if(c.containsClick(event.getX(), event.getY())) {
+				System.out.println("legal click");
+			}
+		}
+	}
+	@Override
+	public void mouseEntered(MouseEvent arg0) {}
+	@Override
+	public void mouseExited(MouseEvent arg0) {}
+	@Override
+	public void mousePressed(MouseEvent arg0) {}
+	@Override
+	public void mouseReleased(MouseEvent arg0) {}
+
+
+	public boolean containsClick (int mouseX, int mouseY, int rectX, int rectY, int width, int height) {
+		Rectangle rect = new Rectangle(rectX,rectY,width,height);
 		if(rect.contains(new Point(mouseX, mouseY)))
 			return true;
 		return false;
@@ -89,45 +134,7 @@ public class Board extends JPanel{
 	public void setHighlight(boolean highlight) {
 		this.highlight = highlight;
 	}
-
-	private ArrayList<Player> players;
-	public void setPlayers(ArrayList<Player> players) {
-		this.players = players;
-	}
-	private ArrayList<BoardCell> cells;
-	private Map<Character,String> rooms;
-	private int numRows;
-	private int numColumns;
-	private boolean highlight;
-
-	// Filepaths for the configuration files
-	private String csvFilepath, legendFilepath;
-
-	// Array used to keep track of visited cells when the fucntion calcAdjacencies is called
-	private boolean visited[];
-	private Map<Integer, LinkedList<Integer>> adjacencyLists;
-	private Set<BoardCell> targets;
-
-	// Default constructor for board. Simply initializes the values, nothing else
-	public Board() {
-		initialize();
-	}
-
-	// Parameterized constructor, sets all the fields of board using the configuration files
-	public Board(String csv, String legend) {
-		setSize(700,700);
-		initialize();
-		csvFilepath = csv;
-		legendFilepath = legend;
-
-		adjacencyLists = new HashMap<Integer, LinkedList<Integer>>();
-		targets = new HashSet<BoardCell>();
-
-		loadConfigFiles();
-		calcAdjacencies();
-
-	}
-
+	
 	// Initializes default values of cells, rooms, numRows, and numColumns
 	private void initialize() {
 		cells = new ArrayList<BoardCell>();
@@ -215,11 +222,19 @@ public class Board extends JPanel{
 		if(numColumns*numRows != cells.size()) {
 			throw new BadConfigFormatException("Columns bad");
 		}
-
 		csvFile.close();
+		addCellAttributes();
 		visited = new boolean[numRows * numColumns];
 	}
 
+	private void addCellAttributes() {
+		//System.out.println(cells.size());
+		for(int i = 0; i < cells.size(); i++) {
+			cells.get(i).setRow(i / numColumns);
+			cells.get(i).setColumn(i % numColumns);
+			//System.out.println("row " + (i/numColumns) + " col " + (i % numColumns));
+		}
+	}
 	// Calculates the appropriate index on a 1D array given a row and column 
 	public int calcIndex(int row, int col) {
 		// Outlier / Bad Input Cases

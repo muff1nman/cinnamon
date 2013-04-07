@@ -6,6 +6,8 @@
 package board;
 
 import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Rectangle;
 
 public abstract class BoardCell {
 	
@@ -24,6 +26,22 @@ public abstract class BoardCell {
 		return false;
 	}
 	
+	public boolean containsClick(int x, int y) {
+		Rectangle rect = new Rectangle(column*25, row*25, 25, 25);
+		return rect.contains(new Point(x, y));
+	}
+	public int getRow() {
+		return row;
+	}
+	public void setRow(int row) {
+		this.row = row;
+	}
+	public int getColumn() {
+		return column;
+	}
+	public void setColumn(int column) {
+		this.column = column;
+	}
 	public abstract void draw(Graphics g, Board b, int z, boolean highlight);
 	
 	
