@@ -24,6 +24,8 @@ public class ControlPanel extends JPanel {
 	private JButton nextPlayer;
 	private JButton accusation;
 	private JTextField whoseturn;
+	
+
 	private JTextField response;
 	private JTextField dietext;
 	private JTextField guesstext;
@@ -110,4 +112,11 @@ public class ControlPanel extends JPanel {
 		this.dietext = dietext;
 	}
 
+	public JTextField getWhoseturn() {
+		return whoseturn;
+	}
+	public void setWhoseturn(JTextField whoseturn) {
+		this.whoseturn = whoseturn;
+	}
+	
 }

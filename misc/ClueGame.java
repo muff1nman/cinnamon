@@ -58,8 +58,8 @@ public class ClueGame extends JFrame{
 		board = new Board(layout, legend);
 		notes = new DetectiveNotes();
 		controlPanel = new ControlPanel(this);
-		whosTurn = humanPlayer;
 		loadConfigFiles();
+		whosTurn = humanPlayer;
 		
 	}
 	
@@ -95,11 +95,6 @@ public class ClueGame extends JFrame{
 	
 	public void loadConfigFiles() {
 		loadPeople();
-
-		//board.loadConfigFiles();
-		
-
-		//board.loadConfigFiles();
 
 		loadDeck();
 		deal();
@@ -338,9 +333,17 @@ public class ClueGame extends JFrame{
 		cpuPlayers = new ArrayList<ComputerPlayer>();
 	}
 	
-	private void startHumanTurn() {
+	public void startHumanTurn() {
+		controlPanel.getWhoseturn().setText(whosTurn.getName());
+		System.out.println("whosTurn" + whosTurn.getName());
 		controlPanel.getDietext().setText(rollDie());
 		
+	}
+	
+	public void startComputerTurn(ComputerPlayer cpu) {
+		controlPanel.getWhoseturn().setText(whosTurn.getName());
+		controlPanel.getDietext().setText(rollDie());
+		cpu.makeMove(board);
 	}
 	
 	public String rollDie() {
@@ -349,6 +352,8 @@ public class ClueGame extends JFrame{
 		board.setDieRoll(x);
 		return Integer.toString(x);
 	}
+	
+	
 
 	public static void main(String[] args) {
 		game = new ClueGame("legend.txt", "RoomLayout.csv", "players.txt", "weapons.txt");

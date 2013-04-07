@@ -98,10 +98,17 @@ public class Board extends JPanel implements MouseListener {
 				humanPlayer.setRow(c.getRow());
 				humanPlayer.setColumn(c.getColumn());
 				repaint();
-
+				unHighlightTargets();
 			}
 		}
 	}
+	
+	public void unHighlightTargets() {
+		for(BoardCell c : targets) {
+			c.highlight = false;
+		}
+	}
+	
 	@Override
 	public void mouseEntered(MouseEvent arg0) {}
 	@Override
