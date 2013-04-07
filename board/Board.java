@@ -64,6 +64,7 @@ public class Board extends JPanel{
 
 	// Parameterized constructor, sets all the fields of board using the configuration files
 	public Board(String csv, String legend) {
+		setSize(700,700);
 		initialize();
 		csvFilepath = csv;
 		legendFilepath = legend;
