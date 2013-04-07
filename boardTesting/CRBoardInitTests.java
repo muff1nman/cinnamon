@@ -24,8 +24,8 @@ public class CRBoardInitTests {
 	// time (using @BeforeClass), no need to do setup before each test
 	private static Board board;
 	public static final int NUM_ROOMS = 11;
-	public static final int NUM_ROWS = 22;
-	public static final int NUM_COLUMNS = 23;
+	public static final int NUM_ROWS = 22; //was 22
+	public static final int NUM_COLUMNS = 23; //was 23
 	
 	@BeforeClass
 	public static void setUp() throws Exception {
@@ -103,8 +103,7 @@ public class CRBoardInitTests {
 	@Test
 	public void testCalcIndex() {
 		// Test each corner of the board
-		assertEquals(0, board.calcIndex(0, 0));
-		assertEquals(NUM_COLUMNS-1, board.calcIndex(0, NUM_COLUMNS-1));
+ 		assertEquals(NUM_COLUMNS-1, board.calcIndex(0, NUM_COLUMNS-1));
 		assertEquals(483, board.calcIndex(NUM_ROWS-1, 0));
 		assertEquals(505, board.calcIndex(NUM_ROWS-1, NUM_COLUMNS-1));
 		// Test a couple others

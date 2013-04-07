@@ -3,6 +3,7 @@ package boardTesting;
 import static org.junit.Assert.*;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
 
@@ -19,8 +20,8 @@ public class AdjacencyTargets {
 	@BeforeClass
 	public static void doOnce() throws Exception {
 		newBoard = new Board("RoomLayout.csv","legend.txt");
-		newBoard.loadConfigFiles();
-		newBoard.calcAdjacencies();
+		//newBoard.loadConfigFiles();
+		//newBoard.calcAdjacencies();
 	}
 	// locations that are at each edge of the board (4)
 	@Test
@@ -55,7 +56,7 @@ public class AdjacencyTargets {
 		LinkedList<Integer> testList = newBoard.getAdjList(newBoard.calcIndex(8, 3));
 		Assert.assertEquals(1, testList.size());
 		Assert.assertTrue(testList.contains(newBoard.calcIndex(9,3)));
-	
+
 	}
 	@Test
 	public void door2() {
@@ -156,6 +157,17 @@ public class AdjacencyTargets {
 	public void targetEnter2() {
 		newBoard.startTargets(newBoard.calcIndex(20,19), 4);
 		Set<BoardCell> testTargets = newBoard.getTargets();
+		Iterator<BoardCell> iter = testTargets.iterator(); 
+		while(iter.hasNext()) {
+			System.out.println(iter.next());
+		}
+		for(int i = 0; i < newBoard.getNumRows(); i++) {
+			for(int j = 0; j < newBoard.getNumColumns(); j++) {
+				if(testTargets.contains(newBoard.getCellAt(i, j))) {
+					System.out.println("row " + i + " col " + j);
+				}
+			}
+		}
 		Assert.assertEquals(3,testTargets.size());
 		Assert.assertTrue(testTargets.contains(newBoard.getCellAt(18,20)));
 		Assert.assertTrue(testTargets.contains(newBoard.getCellAt(17,20)));
