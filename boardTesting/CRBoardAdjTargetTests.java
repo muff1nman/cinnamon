@@ -16,8 +16,8 @@ public class CRBoardAdjTargetTests {
 	@BeforeClass
 	public static void setUp() {
 		board = new Board("ClueLayout.csv","ClueLegend.txt");
-		board.loadConfigFiles();
-		board.calcAdjacencies();
+		//board.loadConfigFiles();
+		//board.calcAdjacencies();
 
 	}
 

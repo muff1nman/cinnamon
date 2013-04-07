@@ -127,6 +127,10 @@ Columns bad
 I/O Error: Invalid;'[]Filename,.,.()^*&not found!
 Unrecognized room detected
 Unrecognized room detected
+<<<<<<< HEAD
+=======
+I/O Error: Invalid;'[]Filename,.,.()^*&not found!
+>>>>>>> 5f4a71cdf1af816bee1dc576191224e5e2023e4b
 Unrecognized room detected
 Unrecognized room detected
 Columns bad
@@ -135,12 +139,17 @@ Unrecognized room detected
 I/O Error: Invalid;'[]Filename,.,.()^*&not found!
 Unrecognized room detected
 Unrecognized room detected
+<<<<<<< HEAD
+=======
+Unrecognized room detected
+>>>>>>> 5f4a71cdf1af816bee1dc576191224e5e2023e4b
 Columns bad
 ClueLegendBadFormat.txt contains data in an invalid format
 Unrecognized room detected
 Unrecognized room detected
 Unrecognized room detected
 Unrecognized room detected
+<<<<<<< HEAD
 Columns bad
 ClueLegendBadFormat.txt contains data in an invalid format
 Unrecognized room detected
@@ -158,3 +167,120 @@ Unrecognized room detected
 Unrecognized room detected
 Columns bad
 ClueLegendBadFormat.txt contains data in an invalid format
+=======
+Unrecognized room detected
+Unrecognized room detected
+Unrecognized room detected
+Unrecognized room detected0
+I/O Error: Invalid;'[]Filename,.,.()^*&not found!
+I/O Error: Invalid;'[]Filename,.,.()^*&not found!
+Unrecognized room detected0
+Unrecognized room detected0
+Unrecognized room detectedZ
+Unrecognized room detectedZ
+Columns bad
+Columns bad
+ClueLegendBadFormat.txt contains data in an invalid format
+ClueLegendBadFormat.txt contains data in an invalid format
+I/O Error: Invalid;'[]Filename,.,.()^*&not found!
+I/O Error: Invalid;'[]Filename,.,.()^*&not found!
+Unrecognized room detected0
+Unrecognized room detected0
+Unrecognized room detectedZ
+Unrecognized room detectedZ
+Columns bad
+Columns bad
+ClueLegendBadFormat.txt contains data in an invalid format
+ClueLegendBadFormat.txt contains data in an invalid format
+I/O Error: Invalid;'[]Filename,.,.()^*&not found!
+I/O Error: Invalid;'[]Filename,.,.()^*&not found!
+I/O Error: Invalid;'[]Filename,.,.()^*&not found!
+I/O Error: Invalid;'[]Filename,.,.()^*&not found!
+Unrecognized room detected0
+Unrecognized room detected0
+Unrecognized room detectedZ
+Unrecognized room detectedZ
+Columns bad
+Columns bad
+ClueLegendBadFormat.txt contains data in an invalid format
+ClueLegendBadFormat.txt contains data in an invalid format
+I/O Error: Invalid;'[]Filename,.,.()^*&not found!
+I/O Error: Invalid;'[]Filename,.,.()^*&not found!
+Unrecognized room detected0
+Unrecognized room detected0
+Unrecognized room detectedZ
+Unrecognized room detectedZ
+Columns bad
+Columns bad
+ClueLegendBadFormat.txt contains data in an invalid format
+ClueLegendBadFormat.txt contains data in an invalid format
+Unrecognized room detected0
+Columns bad
+Columns bad
+ClueLegendBadFormat.txt contains data in an invalid format
+ClueLegendBadFormat.txt contains data in an invalid format
+Unrecognized room detectedZ
+Unrecognized room detectedZ
+Unrecognized room detected0
+Unrecognized room detected0
+Unrecognized room detected0
+I/O Error: Invalid;'[]Filename,.,.()^*&not found!
+I/O Error: Invalid;'[]Filename,.,.()^*&not found!
+Unrecognized room detected0
+Unrecognized room detected0
+Unrecognized room detectedZ
+Unrecognized room detectedZ
+Columns bad
+Columns bad
+ClueLegendBadFormat.txt contains data in an invalid format
+ClueLegendBadFormat.txt contains data in an invalid format
+I/O Error: Invalid;'[]Filename,.,.()^*&not found!
+I/O Error: Invalid;'[]Filename,.,.()^*&not found!
+Unrecognized room detected0
+Unrecognized room detected0
+Columns bad
+Columns bad
+ClueLegendBadFormat.txt contains data in an invalid format
+ClueLegendBadFormat.txt contains data in an invalid format
+Unrecognized room detectedZ
+Unrecognized room detectedZ
+Unrecognized room detected0
+Columns bad
+Columns bad
+ClueLegendBadFormat.txt contains data in an invalid format
+ClueLegendBadFormat.txt contains data in an invalid format
+Unrecognized room detectedZ
+Unrecognized room detectedZ
+Columns bad
+Columns bad
+ClueLegendBadFormat.txt contains data in an invalid format
+ClueLegendBadFormat.txt contains data in an invalid format
+Unrecognized room detectedZ
+Unrecognized room detectedZ
+I/O Error: Invalid;'[]Filename,.,.()^*&not found!
+I/O Error: Invalid;'[]Filename,.,.()^*&not found!
+Unrecognized room detectedZ
+Unrecognized room detectedZ
+Columns bad
+Columns bad
+ClueLegendBadFormat.txt contains data in an invalid format
+ClueLegendBadFormat.txt contains data in an invalid format
+I/O Error: Invalid;'[]Filename,.,.()^*&not found!
+I/O Error: Invalid;'[]Filename,.,.()^*&not found!
+Unrecognized room detectedZ
+Unrecognized room detectedZ
+Columns bad
+Columns bad
+ClueLegendBadFormat.txt contains data in an invalid format
+ClueLegendBadFormat.txt contains data in an invalid format
+I/O Error: Invalid;'[]Filename,.,.()^*&not found!
+I/O Error: Invalid;'[]Filename,.,.()^*&not found!
+Columns bad
+Columns bad
+Unrecognized room detectedZ
+Unrecognized room detectedZ
+ClueLegendBadFormat.txt contains data in an invalid format
+ClueLegendBadFormat.txt contains data in an invalid format
+>>>>>>> 5f4a71cdf1af816bee1dc576191224e5e2023e4b
+I/O Error: Invalid;'[]Filename,.,.()^*&not found!
+I/O Error: Invalid;'[]Filename,.,.()^*&not found!

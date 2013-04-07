@@ -80,8 +80,12 @@ public class ClueGame extends JFrame{
 	
 	public void loadConfigFiles() {
 		loadPeople();
-		board.loadConfigFiles();
+
+		//board.loadConfigFiles();
 		
+
+		//board.loadConfigFiles();
+
 		loadDeck();
 		deal();
 		loadMenuBar();
