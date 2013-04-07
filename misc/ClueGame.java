@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 import java.util.Scanner;
 import board.Board;
 
@@ -32,6 +33,7 @@ public class ClueGame extends JFrame{
 	private DetectiveNotes notes;
 	private static ClueGame game;
 	private ArrayList<Player> allPlayers;
+	private ControlPanel controlPanel;
 	
 
 	public ClueGame(String legend, String layout, String players, String weapons) {
@@ -53,7 +55,9 @@ public class ClueGame extends JFrame{
 		humanPlayer = new HumanPlayer();
 		board = new Board(layout, legend);
 		notes = new DetectiveNotes();
+		controlPanel = new ControlPanel();
 		loadConfigFiles();
+		
 	}
 	
 	public ClueGame() {
@@ -91,7 +95,8 @@ public class ClueGame extends JFrame{
 		loadMenuBar();
 		board.setPlayers(allPlayers);
 		add(board, BorderLayout.CENTER);
-		add(new ControlPanel(), BorderLayout.SOUTH);
+		
+		add(controlPanel, BorderLayout.SOUTH);
 		add(new CardPanel(this), BorderLayout.EAST);
 	}
 	
@@ -322,10 +327,16 @@ public class ClueGame extends JFrame{
 	}
 	
 	private void startHumanTurn() {
-		
+		controlPanel.getDietext().setText(rollDie());
 		
 	}
 	
+	private String rollDie() {
+		Random generator = new Random();
+		int x = (Math.abs(generator.nextInt()) % 6) + 1 ;
+		return Integer.toString(x);
+	}
+
 	public static void main(String[] args) {
 		game = new ClueGame("legend.txt", "RoomLayout.csv", "players.txt", "weapons.txt");
 		game.setVisible(true);

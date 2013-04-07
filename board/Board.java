@@ -42,7 +42,7 @@ public class Board extends JPanel {
 	class BoardClickListener implements MouseListener {
 		@Override
 		public void mouseClicked(MouseEvent event) {
-			
+			//if(containsClick(event.getX(),event.getY()))
 		}
 		@Override
 		public void mouseEntered(MouseEvent arg0) {}
@@ -55,10 +55,10 @@ public class Board extends JPanel {
 	}
 	
 	public boolean containsClick (int mouseX, int mouseY) {
-		//Rectangle rect = new Rectangle(x,y,WIDTH,HEIGHT);
-		//if(rect.contains(new Point(mouseX, mouseY)))
+		Rectangle rect = new Rectangle(0,0,WIDTH,HEIGHT);
+		if(rect.contains(new Point(mouseX, mouseY)))
 			return true;
-		//return false;
+		return false;
 	}
 	public void highlightTargets(int row, int column) {
 		this.startTargets(this.calcIndex(row,column), 5);
