@@ -340,9 +340,18 @@ public class ClueGame extends JFrame{
 	
 	private void startHumanTurn() {
 		controlPanel.getDietext().setText(rollDie());
+		controlPanel.getWhoseturn().setText(humanPlayer.getName());
 		
 	}
 	
+	public ArrayList<Player> getAllPlayers() {
+		return allPlayers;
+	}
+
+	public void setAllPlayers(ArrayList<Player> allPlayers) {
+		this.allPlayers = allPlayers;
+	}
+
 	public String rollDie() {
 		Random generator = new Random();
 		int x = (Math.abs(generator.nextInt()) % 6) + 1 ;
@@ -355,11 +364,8 @@ public class ClueGame extends JFrame{
 		game.setVisible(true);
 		JOptionPane.showMessageDialog(game, "You are Miss Scarlet, press Next Player to begin play", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
 
-		game.cpuPlayers.get(1).makeMove(game.board);
 		game.startHumanTurn();
 		game.humanPlayer.makeMove(game.board);
-		//game.board.setHighlight(true);
-		//game.repaint();
 	}
 
 	
