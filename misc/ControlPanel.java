@@ -24,6 +24,7 @@ public class ControlPanel extends JPanel {
 	private JButton nextPlayer;
 	private JButton accusation;
 	private JTextField whoseturn;
+
 	
 
 	private JTextField response;
@@ -32,7 +33,6 @@ public class ControlPanel extends JPanel {
 	private ClueGame game;
 	
 	public ControlPanel(ClueGame g) {
-		//this.board
 		game = g;
 		createLayout();
 	}
@@ -42,13 +42,17 @@ public class ControlPanel extends JPanel {
 		  {
 			  if(game.isHumanMustFinish()) {
 					JOptionPane.showMessageDialog(game, "You must finish your turn", "Invalid Move", JOptionPane.INFORMATION_MESSAGE);
+			  } else {
+				  
+				  updatePanel();
 			  }
-			  updatePanel();
 		  }
 	}
 	
 	private void updatePanel() {
 		whoseturn.setText(game.getWhosTurn().getName());
+		response.setText("Hello");
+		guesstext.setText("Guess");
 		game.rollDie();
 		
 	}

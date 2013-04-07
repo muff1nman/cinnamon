@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import misc.Player;
@@ -90,17 +91,21 @@ public class Board extends JPanel implements MouseListener {
 	}
 	@Override
 	public void mouseClicked(MouseEvent event) {
-		System.out.println("click"); //print
+		boolean badCell = true;
 		for(BoardCell c : targets) {
 			if(c.containsClick(event.getX(), event.getY())) {
-
-				System.out.println("legal click");
 				humanPlayer.setRow(c.getRow());
 				humanPlayer.setColumn(c.getColumn());
 				repaint();
+
 				unHighlightTargets();
+
+				badCell = false;
+
 			}
 		}
+		if(badCell)
+			JOptionPane.showMessageDialog(this, "Please select a highlighted cell", "Invalid Move", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public void unHighlightTargets() {
