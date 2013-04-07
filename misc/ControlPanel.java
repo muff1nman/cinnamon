@@ -24,12 +24,8 @@ public class ControlPanel extends JPanel {
 	private JButton nextPlayer;
 	private JButton accusation;
 	private JTextField whoseturn;
-	public JTextField getWhoseturn() {
-		return whoseturn;
-	}
-	public void setWhoseturn(JTextField whoseturn) {
-		this.whoseturn = whoseturn;
-	}
+
+	
 
 	private JTextField response;
 	private JTextField dietext;
@@ -55,7 +51,8 @@ public class ControlPanel extends JPanel {
 				  if(game.getWhosTurn().isHuman()) {
 					  game.startHumanTurn();
 				  } else {
-					  game.startComputerTurn(game.getWhosTurn());
+					  ComputerPlayer cpu = (ComputerPlayer) game.getWhosTurn();
+					  game.startComputerTurn(cpu);
 				  }
 				  updatePanel();
 			  }
@@ -129,4 +126,11 @@ public class ControlPanel extends JPanel {
 		this.dietext = dietext;
 	}
 
+	public JTextField getWhoseturn() {
+		return whoseturn;
+	}
+	public void setWhoseturn(JTextField whoseturn) {
+		this.whoseturn = whoseturn;
+	}
+	
 }

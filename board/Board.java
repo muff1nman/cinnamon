@@ -66,6 +66,7 @@ public class Board extends JPanel implements MouseListener {
 	private Map<Integer, LinkedList<Integer>> adjacencyLists;
 	private Set<BoardCell> targets;
 	private Player humanPlayer;
+	private boolean humanMustFinish;
 
 	// Default constructor for board. Simply initializes the values, nothing else
 	public Board() {
@@ -80,6 +81,7 @@ public class Board extends JPanel implements MouseListener {
 		csvFilepath = csv;
 		legendFilepath = legend;
 
+		humanMustFinish = true;
 		adjacencyLists = new HashMap<Integer, LinkedList<Integer>>();
 		targets = new HashSet<BoardCell>();
 
@@ -97,12 +99,32 @@ public class Board extends JPanel implements MouseListener {
 				humanPlayer.setRow(c.getRow());
 				humanPlayer.setColumn(c.getColumn());
 				repaint();
+
+				unHighlightTargets();
+				
+				humanMustFinish = false;
 				badCell = false;
+				
 			}
 		}
 		if(badCell)
 			JOptionPane.showMessageDialog(this, "Please select a highlighted cell", "Invalid Move", JOptionPane.INFORMATION_MESSAGE);
 	}
+	
+	public boolean isHumanMustFinish() {
+		return humanMustFinish;
+	}
+
+	public void setHumanMustFinish(boolean humanMustFinish) {
+		this.humanMustFinish = humanMustFinish;
+	}
+
+	public void unHighlightTargets() {
+		for(BoardCell c : targets) {
+			c.highlight = false;
+		}
+	}
+	
 	@Override
 	public void mouseEntered(MouseEvent arg0) {}
 	@Override

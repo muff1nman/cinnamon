@@ -34,7 +34,6 @@ public class ClueGame extends JFrame{
 	private static ClueGame game;
 	private ArrayList<Player> allPlayers;
 	private ControlPanel controlPanel;
-	private boolean humanMustFinish;
 	
 
 	public ClueGame(String legend, String layout, String players, String weapons) {
@@ -43,7 +42,6 @@ public class ClueGame extends JFrame{
 		setSize(760,700);
 		this.setVisible(true);
 		
-		humanMustFinish = true;
 		menubar = new JMenuBar();
 		setJMenuBar(menubar);
 		this.legend = legend;
@@ -58,17 +56,17 @@ public class ClueGame extends JFrame{
 		board = new Board(layout, legend);
 		notes = new DetectiveNotes();
 		controlPanel = new ControlPanel(this);
-		whosTurn = humanPlayer;
 		loadConfigFiles();
+		whosTurn = humanPlayer;
 		
 	}
 	
 	public boolean isHumanMustFinish() {
-		return humanMustFinish;
+		return board.isHumanMustFinish();
 	}
 
 	public void setHumanMustFinish(boolean humanMustFinish) {
-		this.humanMustFinish = humanMustFinish;
+		board.setHumanMustFinish(humanMustFinish);
 	}
 
 	public ClueGame() {
@@ -95,11 +93,6 @@ public class ClueGame extends JFrame{
 	
 	public void loadConfigFiles() {
 		loadPeople();
-
-		//board.loadConfigFiles();
-		
-
-		//board.loadConfigFiles();
 
 		loadDeck();
 		deal();
@@ -338,12 +331,21 @@ public class ClueGame extends JFrame{
 		cpuPlayers = new ArrayList<ComputerPlayer>();
 	}
 	
-	private void startHumanTurn() {
+	public void startHumanTurn() {
+		controlPanel.getWhoseturn().setText(whosTurn.getName());
+		System.out.println("whosTurn" + whosTurn.getName());
 		controlPanel.getDietext().setText(rollDie());
 		controlPanel.getWhoseturn().setText(humanPlayer.getName());
 		
 	}
+
+	public void startComputerTurn(ComputerPlayer cpu) {
+		controlPanel.getWhoseturn().setText(whosTurn.getName());
+		controlPanel.getDietext().setText(rollDie());
+		cpu.makeMove(board);
+	}
 	
+
 	public ArrayList<Player> getAllPlayers() {
 		return allPlayers;
 	}
@@ -352,12 +354,15 @@ public class ClueGame extends JFrame{
 		this.allPlayers = allPlayers;
 	}
 
+
 	public String rollDie() {
 		Random generator = new Random();
 		int x = (Math.abs(generator.nextInt()) % 6) + 1 ;
 		board.setDieRoll(x);
 		return Integer.toString(x);
 	}
+	
+	
 
 	public static void main(String[] args) {
 		game = new ClueGame("legend.txt", "RoomLayout.csv", "players.txt", "weapons.txt");
