@@ -8,6 +8,12 @@
 
 package board;
 import java.awt.Graphics;
+
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
@@ -31,7 +37,29 @@ public class Board extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+
+	class BoardClickListener implements MouseListener {
+		@Override
+		public void mouseClicked(MouseEvent event) {
+			
+		}
+		@Override
+		public void mouseEntered(MouseEvent arg0) {}
+		@Override
+		public void mouseExited(MouseEvent arg0) {}
+		@Override
+		public void mousePressed(MouseEvent arg0) {}
+		@Override
+		public void mouseReleased(MouseEvent arg0) {}
+	}
 	
+	public boolean containsClick (int mouseX, int mouseY) {
+		//Rectangle rect = new Rectangle(x,y,WIDTH,HEIGHT);
+		//if(rect.contains(new Point(mouseX, mouseY)))
+			return true;
+		//return false;
+	}
 	public void highlightTargets(int row, int column) {
 		this.startTargets(this.calcIndex(row,column), 5);
 		for (BoardCell x : this.getTargets()) {
@@ -40,13 +68,13 @@ public class Board extends JPanel {
 			this.repaint();
 		}
 	}
-	
+
 	public void paintComponent(Graphics g) {
 		//System.out.println("x: " + mouse.ge + " y: " +);
 		int z = 0;
 		//this.startTargets(location, steps)
 		for (BoardCell x: cells) {
-			
+
 			x.draw(g, this, z, false);
 			z++;
 		}
@@ -57,10 +85,10 @@ public class Board extends JPanel {
 			//	x.draw(g, this, this.calcIndex(x.row, x.column), true);
 			//}
 		}
-		
-		
+
+
 	}
-	
+
 	public void setHighlight(boolean highlight) {
 		this.highlight = highlight;
 	}
@@ -97,14 +125,14 @@ public class Board extends JPanel {
 
 		adjacencyLists = new HashMap<Integer, LinkedList<Integer>>();
 		targets = new HashSet<BoardCell>();
-		
+
 		loadConfigFiles();
 		calcAdjacencies();
 		//MouseListener mouse = new CellListener();
 		//addMouseListener(mouse);
 		
 	}
-	
+
 	// Initializes default values of cells, rooms, numRows, and numColumns
 	private void initialize() {
 		cells = new ArrayList<BoardCell>();
@@ -195,7 +223,6 @@ public class Board extends JPanel {
 		}
 
 		csvFile.close();
-		System.out.println(numRows + " " + numColumns);
 		visited = new boolean[numRows * numColumns];
 	}
 
@@ -239,25 +266,25 @@ public class Board extends JPanel {
 			}
 		}
 	}
-	
+
 	// This function verifies that the adjacency is correct for the given cell, (i0,j0)
-		private boolean adjacencyLogic(int i0, int j0, int i1, int j1) {
-			// If calcIndex detects an issue, it is not correct. return false.
-			if(calcIndex(i1,j1) != -1) {
-				if(cells.get(calcIndex(i1,j1)).isDoorway()) {
-					// Make a room cell from the doorway cell we're checking
-					RoomCell thisRoom = (RoomCell) cells.get(calcIndex(i1,j1));
-					// If the you remove the differences in distance between the cells and now the x's and y's are equal, return true 
-					if(i1 + thisRoom.getDoorDirection().getX() == i0 && j1 + thisRoom.getDoorDirection().getY() == j0) return true;
-					return false;
-				}
-				else {
-					return !cells.get(calcIndex(i1,j1)).isRoom();
-				}
+	private boolean adjacencyLogic(int i0, int j0, int i1, int j1) {
+		// If calcIndex detects an issue, it is not correct. return false.
+		if(calcIndex(i1,j1) != -1) {
+			if(cells.get(calcIndex(i1,j1)).isDoorway()) {
+				// Make a room cell from the doorway cell we're checking
+				RoomCell thisRoom = (RoomCell) cells.get(calcIndex(i1,j1));
+				// If the you remove the differences in distance between the cells and now the x's and y's are equal, return true 
+				if(i1 + thisRoom.getDoorDirection().getX() == i0 && j1 + thisRoom.getDoorDirection().getY() == j0) return true;
+				return false;
 			}
-			return false;
+			else {
+				return !cells.get(calcIndex(i1,j1)).isRoom();
+			}
 		}
-	
+		return false;
+	}
+
 	// Start targets uses calcTargets to calculate the correct targets for moving in the game
 	public void startTargets(int location, int steps) {
 		targets = new HashSet<BoardCell>();
@@ -265,18 +292,18 @@ public class Board extends JPanel {
 		visited[location] = true;
 		calcTargets(location, steps);
 	}
-	
+
 	// Does the heavy lifting for startTargets, populates the targets list for a current location given a number of steps
 	private void calcTargets(int location, int steps) {
-		
+
 		LinkedList<Integer> adjacentCells = new LinkedList<Integer>();
-		
+
 		for(int adjCell : adjacencyLists.get(location)) {
 			if(visited[adjCell] == false) {
 				adjacentCells.add(adjCell);
 			}
 		}
-		
+
 		for(int adjCell : adjacentCells) {
 			visited[adjCell] = true;
 			BoardCell thisCell = cells.get(adjCell);
@@ -289,8 +316,8 @@ public class Board extends JPanel {
 			visited[adjCell] = false;
 		}
 	}
-	
-	
+
+
 	public RoomCell getRoomCellAt(int row, int column) {
 		if(cells.get(calcIndex(row, column)).isRoom()) {
 			return (RoomCell) cells.get(calcIndex(row, column));
@@ -298,20 +325,20 @@ public class Board extends JPanel {
 			return null;
 		}
 	}
-	
+
 	public BoardCell getCellAt(int row, int column) {
 		return cells.get(calcIndex(row, column));
 	}
-	
+
 	//
 	// Getters for all standard instance variables
 	//
-	
+
 	public Set<BoardCell> getTargets() {
 		return targets;
 
 	}
-	
+
 	public LinkedList<Integer> getAdjList(int location) {
 		return adjacencyLists.get(location);
 	}
@@ -319,15 +346,15 @@ public class Board extends JPanel {
 	public ArrayList<BoardCell> getCells() {
 		return cells;
 	}
-	
+
 	public Map<Character, String> getRooms() {
 		return rooms;
 	}
-	
+
 	public int getNumRows() {
 		return numRows;
 	}
-	
+
 	public int getNumColumns() {
 		return numColumns;
 	}

@@ -14,7 +14,7 @@ public class HumanPlayer extends Player{
 	}
 
 	public void makeMove(Board board) {
-		System.out.println(this.getRow() + " " + this.getColumn() );
+		System.out.println(this.getRow() + " " + this.getColumn() ); // print
 		board.highlightTargets( this.getRow(), this.getColumn());
 	}
 	

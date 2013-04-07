@@ -37,7 +37,7 @@ public class ClueGame extends JFrame{
 	public ClueGame(String legend, String layout, String players, String weapons) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Clue!");
-		setSize(800,700);
+		setSize(760,700);
 		this.setVisible(true);
 		
 		menubar = new JMenuBar();
@@ -91,8 +91,8 @@ public class ClueGame extends JFrame{
 		loadMenuBar();
 		board.setPlayers(allPlayers);
 		add(board, BorderLayout.CENTER);
-		//add(new ControlPanel(), BorderLayout.SOUTH);
-		//add(new CardPanel(this), BorderLayout.EAST);
+		add(new ControlPanel(), BorderLayout.SOUTH);
+		add(new CardPanel(this), BorderLayout.EAST);
 	}
 	
 	private void loadMenuBar() {
@@ -200,6 +200,7 @@ public class ClueGame extends JFrame{
 		boolean weaponInSolution = false;
 		boolean personInSolution = false;
 		boolean roomInSolution = false;
+		Collections.shuffle(deck);
 		for(Card a : deck) {
 			CardType theType = a.getCardType();
 			if((!weaponInSolution)&&(theType==CardType.WEAPON)) {
@@ -320,13 +321,22 @@ public class ClueGame extends JFrame{
 		cpuPlayers = new ArrayList<ComputerPlayer>();
 	}
 	
+	private void startHumanTurn() {
+		
+		
+	}
+	
 	public static void main(String[] args) {
 		game = new ClueGame("legend.txt", "RoomLayout.csv", "players.txt", "weapons.txt");
 		game.setVisible(true);
 		JOptionPane.showMessageDialog(game, "You are Miss Scarlet, press Next Player to begin play", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
+
 		game.cpuPlayers.get(1).makeMove(game.board);
+		game.startHumanTurn();
 		game.humanPlayer.makeMove(game.board);
 		//game.board.setHighlight(true);
 		//game.repaint();
 	}
+
+	
 }
