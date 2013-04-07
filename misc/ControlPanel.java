@@ -5,7 +5,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
@@ -25,22 +27,29 @@ public class ControlPanel extends JPanel {
 	private JTextField response;
 	private JTextField dietext;
 	private JTextField guesstext;
+	private ClueGame game;
 	
-	//private Board board;
-	//private JButton nextPlayer;
+	public ControlPanel(ClueGame g) {
+		//this.board
+		game = g;
+		createLayout();
+	}
 	
 	private class ButtonListener implements ActionListener {
 		  public void actionPerformed(ActionEvent e)
 		  {
-		     System.out.println("fuck");
+			  if(game.isHumanMustFinish()) {
+					JOptionPane.showMessageDialog(game, "You must finish your turn", "Invalid Move", JOptionPane.INFORMATION_MESSAGE);
+			  }
+			  updatePanel();
 		  }
 	}
 	
-	public ControlPanel() {
-		//this.board
-		createLayout();
+	private void updatePanel() {
+		whoseturn.setText(game.getWhosTurn().getName());
+		game.rollDie();
+		
 	}
-	
 	public void createLayout() {
 		response = new JTextField(10);
 		dietext = new JTextField(5);

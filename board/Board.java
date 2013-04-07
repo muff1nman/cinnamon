@@ -93,10 +93,12 @@ public class Board extends JPanel implements MouseListener {
 		System.out.println("click"); //print
 		for(BoardCell c : targets) {
 			if(c.containsClick(event.getX(), event.getY())) {
+
 				System.out.println("legal click");
 				humanPlayer.setRow(c.getRow());
 				humanPlayer.setColumn(c.getColumn());
 				repaint();
+
 			}
 		}
 	}

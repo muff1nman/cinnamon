@@ -34,6 +34,7 @@ public class ClueGame extends JFrame{
 	private static ClueGame game;
 	private ArrayList<Player> allPlayers;
 	private ControlPanel controlPanel;
+	private boolean humanMustFinish;
 	
 
 	public ClueGame(String legend, String layout, String players, String weapons) {
@@ -42,6 +43,7 @@ public class ClueGame extends JFrame{
 		setSize(760,700);
 		this.setVisible(true);
 		
+		humanMustFinish = true;
 		menubar = new JMenuBar();
 		setJMenuBar(menubar);
 		this.legend = legend;
@@ -55,11 +57,20 @@ public class ClueGame extends JFrame{
 		humanPlayer = new HumanPlayer();
 		board = new Board(layout, legend);
 		notes = new DetectiveNotes();
-		controlPanel = new ControlPanel();
+		controlPanel = new ControlPanel(this);
+		whosTurn = humanPlayer;
 		loadConfigFiles();
 		
 	}
 	
+	public boolean isHumanMustFinish() {
+		return humanMustFinish;
+	}
+
+	public void setHumanMustFinish(boolean humanMustFinish) {
+		this.humanMustFinish = humanMustFinish;
+	}
+
 	public ClueGame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Clue!");
@@ -332,7 +343,7 @@ public class ClueGame extends JFrame{
 		
 	}
 	
-	private String rollDie() {
+	public String rollDie() {
 		Random generator = new Random();
 		int x = (Math.abs(generator.nextInt()) % 6) + 1 ;
 		board.setDieRoll(x);
