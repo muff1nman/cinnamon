@@ -98,15 +98,11 @@ public class RoomCell extends BoardCell {
 	}
 
 	@Override
-	public void draw(Graphics g, Board b, int z, boolean highlight) {
+	//public void draw(Graphics g, Board b, int z, boolean highlight) {
+	public void draw(Graphics g, Board b){
 		int doorFraction = 5;
-		int numColumns = b.getNumColumns();
-		int numRows = b.getNumRows();
-		//int pixelModifier = Math.min(b.getSize().width/numColumns, b.getSize().height/numRows);
 		int pixelModifier = 25;
 		int doorOffset = pixelModifier/doorFraction;
-		int row = z/numColumns;
-		int column = z - (row*numColumns);
 		
 		g.setColor(Color.red);
 		if (this.highlight) {

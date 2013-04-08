@@ -13,9 +13,7 @@ import java.awt.Rectangle;
 
 // WalkwayCell class body, extending BoardCell
 public class WalkwayCell extends BoardCell {
-	
-	//boolean highlight;
-	
+		
 	public WalkwayCell() {
 		super();
 		highlight = false;
@@ -28,22 +26,16 @@ public class WalkwayCell extends BoardCell {
 	}
 
 	@Override
-	public void draw(Graphics g, Board b, int z, boolean highlight) {		
-		int numColumns = b.getNumColumns();
-		int numRows = b.getNumRows();
-		int row = z/numColumns;
-		int column = z - (row*numColumns);
-		//int pixelModifier = Math.min(b.getSize().width/numColumns, b.getSize().height/numRows);
+	public void draw(Graphics g, Board b) {
 		int pixelModifier = 25;
 		g.setColor(Color.yellow);
 		if (this.highlight) {
 			g.setColor(Color.GREEN);
 		}
-		//Rectangle rect = new Rectangle(column*pixelModifier, row*pixelModifier, pixelModifier, pixelModifier);
-		//g.fillRect(rect.x, rect.y, rect.width, rect.height);
+
 		g.fillRect(column*pixelModifier, row*pixelModifier, pixelModifier, pixelModifier);
 		g.setColor(Color.black);
-		//g.drawRect(rect.x, rect.y, rect.width, rect.height);
+
 		g.drawRect(column*pixelModifier, row*pixelModifier, pixelModifier, pixelModifier);
 		
 		

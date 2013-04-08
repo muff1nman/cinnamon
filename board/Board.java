@@ -57,7 +57,6 @@ public class Board extends JPanel implements MouseListener {
 	private boolean highlight;
 	private int dieRoll;
 
-	
 	// Filepaths for the configuration files
 	private String csvFilepath, legendFilepath;
 
@@ -152,18 +151,11 @@ public class Board extends JPanel implements MouseListener {
 
 	public void paintComponent(Graphics g) {
 		int z = 0;
-		//this.startTargets(location, steps)
 		for (BoardCell x: cells) {
-
-			x.draw(g, this, z, false);
-			z++;
+			x.draw(g, this);
 		}
 		for (Player y: players) {
 			y.draw(g, this);
-			//this.startTargets(this.calcIndex(y.getRow(), y.getColumn()), 2);
-			//for (BoardCell x : this.getTargets()) {
-			//	x.draw(g, this, this.calcIndex(x.row, x.column), true);
-			//}
 		}
 
 
@@ -271,7 +263,6 @@ public class Board extends JPanel implements MouseListener {
 		for(int i = 0; i < cells.size(); i++) {
 			cells.get(i).setRow(i / numColumns);
 			cells.get(i).setColumn(i % numColumns);
-			//System.out.println("row " + (i/numColumns) + " col " + (i % numColumns));
 		}
 	}
 	// Calculates the appropriate index on a 1D array given a row and column 
@@ -336,9 +327,9 @@ public class Board extends JPanel implements MouseListener {
 	// Start targets uses calcTargets to calculate the correct targets for moving in the game
 	public void startTargets(int location, int steps) {
 		targets = new HashSet<BoardCell>();
-		//System.out.println("location size");
 		visited[location] = true;
 		calcTargets(location, steps);
+		visited[location] = false;
 	}
 
 	// Does the heavy lifting for startTargets, populates the targets list for a current location given a number of steps

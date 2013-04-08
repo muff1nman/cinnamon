@@ -42,7 +42,8 @@ public abstract class BoardCell {
 	public void setColumn(int column) {
 		this.column = column;
 	}
-	public abstract void draw(Graphics g, Board b, int z, boolean highlight);
+	//public abstract void draw(Graphics g, Board b, int z, boolean highlight);
+	public abstract void draw(Graphics g, Board b);
 	
 	
 }

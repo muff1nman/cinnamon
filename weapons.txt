@@ -1,7 +1,6 @@
-candlestick
-glow wand
-rubber nickel
-drywall
-duct tape
-ducks
-an opera house
+Candlestick
+Rope
+Revolver
+Lead Pipe
+Knife
+Wrench

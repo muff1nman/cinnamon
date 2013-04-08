@@ -55,10 +55,10 @@ public class ComputerPlayer extends Player {
 		return (BoardCell) targArr[random];
 	}
 
-	public void makeMove (Board board) {
-	//	int location = 0;
-		System.out.println(this.getRow() + " " + this.getColumn()); // print
-		board.startTargets(board.calcIndex(this.getRow(), this.getColumn()), 2);
+	public void makeMove (Board board, int roll) {
+		board.startTargets(board.calcIndex(this.getRow(), this.getColumn()), roll);
+		System.out.println(this.getName() + " index " + board.calcIndex(this.getRow(), this.getColumn()) + " roll " + roll); //print
+		System.out.println("target size " + board.getTargets().size());
 		BoardCell choice = pickLocation(board.getTargets());
 		for(int x = 0; x < board.getNumColumns(); x++) {
 			for(int y = 0; y < board.getNumRows(); y++) {
@@ -68,10 +68,6 @@ public class ComputerPlayer extends Player {
 				}
 			}
 		}
-		//this.setColumn(this.getColumn()-1);
-		//this.setRow(this.getRow()-1);
-		//this.draw(board.getGraphics(), board);
-		//board.paintComponent(board.getGraphics());
 		board.repaint();
 		
 	}

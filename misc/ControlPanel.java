@@ -46,9 +46,6 @@ public class ControlPanel extends JPanel {
 				  for(int i = 0; i < game.getAllPlayers().size(); i++) {
 					  if(game.getAllPlayers().get(i).getName().equals(game.getWhosTurn().getName())) {
 						  game.setWhosTurn(game.getAllPlayers().get((i+1) % game.getAllPlayers().size()));
-						  System.out.println(game.getAllPlayers().get(i).getName());
-						  System.out.println(game.getWhosTurn().getName());
-						  System.out.println(game.getAllPlayers().get((i+1) % game.getAllPlayers().size()).getName());
 						  break;
 					  }
 				  }

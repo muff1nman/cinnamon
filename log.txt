@@ -300,3 +300,9 @@ Unrecognized room detectedZ
 Unrecognized room detectedZ
 ClueLegendBadFormat.txt contains data in an invalid format
 ClueLegendBadFormat.txt contains data in an invalid format
+Columns bad
+Columns bad
+ClueLegendBadFormat.txt contains data in an invalid format
+ClueLegendBadFormat.txt contains data in an invalid format
+Unrecognized room detectedZ
+Unrecognized room detectedZ

@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 import board.Board;
+import board.BoardCell;
 
 import misc.Card.CardType;
 import javax.swing.*;
@@ -339,17 +340,17 @@ public class ClueGame extends JFrame{
 	}
 	
 	public void startHumanTurn() {
-		controlPanel.getWhoseturn().setText(whosTurn.getName());
-		System.out.println("whosTurn" + whosTurn.getName());
 		controlPanel.getDietext().setText(rollDie());
 		controlPanel.getWhoseturn().setText(humanPlayer.getName());
-		
+		board.setHumanMustFinish(true);
+		humanPlayer.makeMove(board);
 	}
 
 	public void startComputerTurn(ComputerPlayer cpu) {
 		controlPanel.getWhoseturn().setText(whosTurn.getName());
-		controlPanel.getDietext().setText(rollDie());
-		cpu.makeMove(board);
+		int roll = Integer.parseInt(rollDie());
+		controlPanel.getDietext().setText(String.valueOf(roll));
+		cpu.makeMove(board, roll);
 	}
 	
 
@@ -375,7 +376,6 @@ public class ClueGame extends JFrame{
 		game = new ClueGame("legend.txt", "RoomLayout.csv", "players.txt", "weapons.txt");
 		game.setVisible(true);
 		JOptionPane.showMessageDialog(game, "You are Miss Scarlet, press Next Player to begin play", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
-
 		game.startHumanTurn();
 		game.humanPlayer.makeMove(game.board);
 	}
