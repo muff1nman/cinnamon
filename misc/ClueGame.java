@@ -25,6 +25,12 @@ public class ClueGame extends JFrame{
 	private HumanPlayer humanPlayer;
 	private Player whosTurn;
 	private Board board;
+	public Board getBoard() {
+		return board;
+	}
+
+
+
 	private String legend;
 	private String layout;
 	private String players;
@@ -294,6 +300,7 @@ public class ClueGame extends JFrame{
 		return deck;
 	}
 	public void setDeck(ArrayList<Card> deck) {
+		this.deck.clear();
 		this.deck = deck;
 	}
 	public ArrayList<Card> getClosetCards() {

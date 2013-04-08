@@ -33,10 +33,11 @@ public class GameActionTests {
 	@Before
 	public void setUp() {
 		
-		game = new ClueGame();
-		board = new Board("RoomLayout.csv","legend.txt");
-		board.loadConfigFiles();
-		board.calcAdjacencies();
+		game = new ClueGame("legend.txt", "RoomLayout.csv", "players.txt", "weapons.txt");
+		board = game.getBoard();
+		//board = new Board("RoomLayout.csv","legend.txt");
+		//board.loadConfigFiles();
+		//board.calcAdjacencies();
 		ArrayList<Card> allCards = new ArrayList<Card>();
 		mustardCard = new Card("Colonel Mustard", Card.CardType.PERSON);
 		allCards.add(mustardCard);

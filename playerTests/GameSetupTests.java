@@ -18,18 +18,18 @@ public class GameSetupTests {
 	@Before
 	public void setup() {
 		testGame = new ClueGame("legend.txt","RoomLayout.csv", "players.txt", "weapons.txt");
-		testGame.loadConfigFiles();
+		//testGame.loadConfigFiles();
 	}
 	
 	// Each tests name, color, starting location
 	@Test
 	public void testLoadingPeople() {
 		testGame.loadPeople();
-		Assert.assertEquals(new HumanPlayer("Bob Lob Lah","Yellow",9,0), testGame.getHumanPlayer());
+		Assert.assertEquals(new HumanPlayer("Miss Scarlet","Red",19,11), testGame.getHumanPlayer());
 		// Tests person at beginning
-		Assert.assertEquals(new ComputerPlayer("Colonel Mustard","Orange",0,19), testGame.getCpuPlayers().get(0));
+		Assert.assertEquals(new ComputerPlayer("Colonel Mustard","Orange",0,19), testGame.getCpuPlayers().get(1));
 		// Tests person at end
-		Assert.assertEquals(new ComputerPlayer("Mr. White","White",0,6), testGame.getCpuPlayers().get(3));
+		Assert.assertEquals(new ComputerPlayer("Mrs. White","White",0,6), testGame.getCpuPlayers().get(3));
 	}
 	
 	@Test
@@ -77,15 +77,17 @@ public class GameSetupTests {
 			Assert.assertTrue(Math.abs(a.getCards().size() - numCards) <= 1);
 		}
 		// Tests one card is not given to multiple players
+		System.out.println("size of deck " + testGame.getDeck().size());
 		for(Card a : testGame.getDeck()) {
+			System.out.println(a.getName());
 			int i = 0;
-			if(testGame.getHumanPlayer().getCards().contains(a))
+			if(testGame.getHumanPlayer().getCards().contains(a)) 
 				i++;
-			for(Player b : testGame.getCpuPlayers()) {
-				if(b.getCards().contains(a))
+			for(Player b : testGame.getCpuPlayers()) 
+				if(b.getCards().contains(a)) {
 					i++;
 			}
-			if(testGame.getClosetCards().contains(a))
+			if(testGame.getClosetCards().contains(a)) 
 				i++;
 			Assert.assertTrue(i == 1);
 		}
