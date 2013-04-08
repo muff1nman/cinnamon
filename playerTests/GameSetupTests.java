@@ -18,7 +18,6 @@ public class GameSetupTests {
 	@Before
 	public void setup() {
 		testGame = new ClueGame("legend.txt","RoomLayout.csv", "players.txt", "weapons.txt");
-		//testGame.loadConfigFiles();
 	}
 	
 	// Each tests name, color, starting location
@@ -34,28 +33,25 @@ public class GameSetupTests {
 	
 	@Test
 	public void testLoadingCards() {
-		testGame.loadDeck();
+		//testGame.loadDeck();
 		/* Tests Deck has proper number of cards (first integer: number of rooms (not including walkway)
 		plus number people plus number weapons */
-		Assert.assertEquals(10+5+7,testGame.getDeck().size());
+		Assert.assertEquals(10+5+6,testGame.getDeck().size());
 		// Tests deck contains proper number of each type of card
 		Assert.assertEquals(10, testGame.getDeckRoomSize());
 		Assert.assertEquals(5, testGame.getDeckPlayerSize());
-		Assert.assertEquals(7, testGame.getDeckWeaponSize());
+		Assert.assertEquals(6, testGame.getDeckWeaponSize());
 		// Tests one room
 		Assert.assertTrue(testGame.getDeck().contains(new Card("Dining Room", CardType.ROOM)));
 		// Tests one weapon
 		Assert.assertTrue(testGame.getDeck().contains(new Card("Miss Scarlet", CardType.PERSON)));
 		// Tests one person
-		Assert.assertTrue(testGame.getDeck().contains(new Card("drywall", CardType.WEAPON)));
+		Assert.assertTrue(testGame.getDeck().contains(new Card("Revolver", CardType.WEAPON)));
 	}
 	
 	@Test
 	public void testDealingCards() {
 		// Tests all cards are dealt
-		testGame.loadDeck();
-		testGame.loadPeople();
-		testGame.deal();
 		Assert.assertTrue(testGame.getDeck().size() > 0);
 		boolean testCardsDealt = false;
 		for(Card a : testGame.getDeck()) {
@@ -77,9 +73,7 @@ public class GameSetupTests {
 			Assert.assertTrue(Math.abs(a.getCards().size() - numCards) <= 1);
 		}
 		// Tests one card is not given to multiple players
-		System.out.println("size of deck " + testGame.getDeck().size());
 		for(Card a : testGame.getDeck()) {
-			System.out.println(a.getName());
 			int i = 0;
 			if(testGame.getHumanPlayer().getCards().contains(a)) 
 				i++;
